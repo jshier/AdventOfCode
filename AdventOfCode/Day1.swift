@@ -13,8 +13,8 @@ final class Day1: Day {
         let input = String.input(forDay: 1)
         let calculator = CaptchaCalculator(input)
         
-        print("Day 1: \(calculator.calculateCircularSum())")
-        print("Day 1: \(calculator.calculateHalfwaySum())")
+        stageOneOutput = "\(calculator.calculateCircularSum())"
+        stageTwoOutput = "\(calculator.calculateHalfwaySum())"
     }
     
     struct CaptchaCalculator {

@@ -16,7 +16,7 @@ class Day2: Day {
         let numbers = separatedLines.map { $0.flatMap(Int.init) }
         let differences = numbers.map { $0.max()! - $0.min()! }
         let checksum = differences.reduce(0, +)
-        print("Day 2: \(checksum)")
+        stageOneOutput = "\(checksum)"
         
         let moduluses = numbers.map { (sequence) -> Int in
             var remainingNumbers = sequence.dropFirst()
@@ -35,6 +35,6 @@ class Day2: Day {
             return 0
         }
         let modulusChecksum = moduluses.reduce(0, +)
-        print("Day 2: \(modulusChecksum)")
+        stageTwoOutput = "\(modulusChecksum)"
     }
 }

@@ -24,6 +24,6 @@ class Day3: Day {
         let horizontalCoordinate = (closestCenter <= input) ? centerDifference : -centerDifference
         let verticalCoordinate = center
         let steps = abs(horizontalCoordinate) + abs(verticalCoordinate)
-        print("Day 3: \(steps)")
+        stageOneOutput = "\(steps)"
     }
 }

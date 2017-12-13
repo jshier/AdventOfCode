@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3136B8631FE0D94100CB98FE /* Day5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3136B8621FE0D94100CB98FE /* Day5.swift */; };
 		315684C31FE0B101009234CE /* Day3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315684C21FE0B101009234CE /* Day3.swift */; };
 		318AC32A1FE062A900A98B5E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318AC3291FE062A900A98B5E /* main.swift */; };
 		318AC3311FE062BE00A98B5E /* Day12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318AC3301FE062BE00A98B5E /* Day12.swift */; };
@@ -29,6 +30,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3136B8621FE0D94100CB98FE /* Day5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day5.swift; sourceTree = "<group>"; };
+		3136B8641FE0E07200CB98FE /* day5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day5.txt; sourceTree = "<group>"; };
+		3136B8651FE0E07200CB98FE /* day6.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day6.txt; sourceTree = "<group>"; };
 		315684C21FE0B101009234CE /* Day3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day3.swift; sourceTree = "<group>"; };
 		315684C41FE0B12F009234CE /* day2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day2.txt; sourceTree = "<group>"; };
 		318AC3261FE062A900A98B5E /* AdventOfCode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AdventOfCode; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +84,7 @@
 				319347281FE0897B00D4EC4F /* Day1.swift */,
 				3193472C1FE0AA2000D4EC4F /* Day2.swift */,
 				315684C21FE0B101009234CE /* Day3.swift */,
+				3136B8621FE0D94100CB98FE /* Day5.swift */,
 				318AC3301FE062BE00A98B5E /* Day12.swift */,
 			);
 			path = AdventOfCode;
@@ -90,6 +95,8 @@
 			children = (
 				319347271FE088B600D4EC4F /* day1.txt */,
 				315684C41FE0B12F009234CE /* day2.txt */,
+				3136B8641FE0E07200CB98FE /* day5.txt */,
+				3136B8651FE0E07200CB98FE /* day6.txt */,
 				319347261FE088B600D4EC4F /* day7.txt */,
 				319347251FE088B600D4EC4F /* day12.txt */,
 			);
@@ -154,6 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3136B8631FE0D94100CB98FE /* Day5.swift in Sources */,
 				315684C31FE0B101009234CE /* Day3.swift in Sources */,
 				319347291FE0897B00D4EC4F /* Day1.swift in Sources */,
 				3193472D1FE0AA2000D4EC4F /* Day2.swift in Sources */,

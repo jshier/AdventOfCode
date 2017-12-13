@@ -41,7 +41,7 @@ final class Day12: Day {
         }
         
         let zeroConnections = connections(from: "0")
-        print("0 Connections: \(zeroConnections.count)")
+        stageOneOutput = "\(zeroConnections.count)"
         var totalGroups: [Set<String>] = [zeroConnections]
         let allPossibleGroups = Set(reduced.keys)
         var remainingGroups = allPossibleGroups.subtracting(zeroConnections)
@@ -52,6 +52,6 @@ final class Day12: Day {
             remainingGroups.subtract(groupForKey)
         }
         
-        print("Total Groups: \(totalGroups.count)")
+        stageTwoOutput = "\(totalGroups.count)"
     }
 }

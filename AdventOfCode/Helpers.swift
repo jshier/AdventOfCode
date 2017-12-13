@@ -10,6 +10,6 @@ import Foundation
 
 extension String {
     static func input(forDay day: Int) -> String {
-        return try! String(contentsOfFile: "/Users/jshier/Desktop/AdventOfCode/Inputs/day\(day).txt")
+        return try! String(contentsOfFile: "/Users/jshier/Desktop/Code/AdventOfCode/Inputs/day\(day).txt")
     }
 }
