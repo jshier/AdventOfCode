@@ -17,6 +17,8 @@
 		3193472D1FE0AA2000D4EC4F /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3193472C1FE0AA2000D4EC4F /* Day2.swift */; };
 		31A87E1C1FE4879600FF85D3 /* Day15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E1B1FE4879600FF85D3 /* Day15.swift */; };
 		31A87E201FE4964700FF85D3 /* Day4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E1F1FE4964700FF85D3 /* Day4.swift */; };
+		31A87E281FE49F9500FF85D3 /* Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E271FE49F9500FF85D3 /* Day7.swift */; };
+		31A87E2A1FE4A9A200FF85D3 /* Day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E291FE4A9A200FF85D3 /* Day8.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +59,8 @@
 		31A87E241FE49D1600FF85D3 /* day10.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day10.txt; sourceTree = "<group>"; };
 		31A87E251FE49D3200FF85D3 /* day11.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day11.txt; sourceTree = "<group>"; };
 		31A87E261FE49D5500FF85D3 /* day14.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day14.txt; sourceTree = "<group>"; };
+		31A87E271FE49F9500FF85D3 /* Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day7.swift; sourceTree = "<group>"; };
+		31A87E291FE4A9A200FF85D3 /* Day8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day8.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				315684C21FE0B101009234CE /* Day3.swift */,
 				31A87E1F1FE4964700FF85D3 /* Day4.swift */,
 				3136B8621FE0D94100CB98FE /* Day5.swift */,
+				31A87E271FE49F9500FF85D3 /* Day7.swift */,
+				31A87E291FE4A9A200FF85D3 /* Day8.swift */,
 				318AC3301FE062BE00A98B5E /* Day12.swift */,
 				31A87E1B1FE4879600FF85D3 /* Day15.swift */,
 			);
@@ -187,8 +193,10 @@
 				315684C31FE0B101009234CE /* Day3.swift in Sources */,
 				319347291FE0897B00D4EC4F /* Day1.swift in Sources */,
 				3193472D1FE0AA2000D4EC4F /* Day2.swift in Sources */,
+				31A87E281FE49F9500FF85D3 /* Day7.swift in Sources */,
 				318AC32A1FE062A900A98B5E /* main.swift in Sources */,
 				31A87E1C1FE4879600FF85D3 /* Day15.swift in Sources */,
+				31A87E2A1FE4A9A200FF85D3 /* Day8.swift in Sources */,
 				31A87E201FE4964700FF85D3 /* Day4.swift in Sources */,
 				318AC3331FE062C700A98B5E /* Helpers.swift in Sources */,
 				3193472B1FE0899B00D4EC4F /* Day.swift in Sources */,

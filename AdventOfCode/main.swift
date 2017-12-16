@@ -10,6 +10,6 @@ import Foundation
 
 //let output = [Day1(), Day2(), Day3(), Day5(), Day12()].map { $0.output() }
 //                                                      .joined(separator: "\n")
-let output = Day15().output()
+let output = Day8().output()
 print(output)
 
