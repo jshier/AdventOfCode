@@ -20,6 +20,8 @@
 		31A87E201FE4964700FF85D3 /* Day4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E1F1FE4964700FF85D3 /* Day4.swift */; };
 		31A87E281FE49F9500FF85D3 /* Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E271FE49F9500FF85D3 /* Day7.swift */; };
 		31A87E2A1FE4A9A200FF85D3 /* Day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E291FE4A9A200FF85D3 /* Day8.swift */; };
+		31DE12B91FE6281500C48F43 /* Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE12B81FE6281500C48F43 /* Day6.swift */; };
+		31DE12BC1FE631C600C48F43 /* Day17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE12BB1FE631C600C48F43 /* Day17.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +66,9 @@
 		31A87E261FE49D5500FF85D3 /* day14.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day14.txt; sourceTree = "<group>"; };
 		31A87E271FE49F9500FF85D3 /* Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day7.swift; sourceTree = "<group>"; };
 		31A87E291FE4A9A200FF85D3 /* Day8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day8.swift; sourceTree = "<group>"; };
+		31DE12B81FE6281500C48F43 /* Day6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day6.swift; sourceTree = "<group>"; };
+		31DE12BA1FE631BC00C48F43 /* day17.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day17.txt; sourceTree = "<group>"; };
+		31DE12BB1FE631C600C48F43 /* Day17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day17.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,11 +110,13 @@
 				315684C21FE0B101009234CE /* Day3.swift */,
 				31A87E1F1FE4964700FF85D3 /* Day4.swift */,
 				3136B8621FE0D94100CB98FE /* Day5.swift */,
+				31DE12B81FE6281500C48F43 /* Day6.swift */,
 				31A87E271FE49F9500FF85D3 /* Day7.swift */,
 				31A87E291FE4A9A200FF85D3 /* Day8.swift */,
 				318AC3301FE062BE00A98B5E /* Day12.swift */,
 				31A87E1B1FE4879600FF85D3 /* Day15.swift */,
 				31635F8B1FE4F5FD004ADA7F /* Day16.swift */,
+				31DE12BB1FE631C600C48F43 /* Day17.swift */,
 			);
 			path = AdventOfCode;
 			sourceTree = "<group>";
@@ -132,6 +139,7 @@
 				31A87E261FE49D5500FF85D3 /* day14.txt */,
 				31A87E1E1FE487E600FF85D3 /* day15.txt */,
 				31635F8A1FE4F52A004ADA7F /* day16.txt */,
+				31DE12BA1FE631BC00C48F43 /* day17.txt */,
 			);
 			path = Inputs;
 			sourceTree = SOURCE_ROOT;
@@ -195,10 +203,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3136B8631FE0D94100CB98FE /* Day5.swift in Sources */,
+				31DE12BC1FE631C600C48F43 /* Day17.swift in Sources */,
 				315684C31FE0B101009234CE /* Day3.swift in Sources */,
 				31635F8C1FE4F5FD004ADA7F /* Day16.swift in Sources */,
 				319347291FE0897B00D4EC4F /* Day1.swift in Sources */,
 				3193472D1FE0AA2000D4EC4F /* Day2.swift in Sources */,
+				31DE12B91FE6281500C48F43 /* Day6.swift in Sources */,
 				31A87E281FE49F9500FF85D3 /* Day7.swift in Sources */,
 				318AC32A1FE062A900A98B5E /* main.swift in Sources */,
 				31A87E1C1FE4879600FF85D3 /* Day15.swift in Sources */,
