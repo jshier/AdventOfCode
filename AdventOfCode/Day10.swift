@@ -28,39 +28,29 @@ final class Day10: Day {
 //            print("List: \(list)")
         }
         stageOneOutput = "\(list[0] * list[1])"
-        
-        let mixIns: [UInt32] = [17, 31, 73, 47, 23]
-        
+        stageTwoOutput = fileInput.knotHash()
     }
 }
 
-//extension String {
-//    func knotHash(lengths: [Int] = Array.countingUpTo(255)) -> String {
-//        let mixIns: [UInt32] = [17, 31, 73, 47, 23]
-//        var sequence = unicodeValues + mixIns
-//        var currentPosition = 0
-//        var skipSize = 0
-//        for _ in 0..<64 {
-//            for length in lengths {
-//                sequence.reverse(from: currentPosition, length: length)
-//                currentPosition = sequence.circularIndex(currentPosition, offsetBy: length + skipSize)
-//                skipSize += 1
-//            }
-//        }
-//
-//
-//    }
-//}
-//
-//extension Array where Element == UInt32 {
-//    var denseHash: [Int] {
-//        precondition(count == 256)
-//
-//
-//    }
-//
-//
-//}
+extension String {
+    func knotHash(input: [Int] = .countingUpTo(255)) -> String {
+        let mixIns = [17, 31, 73, 47, 23]
+        let lengths = unicodeValues + mixIns
+        var sequence = input
+        var currentPosition = 0
+        var skipSize = 0
+        for _ in 0..<64 {
+            for length in lengths {
+                sequence.reverse(from: currentPosition, length: length)
+                currentPosition = sequence.circularIndex(currentPosition, offsetBy: length + skipSize)
+                skipSize += 1
+            }
+        }
+
+        let hashed = sequence.denseHash
+        return hashed.hexString
+    }
+}
 
 extension Array where Element == Int {
     static func countingUpTo(_ max: Int) -> [Int] {
@@ -71,6 +61,18 @@ extension Array where Element == Int {
         }
         
         return array
+    }
+    
+    var denseHash: [Int] {
+        precondition(count == 256)
+        
+        let parts = partition(into: 16)
+        let xord = parts.map { Int($0.reduce(0, ^)) }
+        return xord
+    }
+    
+    var hexString: String {
+        return map { String(format: "%02x", $0) }.joined()
     }
 }
 
@@ -96,19 +98,36 @@ extension Array {
         }
     }
     
-//    func partition(into: Int) -> [[Element]] {
-//
-//    }
+    /// This only works if the number of elements is evenly divisible by the requested number of partitions.
+    func partition(into partitions: Int) -> [[Element]] {
+        let partitionLength = count / partitions
+        
+        guard partitionLength > 0 else { return [self] }
+        
+        let pivots = partitions - 1
+        
+        guard pivots > 0 else { return [self] }
+        
+        var parts: [[Element]] = []
+        for i in 0...pivots {
+            parts.append(Array(self[(i * partitionLength)..<((i + 1) * partitionLength)]))
+        }
+        
+        assert(parts.count == partitions, "Resulting array should have the requested number of elements.")
+        //assert(parts.flatMap { $0 }.count == count, "Resulting arrays should contain all original items.")
+        
+        return parts
+    }
 }
 
 extension Character {
-    var unicodeValue: UInt32 {
-        return unicodeScalars.first!.value
+    var unicodeValue: Int {
+        return Int(unicodeScalars.first!.value)
     }
 }
 
 extension String {
-    var unicodeValues: [UInt32] {
+    var unicodeValues: [Int] {
         return map { $0.unicodeValue }
     }
 }
