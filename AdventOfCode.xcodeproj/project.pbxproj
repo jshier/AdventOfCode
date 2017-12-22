@@ -25,6 +25,7 @@
 		31A87E2A1FE4A9A200FF85D3 /* Day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E291FE4A9A200FF85D3 /* Day8.swift */; };
 		31DE12B91FE6281500C48F43 /* Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE12B81FE6281500C48F43 /* Day6.swift */; };
 		31DE12BC1FE631C600C48F43 /* Day17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE12BB1FE631C600C48F43 /* Day17.swift */; };
+		31F7E4F91FEDBD9C00B397E8 /* Day22.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F7E4F81FEDBD9C00B397E8 /* Day22.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,6 +77,8 @@
 		31DE12B81FE6281500C48F43 /* Day6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day6.swift; sourceTree = "<group>"; };
 		31DE12BA1FE631BC00C48F43 /* day17.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day17.txt; sourceTree = "<group>"; };
 		31DE12BB1FE631C600C48F43 /* Day17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day17.swift; sourceTree = "<group>"; };
+		31F7E4F71FEDBD6000B397E8 /* day22.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day22.txt; sourceTree = "<group>"; };
+		31F7E4F81FEDBD9C00B397E8 /* Day22.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day22.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,7 @@
 				31635F8B1FE4F5FD004ADA7F /* Day16.swift */,
 				31DE12BB1FE631C600C48F43 /* Day17.swift */,
 				315B6A0E1FE77FA40026AF73 /* Day18.swift */,
+				31F7E4F81FEDBD9C00B397E8 /* Day22.swift */,
 			);
 			path = AdventOfCode;
 			sourceTree = "<group>";
@@ -151,6 +155,7 @@
 				31635F8A1FE4F52A004ADA7F /* day16.txt */,
 				31DE12BA1FE631BC00C48F43 /* day17.txt */,
 				315B6A0D1FE77F980026AF73 /* day18.txt */,
+				31F7E4F71FEDBD6000B397E8 /* day22.txt */,
 			);
 			path = Inputs;
 			sourceTree = SOURCE_ROOT;
@@ -213,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31F7E4F91FEDBD9C00B397E8 /* Day22.swift in Sources */,
 				3136B8631FE0D94100CB98FE /* Day5.swift in Sources */,
 				31DE12BC1FE631C600C48F43 /* Day17.swift in Sources */,
 				315684C31FE0B101009234CE /* Day3.swift in Sources */,
