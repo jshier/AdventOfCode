@@ -28,6 +28,7 @@ final class Day6: Day {
             }
         }
         
+        @discardableResult
         func redistributeUntilDuplicate() -> String {
             while true {
                 redistribute()
@@ -41,7 +42,7 @@ final class Day6: Day {
             }
         }
         
-        let firstDuplicate = redistributeUntilDuplicate()
+        redistributeUntilDuplicate()
         
         stageOneOutput = "\(redistributions)"
         
@@ -49,7 +50,7 @@ final class Day6: Day {
         seen.insert(banks.asString)
         
         redistributions = 0
-        let secondDuplicate = redistributeUntilDuplicate()
+        redistributeUntilDuplicate()
         stageTwoOutput = "\(redistributions)"
     }
 }

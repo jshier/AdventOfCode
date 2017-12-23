@@ -23,6 +23,7 @@
 		31A87E201FE4964700FF85D3 /* Day4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E1F1FE4964700FF85D3 /* Day4.swift */; };
 		31A87E281FE49F9500FF85D3 /* Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E271FE49F9500FF85D3 /* Day7.swift */; };
 		31A87E2A1FE4A9A200FF85D3 /* Day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E291FE4A9A200FF85D3 /* Day8.swift */; };
+		31D3B3BC1FEE19C70002648A /* Day23.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3B3BB1FEE19C70002648A /* Day23.swift */; };
 		31DE12B91FE6281500C48F43 /* Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE12B81FE6281500C48F43 /* Day6.swift */; };
 		31DE12BC1FE631C600C48F43 /* Day17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE12BB1FE631C600C48F43 /* Day17.swift */; };
 		31F7E4F91FEDBD9C00B397E8 /* Day22.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F7E4F81FEDBD9C00B397E8 /* Day22.swift */; };
@@ -74,6 +75,8 @@
 		31A87E261FE49D5500FF85D3 /* day14.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day14.txt; sourceTree = "<group>"; };
 		31A87E271FE49F9500FF85D3 /* Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day7.swift; sourceTree = "<group>"; };
 		31A87E291FE4A9A200FF85D3 /* Day8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day8.swift; sourceTree = "<group>"; };
+		31D3B3BA1FEE19BB0002648A /* day23.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day23.txt; sourceTree = "<group>"; };
+		31D3B3BB1FEE19C70002648A /* Day23.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day23.swift; sourceTree = "<group>"; };
 		31DE12B81FE6281500C48F43 /* Day6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day6.swift; sourceTree = "<group>"; };
 		31DE12BA1FE631BC00C48F43 /* day17.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day17.txt; sourceTree = "<group>"; };
 		31DE12BB1FE631C600C48F43 /* Day17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day17.swift; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 				31DE12BB1FE631C600C48F43 /* Day17.swift */,
 				315B6A0E1FE77FA40026AF73 /* Day18.swift */,
 				31F7E4F81FEDBD9C00B397E8 /* Day22.swift */,
+				31D3B3BB1FEE19C70002648A /* Day23.swift */,
 			);
 			path = AdventOfCode;
 			sourceTree = "<group>";
@@ -156,6 +160,7 @@
 				31DE12BA1FE631BC00C48F43 /* day17.txt */,
 				315B6A0D1FE77F980026AF73 /* day18.txt */,
 				31F7E4F71FEDBD6000B397E8 /* day22.txt */,
+				31D3B3BA1FEE19BB0002648A /* day23.txt */,
 			);
 			path = Inputs;
 			sourceTree = SOURCE_ROOT;
@@ -235,6 +240,7 @@
 				31A87E201FE4964700FF85D3 /* Day4.swift in Sources */,
 				315B6A0A1FE751430026AF73 /* Day9.swift in Sources */,
 				318AC3331FE062C700A98B5E /* Helpers.swift in Sources */,
+				31D3B3BC1FEE19C70002648A /* Day23.swift in Sources */,
 				3193472B1FE0899B00D4EC4F /* Day.swift in Sources */,
 				318AC3311FE062BE00A98B5E /* Day12.swift in Sources */,
 			);

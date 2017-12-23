@@ -25,23 +25,31 @@ final class Day22: Day {
 }
 
 struct Grid {
-    let content: [[Node]]
+    let content: [Point: Node]
     
     init(content: String) {
         let lines = content.split(separator: "\n")
-        self.content = lines.map { $0.flatMap { Node(rawValue: $0) } }
-        assert(self.content.count == self.content[0].count)
+        let nodes = lines.map { $0.flatMap { Node(rawValue: $0) } }
+        assert(nodes.count % 2 == 1 && nodes[0].count % 2 == 1)
+        let middle = nodes.count / 2
+        var nodeMap: [Point: Node] = [:]
+        for (i, line) in nodes.enumerated() {
+            for (j, node) in line.enumerated() {
+                let point = Point(j, i)
+            }
+        }
+        
+        self.content = [:]
     }
     
     subscript(point: Point) -> Node {
-        return content[point.y][point.x]
+        return content[point]!
     }
 }
 
 extension Grid: CustomStringConvertible {
     var description: String {
-        let lines = content.map { $0.map { String($0.rawValue) }.joined() }
-        return lines.joined(separator: "\n")
+        return ""
     }
 }
 
@@ -56,17 +64,15 @@ extension Node: CustomStringConvertible {
     }
 }
 
-typealias Point = (x: Int, y: Int)
+struct Point: Hashable {
+    let x: Int
+    let y: Int
 
-//struct Point {
-//    let x: Int
-//    let y: Int
-//
-//    init(_ x: Int, _ y: Int) {
-//        self.x = x
-//        self.y = y
-//    }
-//}
+    init(_ x: Int, _ y: Int) {
+        self.x = x
+        self.y = y
+    }
+}
 
 struct Virus {
     let position: Point
