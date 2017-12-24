@@ -11,19 +11,59 @@ import Foundation
 class Day3: Day {
     override func perform() {
         let input = 312051
-        var square = 1
-        var odd = 1
-        while square < input {
-            square = odd * odd
-            odd += 2
-        }
 
-        let center = (odd - 1) / 2
-        let closestCenter = square - center
-        let centerDifference = closestCenter - input
-        let horizontalCoordinate = (closestCenter <= input) ? centerDifference : -centerDifference
-        let verticalCoordinate = center
-        let steps = abs(horizontalCoordinate) + abs(verticalCoordinate)
-        stageOneOutput = "\(steps)"
+        let spiral = SquareSpiral()
+        spiral.generate(outTo: input)
+
+        stageOneOutput = "\(spiral.distanceToOrigin)"
+        
+        stageTwoOutput = "\(spiral.firstLargerValue)"
+    }
+}
+
+final class SquareSpiral {
+    private var spiral: [Point] = [Point(0, 0)]
+    private var spiralValues: [Point: Int] = [Point(0, 0): 1]
+    private var direction = Direction.right
+    var firstLargerValue = 0
+    
+    func generate(outTo value: Int) {
+        var sideLength = 1
+        var previousPoint = spiral[0]
+        while spiral.count <= value {
+            for _ in 0..<2 {
+                for _ in 0..<sideLength {
+                    let point = previousPoint + direction.forwardOffset
+                    spiral.append(point)
+                    
+                    previousPoint = point
+                    
+                    if firstLargerValue == 0 {
+                        let newValue = point.surroundingPoints.map { spiralValues[$0] ?? 0 }.reduce(0, +)
+                        if newValue > value {
+                            firstLargerValue = newValue
+                        } else {
+                            spiralValues[point] = newValue
+                        }
+                    }
+                }
+                direction = direction.turn(.left)
+            }
+            sideLength += 1
+        }
+        
+        spiral.removeLast(spiral.count - value)
+    }
+    
+    var distanceToOrigin: Int {
+        guard let lastPoint = spiral.last else { return 0 }
+        
+        return abs(lastPoint.x) + abs(lastPoint.y)
+    }
+}
+
+extension SquareSpiral: CustomStringConvertible {
+    var description: String {
+        return spiral.description
     }
 }

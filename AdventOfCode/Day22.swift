@@ -22,15 +22,6 @@ final class Day22: Day {
 
         stageOneOutput = "\(grid.infections)"
         
-//        var previousEvolution = grid
-//        var infections = 0
-//        for i in 1...10_000_000 {
-//            let evolution = previousEvolution.evolve()
-//            if evolution.didInfect { infections += 1 }
-//            previousEvolution = evolution.grid
-//            if i % 100_000 == 0 { print("Evolutions: \(i), Infections: \(infections)") }
-//        }
-//
         let evolutionGrid = Grid(content: input)
         evolutionGrid.evolve()
         
@@ -84,17 +75,6 @@ final class Grid {
             self[currentPosition] = self[currentPosition].evolve()
         }
     }
-    
-//    func evolve() {
-//        var newContent = content
-//        let newVirus = virus.complexMove(from: self[virus.position])
-//        let original = self[virus.position]
-//        let didInfect = (original == .weakened)
-//        newContent[virus.position] = self[virus.position].evolve()
-//        let grid = Grid(content: newContent, virus: newVirus)
-//
-//        return (grid, didInfect)
-//    }
     
     subscript(point: Point) -> Node {
         get {
@@ -152,6 +132,16 @@ struct Point: Hashable {
     }
 }
 
+extension Point {
+    var surroundingOffsets: [(Int, Int)] {
+        return [(0, 1), (1, 0), (0, -1), (-1, 0), (-1, 1), (1, -1), (1, 1), (-1, -1)]
+    }
+    
+    var surroundingPoints: [Point] {
+        return surroundingOffsets.map { self + $0 }
+    }
+}
+
 extension Point: CustomStringConvertible {
     var description: String {
         return "(\(x), \(y))"
@@ -162,6 +152,10 @@ func + (lhs: Point, rhs: (x: Int, y: Int)) -> Point {
     let x = lhs.x + rhs.x
     let y = lhs.y + rhs.y
     return Point(x, y)
+}
+
+func += (lhs: inout Point, rhs: (x: Int, y: Int)) {
+    lhs = lhs + rhs
 }
 
 struct Virus {
@@ -211,7 +205,9 @@ enum Direction {
         case .right: return .left
         }
     }
-    
+}
+
+private extension Direction {
     func simpleTurn(from node: Node) -> Direction {
         switch node {
         case .clean: return turn(.left)
