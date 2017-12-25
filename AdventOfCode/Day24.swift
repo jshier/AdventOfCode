@@ -8,26 +8,94 @@
 
 final class Day24: Day {
     override func perform() {
-//        let fileInput = String.input(forDay: 24)
-        let testInput = """
-                        0/2
-                        2/2
-                        2/3
-                        3/4
-                        3/5
-                        0/1
-                        10/1
-                        9/10
-                        """
-        let input = testInput
+        let fileInput = String.input(forDay: 24)
+//        let testInput = """
+//                        0/2
+//                        2/2
+//                        2/3
+//                        3/4
+//                        3/5
+//                        0/1
+//                        10/1
+//                        9/10
+//                        """
+        let input = fileInput
         let components = input.split(separator: "\n").map(Component.init)
-        print(components)
+        let bridges = Bridge(components: []).build(using: components)
+        let strengths = bridges.map { $0.strength }
+        
+        stageOneOutput = "\(strengths.max()!)"
+        
+        let strengthsAndLengths = bridges.map { LengthAndStrength(length: $0.length, strength: $0.strength) }
+        
+        stageTwoOutput = "\(strengthsAndLengths.max()!.strength)"
     }
 }
 
-struct Component {
+struct LengthAndStrength: Equatable {
+    let length: Int
+    let strength: Int
+}
+
+extension LengthAndStrength: Comparable {
+    static func < (lhs: LengthAndStrength, rhs: LengthAndStrength) -> Bool {
+        if lhs.length == rhs.length {
+            return lhs.strength < rhs.strength
+        } else {
+            return lhs.length < rhs.length
+        }
+    }
+}
+
+struct Bridge {
+    let components: [Component]
+    
+    var availableValue: Int? {
+        return components.last?.availableValue
+    }
+    
+    var strength: Int {
+        return components.map { $0.strength }.reduce(0, +)
+    }
+    
+    var length: Int {
+        return components.count
+    }
+    
+    func adding(_ component: Component) -> Bridge {
+        var newComponents = components
+        newComponents.append(component)
+        return Bridge(components: newComponents)
+    }
+    
+    func build(using availableComponents: [Component]) -> [Bridge] {
+        var bridges: [Bridge] = []
+        let usableComponents = availableComponents.filter { $0.contains(value: availableValue ?? 0) }
+        for component in usableComponents {
+            var availableComponents = availableComponents
+            availableComponents.remove(at: availableComponents.index(of: component)!)
+            let used = Component(component: component, using: availableValue ?? 0)
+            let newBridge = adding(used)
+            bridges.append(newBridge)
+            let newBridges = newBridge.build(using: availableComponents)
+            bridges.append(contentsOf: newBridges)
+        }
+        
+        return bridges
+    }
+}
+
+extension Bridge: CustomStringConvertible {
+    var description: String {
+        return components.map { $0.description }.joined(separator: "--")
+    }
+}
+
+struct Component: Equatable {
     let left: Port
     let right: Port
+    let isRightUsed: Bool
+    let isLeftUsed: Bool
     
     init(_ substring: Substring) {
         let ports = substring.split(separator: "/")
@@ -35,6 +103,46 @@ struct Component {
                              .map(Port.init)
         left = ports[0]
         right = ports[1]
+        isLeftUsed = false
+        isRightUsed = false
+    }
+    
+    init(left: Port, right: Port, isLeftUsed: Bool, isRightUsed: Bool) {
+        self.left = left
+        self.right = right
+        self.isLeftUsed = isLeftUsed
+        self.isRightUsed = isRightUsed
+    }
+    
+    init(component: Component, using value: Int) {
+        left = component.left
+        right = component.right
+        
+        if left.value == value {
+            isLeftUsed = true
+            isRightUsed = false
+        } else if right.value == value {
+            isLeftUsed = false
+            isRightUsed = true
+        } else {
+            fatalError("Didn't use a value.")
+        }
+    }
+    
+    func contains(value: Int) -> Bool {
+        return left.value == value || right.value == value
+    }
+    
+    var availableValue: Int {
+        if isRightUsed {
+            return left.value
+        } else {
+            return right.value
+        }
+    }
+    
+    var strength: Int {
+        return left.value + right.value
     }
 }
 
@@ -46,9 +154,37 @@ extension Component: CustomStringConvertible {
 
 struct Port {
     let value: Int
-    var isUsed = false
     
     init(_ value: Int) {
         self.value = value
+    }
+}
+
+extension Port: Comparable {
+    static func == (lhs: Port, rhs: Port) -> Bool {
+        return lhs.value == rhs.value
+    }
+    
+    static func < (lhs: Port, rhs: Port) -> Bool {
+        return lhs.value < rhs.value
+    }
+}
+
+extension Array {
+    mutating func remove(where predicate: (Element) -> Bool) -> [Element] {
+        var currentIndex = startIndex
+        var result: [Element] = []
+        while currentIndex < endIndex {
+            let element = self[currentIndex]
+            if predicate(element) {
+                let nextIndex = index(after: currentIndex)
+                result.append(element)
+                removeSubrange(currentIndex..<nextIndex)
+            } else {
+                currentIndex = index(after: currentIndex)
+            }
+        }
+        
+        return result
     }
 }
