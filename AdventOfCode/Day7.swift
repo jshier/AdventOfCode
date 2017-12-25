@@ -10,30 +10,60 @@ import Foundation
 
 final class Day7: Day {
     override func perform() {
-        let input =
-            """
-            pbga (66)
-            xhth (57)
-            ebii (61)
-            havc (66)
-            ktlj (57)
-            fwft (72) -> ktlj, cntj, xhth
-            qoyq (66)
-            padx (45) -> pbga, havc, qoyq
-            tknk (41) -> ugml, padx, fwft
-            jptl (61)
-            ugml (68) -> gyxo, ebii, jptl
-            gyxo (61)
-            cntj (57)
-            """
-            //String.input(forDay: 7)
-        let lines = input.split(separator: "\n")
-        let programs = lines.map(Program.init)
-        let allNames = Set(programs.map { $0.name })
-        let allHostedNames = Set(programs.flatMap { $0.heldNames })
-        let baseName = allNames.subtracting(allHostedNames)
+//        let input =
+//            """
+//            pbga (66)
+//            xhth (57)
+//            ebii (61)
+//            havc (66)
+//            ktlj (57)
+//            fwft (72) -> ktlj, cntj, xhth
+//            qoyq (66)
+//            padx (45) -> pbga, havc, qoyq
+//            tknk (41) -> ugml, padx, fwft
+//            jptl (61)
+//            ugml (68) -> gyxo, ebii, jptl
+//            gyxo (61)
+//            cntj (57)
+//            """
+        let input = String.input(forDay: 7)
+        let lines = input.split(separator: "\n").map(String.init)
+        let allNames: [String] = lines.map { line in
+            let endNameIndex = line.index { $0 == " " }!
+            return String(line.prefix(upTo: endNameIndex))
+        }
+        let allWeights: [Int] = lines.map { line in
+            let startingParens = line.index { $0 == "(" }!
+            let endingParens = line.index { $0 == ")" }!
+            return Int(line[line.index(after: startingParens)..<endingParens])!
+        }
+        let allLinks: [[String]] = lines.map { line in
+            let separatedLine = line.components(separatedBy: "-> ")
+            if separatedLine.count == 2 {
+                return separatedLine[1].components(separatedBy: ", ")
+            } else {
+                return []
+            }
+        }
+        let namesAndWeights = Dictionary(zip(allNames, allWeights)) { (_, rhs) in return rhs }
+        let namesAndLinks = Dictionary(zip(allNames, allLinks)) { (_, rhs) in return rhs }
+
+        
+        let uniqueNames = Set(allNames)
+        let uniqueHostedNames = Set(allLinks.flatMap { $0 })
+        let baseName = uniqueNames.subtracting(uniqueHostedNames)
         let baseProgramName = baseName.first!
+        
         stageOneOutput = baseProgramName
+        
+        func createProgram(_ name: String) -> Program {
+            return Program(name: name, weight: namesAndWeights[name]!, heldPrograms: namesAndLinks[name]?.map(createProgram) ?? [])
+        }
+        
+        let baseProgram = createProgram(baseProgramName)
+        
+        stageTwoOutput = "\(baseProgram.heldWeightMismatch)"
+        baseProgram.findWeightMismatch()
         
 //        let baseProgram = programs.first { $0.name == baseProgramName }!
 //        let programMap = Dictionary(uniqueKeysWithValues: zip(programs.map { $0.name }, programs))
@@ -43,20 +73,82 @@ final class Day7: Day {
     struct Program {
         let name: String
         let weight: Int
-        let heldNames: [String]
+        let heldPrograms: [Program]
         
-        init(line: Substring) {
-            let endNameIndex = line.index { $0 == " " }!
-            name = String(line.prefix(upTo: endNameIndex))
-            let startingParens = line.index { $0 == "(" }!
-            let endingParens = line.index { $0 == ")" }!
-            weight = Int(line[line.index(after: startingParens)..<endingParens])!
-            let separatedLine = line.components(separatedBy: "-> ")
-            if separatedLine.count == 2 {
-                heldNames = separatedLine[1].components(separatedBy: ", ")
-            } else {
-                heldNames = []
+        var heldNames: [String] {
+            return heldPrograms.map { $0.name }
+        }
+        
+        var heldWeight: Int {
+            return heldPrograms.map { $0.totalWeight }.reduce(0, +)
+        }
+        
+        var totalWeight: Int {
+            return heldWeight + weight
+        }
+        
+        var heldWeights: [Int] {
+            return heldPrograms.map { $0.heldWeight }
+        }
+        
+        var heldTotalWeights: [Int] {
+            return heldPrograms.map { $0.totalWeight }
+        }
+        
+        var heldWeightMismatch: Bool {
+            return !heldTotalWeights.allElementsEqual()
+        }
+        
+        func findWeightMismatch() {
+            if !heldTotalWeights.allElementsEqual() {
+                print(heldPrograms.map { $0.heldTotalWeights })
+                print(heldTotalWeights)
+                print(heldPrograms.map { $0.weight })
+                print(heldNames)
+                heldPrograms.forEach { $0.findWeightMismatch() }
             }
         }
+    }
+}
+
+struct SimpleCountedSet<Element: Hashable> {
+    let counts: [Element: Int]
+    
+    init(_ array: [Element]) {
+        var counts: [Element: Int] = [:]
+        for element in array {
+            guard let count = counts[element] else { counts[element] = 1; break }
+            
+            counts[element] = count + 1
+        }
+        
+        self.counts = counts
+    }
+    
+    func element(for queriedCount: Int) -> Element {
+        for (element, count) in counts {
+            if queriedCount == count {
+                return element
+            }
+        }
+        
+        fatalError("No element with count: \(queriedCount)")
+    }
+}
+
+extension Array where Element: Equatable {
+    func allElementsEqual() -> Bool {
+        guard !isEmpty else { return false }
+        
+        var previousElement = self[startIndex]
+        for element in dropFirst() {
+            if element == previousElement {
+                previousElement = element
+            } else {
+                return false
+            }
+        }
+        
+        return true
     }
 }
