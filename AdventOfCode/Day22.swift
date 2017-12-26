@@ -140,6 +140,14 @@ extension Point {
     var surroundingPoints: [Point] {
         return surroundingOffsets.map { self + $0 }
     }
+    
+    var squareDistance: Int {
+        return abs(x) + abs(y)
+    }
+    
+    var straightDistance: Double {
+        return sqrt(Double(x * x + y * y))
+    }
 }
 
 extension Point: CustomStringConvertible {
@@ -148,10 +156,26 @@ extension Point: CustomStringConvertible {
     }
 }
 
+extension Point: Comparable {
+    static func < (lhs: Point, rhs: Point) -> Bool {
+        return lhs.squareDistance < rhs.squareDistance
+    }
+}
+
+func + (lhs: Point, rhs: Point) -> Point {
+    let x = lhs.x + rhs.x
+    let y = lhs.y + rhs.y
+    return Point(x, y)
+}
+
 func + (lhs: Point, rhs: (x: Int, y: Int)) -> Point {
     let x = lhs.x + rhs.x
     let y = lhs.y + rhs.y
     return Point(x, y)
+}
+
+func += (lhs: inout Point, rhs: Point) {
+    lhs = lhs + rhs
 }
 
 func += (lhs: inout Point, rhs: (x: Int, y: Int)) {
