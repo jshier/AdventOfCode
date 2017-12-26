@@ -156,6 +156,13 @@ extension Point {
     var straightDistance: Double {
         return sqrt(Double(x * x + y * y))
     }
+    
+    func perpendicularPoints(for direction: Direction) -> [Point] {
+        switch direction {
+        case .up, .down: return [Direction.left, Direction.right].map { self + $0.forwardOffset }
+        case .left, .right: return [Direction.up, Direction.down].map { self + $0.forwardOffset }
+        }
+    }
 }
 
 extension Point: CustomStringConvertible {
