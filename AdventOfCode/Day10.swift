@@ -33,7 +33,8 @@ final class Day10: Day {
 }
 
 extension String {
-    func knotHash(input: [Int] = .countingUpTo(255)) -> String {
+    
+    func rawKnotHash(input: [Int] = .countingUpTo(255)) -> [Int] {
         let mixIns = [17, 31, 73, 47, 23]
         let lengths = unicodeValues + mixIns
         var sequence = input
@@ -46,8 +47,12 @@ extension String {
                 skipSize += 1
             }
         }
-
-        let hashed = sequence.denseHash
+        
+        return sequence.denseHash
+    }
+    
+    func knotHash(input: [Int] = .countingUpTo(255)) -> String {
+        let hashed = rawKnotHash(input: input)
         return hashed.hexString
     }
 }

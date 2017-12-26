@@ -141,6 +141,14 @@ extension Point {
         return surroundingOffsets.map { self + $0 }
     }
     
+    var adjacentOffsets: [(Int, Int)] {
+        return [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    }
+    
+    var adjacentPoints: [Point] {
+        return adjacentOffsets.map { self + $0 }
+    }
+    
     var squareDistance: Int {
         return abs(x) + abs(y)
     }
@@ -250,7 +258,7 @@ private extension Direction {
     }
 }
 
-extension Array {
+extension Sequence {
     func count(where predicate: (Element) -> Bool) -> Int {
         var count = 0
         for element in self {
