@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-    static func input(forDay day: Int) -> String {
-        return try! String(contentsOfFile: "/Users/jshier/Desktop/Code/AdventOfCode/Inputs/day\(day).txt")
+    static func input(forDay day: Int, year: Int = 2017) -> String {
+        return try! String(contentsOfFile: "/Users/jshier/Desktop/Code/AdventOfCode/Inputs/\(year)/day\(day).txt")
     }
 }
