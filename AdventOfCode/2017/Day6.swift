@@ -12,7 +12,7 @@ final class Day6: Day {
     override func perform() {
         let fileInput = String.input(forDay: 6)
         let fileBanks = fileInput.split(separator: "\t")
-                                 .flatMap { Int($0) }
+                                 .compactMap { Int($0) }
         //let testBanks = [0, 2, 7, 0]
         var banks = fileBanks
         var seen: Set<String> = [banks.asString]

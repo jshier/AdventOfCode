@@ -11,7 +11,7 @@ import Foundation
 class Day5: Day {
     override func perform() {
         let input = String.input(forDay: 5)
-        let instructions = input.split(separator: "\n").map(String.init).flatMap(Int.init)
+        let instructions = input.split(separator: "\n").map(String.init).compactMap(Int.init)
         
         stageOneOutput = "\(performStageOneProgram(with: instructions))"
         stageTwoOutput = "\(performStageTwoProgram(with: instructions))"

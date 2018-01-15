@@ -11,7 +11,7 @@ import Foundation
 final class Day10: Day {
     override func perform() {
         let fileInput = String.input(forDay: 10)
-        let fileLengths = fileInput.split(separator: ",").flatMap { Int($0) }
+        let fileLengths = fileInput.split(separator: ",").compactMap { Int($0) }
         let fileList = Array.countingUpTo(255)
         //let testLengths = [3, 4, 1, 5]
         let lengths = fileLengths

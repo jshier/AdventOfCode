@@ -108,7 +108,7 @@ struct Vector: Hashable {
     }
     
     init(_ string: Substring) {
-        let components = string.split(separator: ",").flatMap { Int($0) }
+        let components = string.split(separator: ",").compactMap { Int($0) }
         x = components[0]
         y = components[1]
         z = components[2]

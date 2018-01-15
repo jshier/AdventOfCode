@@ -21,7 +21,7 @@ final class Day1: Day {
         let storage: [Int]
         
         init(_ input: String) {
-            storage = input.map(String.init).flatMap(Int.init)
+            storage = input.map(String.init).compactMap(Int.init)
         }
         
         func calculateCircularSum() -> Int {

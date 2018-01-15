@@ -99,7 +99,7 @@ struct Component: Equatable {
     
     init(_ substring: Substring) {
         let ports = substring.split(separator: "/")
-                             .flatMap { Int($0) }
+                             .compactMap { Int($0) }
                              .map(Port.init)
         left = ports[0]
         right = ports[1]

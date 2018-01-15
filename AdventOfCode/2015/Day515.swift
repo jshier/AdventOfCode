@@ -20,8 +20,7 @@ final class Day515: Day {
 //                        """
         let input = fileInput
         let strings = input.split(separator: "\n")
-        let naughtyOrNice = strings.map { $0.isNice }
-        let niceCount = naughtyOrNice.count { $0 == true }
+        let niceCount = strings.count { $0.isNice }
         
         stageOneOutput = "\(niceCount)"
     }
@@ -53,5 +52,9 @@ extension StringProtocol {
         }
         
         return (vowelCount >= 3) && doubleLetter
+    }
+    
+    var isNiceComplex: Bool {
+        return false
     }
 }

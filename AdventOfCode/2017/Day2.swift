@@ -13,7 +13,7 @@ class Day2: Day {
         let input = String.input(forDay: 2)
         let lines = input.split(separator: "\n").map(String.init)
         let separatedLines = lines.map { $0.split(separator: "\t").map(String.init) }
-        let numbers = separatedLines.map { $0.flatMap(Int.init) }
+        let numbers = separatedLines.map { $0.compactMap(Int.init) }
         let differences = numbers.map { $0.max()! - $0.min()! }
         let checksum = differences.reduce(0, +)
         stageOneOutput = "\(checksum)"

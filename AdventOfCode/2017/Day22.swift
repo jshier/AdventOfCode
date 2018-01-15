@@ -38,7 +38,7 @@ final class Grid {
     
     init(content: String) {
         let lines = content.split(separator: "\n")
-        let nodes = lines.map { $0.flatMap { Node(rawValue: $0) } }
+        let nodes = lines.map { $0.compactMap { Node(rawValue: $0) } }
         assert(nodes.count % 2 == 1 && nodes[0].count % 2 == 1)
         let middle = nodes.count / 2
         var nodeMap: [Point: Node] = [:]
@@ -172,8 +172,12 @@ extension Point: CustomStringConvertible {
 }
 
 extension Point: Comparable {
+    static func <= (lhs: Point, rhs: Point) -> Bool {
+        return lhs < rhs || lhs == rhs
+    }
+    
     static func < (lhs: Point, rhs: Point) -> Bool {
-        return lhs.squareDistance < rhs.squareDistance
+        return (lhs.x < rhs.x  && lhs.y <= rhs.y) || (lhs.x <= rhs.x  && lhs.y < rhs.y)
     }
 }
 
@@ -195,6 +199,51 @@ func += (lhs: inout Point, rhs: Point) {
 
 func += (lhs: inout Point, rhs: (x: Int, y: Int)) {
     lhs = lhs + rhs
+}
+
+extension Point {
+    init<S: StringProtocol>(_ string: S) {
+        let elements = string.split(separator: ",")
+                             .compactMap { Int($0) }
+        x = elements[0]
+        y = elements[1]
+    }
+}
+
+struct PointIterator: IteratorProtocol {
+    let start: Point
+    let end: Point
+    var nextValue: Point
+    
+    init(start: Point, end: Point) {
+        precondition(start < end)
+        self.start = start
+        self.end = end
+        nextValue = start
+    }
+    
+    mutating func next() -> Point? {
+        // Iterate x then y
+        guard nextValue <= end else { return nil }
+        
+        let current = nextValue
+        if current.x < end.x {
+            nextValue = Point(current.x + 1, current.y)
+        } else {
+            nextValue = Point(start.x, current.y + 1)
+        }
+        
+        return current
+    }
+}
+
+struct PointSequence: Sequence {
+    let start: Point
+    let end: Point
+    
+    func makeIterator() -> PointIterator {
+        return PointIterator(start: start, end: end)
+    }
 }
 
 struct Virus {

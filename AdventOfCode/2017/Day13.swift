@@ -19,7 +19,7 @@ final class Day13: Day {
 //                        """
         let input = fileInput
         let lines = input.split(separator: "\n")
-        let scanners = lines.map { $0.components(separatedBy: ": ").flatMap(Int.init) }
+        let scanners = lines.map { $0.components(separatedBy: ": ").compactMap(Int.init) }
         let scanner = Dictionary(zip(scanners.map { $0[0] }, scanners.map { $0[1] })) { (_, rhs) in return rhs }
         
         var violations: [Int] = []

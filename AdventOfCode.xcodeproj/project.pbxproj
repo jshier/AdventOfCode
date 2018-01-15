@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		31202D961FEF8DE0009B2C2E /* Day24.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31202D951FEF8DE0009B2C2E /* Day24.swift */; };
+		312C9FD9200D496B00F8C0F4 /* Day615.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C9FD8200D496B00F8C0F4 /* Day615.swift */; };
 		313240D31FF0BD3400E3B690 /* Day25.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313240D21FF0BD3400E3B690 /* Day25.swift */; };
 		3136B8631FE0D94100CB98FE /* Day5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3136B8621FE0D94100CB98FE /* Day5.swift */; };
 		314051C01FF260B20084D053 /* Day11.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314051BF1FF260B20084D053 /* Day11.swift */; };
@@ -57,6 +58,8 @@
 /* Begin PBXFileReference section */
 		31202D941FEF8DBC009B2C2E /* day24.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day24.txt; sourceTree = "<group>"; };
 		31202D951FEF8DE0009B2C2E /* Day24.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day24.swift; sourceTree = "<group>"; };
+		312C9FD7200D495F00F8C0F4 /* day6.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day6.txt; sourceTree = "<group>"; };
+		312C9FD8200D496B00F8C0F4 /* Day615.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day615.swift; sourceTree = "<group>"; };
 		313240D11FF0BD2700E3B690 /* day25.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day25.txt; sourceTree = "<group>"; };
 		313240D21FF0BD3400E3B690 /* Day25.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day25.swift; sourceTree = "<group>"; };
 		3136B8621FE0D94100CB98FE /* Day5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day5.swift; sourceTree = "<group>"; };
@@ -241,6 +244,7 @@
 				31D524A220047DE90058241D /* Day315.swift */,
 				31D524A9200483990058241D /* Day415.swift */,
 				31D524AC200488260058241D /* Day515.swift */,
+				312C9FD8200D496B00F8C0F4 /* Day615.swift */,
 				31D524A52004834B0058241D /* AdventOfCode-Bridging-Header.h */,
 			);
 			path = 2015;
@@ -253,6 +257,7 @@
 				31D524A12004782E0058241D /* day2.txt */,
 				31D524A420047DF40058241D /* day3.txt */,
 				31D524AB2004880E0058241D /* day5.txt */,
+				312C9FD7200D495F00F8C0F4 /* day6.txt */,
 			);
 			name = 2015;
 			path = Inputs/2015;
@@ -334,6 +339,7 @@
 				315B6A0F1FE77FA40026AF73 /* Day18.swift in Sources */,
 				31D5249E200474980058241D /* Day115.swift in Sources */,
 				31A87E281FE49F9500FF85D3 /* Day7.swift in Sources */,
+				312C9FD9200D496B00F8C0F4 /* Day615.swift in Sources */,
 				318AC32A1FE062A900A98B5E /* main.swift in Sources */,
 				31D524A0200478120058241D /* Day215.swift in Sources */,
 				31D524A320047DE90058241D /* Day315.swift in Sources */,

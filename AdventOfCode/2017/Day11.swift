@@ -13,7 +13,7 @@ final class Day11: Day {
         let fileInput = String.input(forDay: 11)
         //let testInput = "ne,ne,s,s"
         let input = fileInput
-        let directions = input.split(separator: ",").map(String.init).flatMap(HexDirection.init)
+        let directions = input.split(separator: ",").map(String.init).compactMap(HexDirection.init)
         let points = directions.map { $0.point }
 //        var result = Point(0, 0)
 //        for point in points {

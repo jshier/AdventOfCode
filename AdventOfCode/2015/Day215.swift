@@ -27,7 +27,7 @@ final class Day215: Day {
         let height: Int
         
         init(_ substring: Substring) {
-            let lwh = substring.split(separator: "x").flatMap { Int($0) }
+            let lwh = substring.split(separator: "x").compactMap { Int($0) }
             length = lwh[0]
             width = lwh[1]
             height = lwh[2]
