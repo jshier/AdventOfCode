@@ -172,12 +172,8 @@ extension Point: CustomStringConvertible {
 }
 
 extension Point: Comparable {
-    static func <= (lhs: Point, rhs: Point) -> Bool {
-        return lhs < rhs || lhs == rhs
-    }
-    
     static func < (lhs: Point, rhs: Point) -> Bool {
-        return (lhs.x < rhs.x  && lhs.y <= rhs.y) || (lhs.x <= rhs.x  && lhs.y < rhs.y)
+        return lhs.x < rhs.x || (lhs.x == rhs.x && lhs.y < rhs.y)
     }
 }
 
@@ -229,8 +225,10 @@ struct PointIterator: IteratorProtocol {
         let current = nextValue
         if current.x < end.x {
             nextValue = Point(current.x + 1, current.y)
-        } else {
+        } else if current.y < end.y {
             nextValue = Point(start.x, current.y + 1)
+        } else if current.x == end.x && current.y == end.y {
+            nextValue = Point(current.x + 1, current.y)
         }
         
         return current
