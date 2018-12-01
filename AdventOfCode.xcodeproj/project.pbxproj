@@ -17,6 +17,7 @@
 		314051C61FF29B1C0084D053 /* Day19.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314051C51FF29B1C0084D053 /* Day19.swift */; };
 		314051CA1FF2A8AE0084D053 /* Day20.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314051C91FF2A8AE0084D053 /* Day20.swift */; };
 		314051CD1FF2E6F00084D053 /* Day21.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314051CC1FF2E6F00084D053 /* Day21.swift */; };
+		314392F521B23548000F28F9 /* Day118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314392F421B23548000F28F9 /* Day118.swift */; };
 		315684C31FE0B101009234CE /* Day3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315684C21FE0B101009234CE /* Day3.swift */; };
 		315B6A0A1FE751430026AF73 /* Day9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315B6A091FE751430026AF73 /* Day9.swift */; };
 		315B6A0C1FE765EC0026AF73 /* Day10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315B6A0B1FE765EC0026AF73 /* Day10.swift */; };
@@ -74,6 +75,31 @@
 		314051C91FF2A8AE0084D053 /* Day20.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day20.swift; sourceTree = "<group>"; };
 		314051CB1FF2E6DE0084D053 /* day21.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day21.txt; sourceTree = "<group>"; };
 		314051CC1FF2E6F00084D053 /* Day21.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day21.swift; sourceTree = "<group>"; };
+		314392DB21B2350A000F28F9 /* day13.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day13.txt; sourceTree = "<group>"; };
+		314392DC21B2350A000F28F9 /* day12.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day12.txt; sourceTree = "<group>"; };
+		314392DD21B2350A000F28F9 /* day10.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day10.txt; sourceTree = "<group>"; };
+		314392DE21B2350A000F28F9 /* day11.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day11.txt; sourceTree = "<group>"; };
+		314392DF21B2350A000F28F9 /* day15.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day15.txt; sourceTree = "<group>"; };
+		314392E021B2350A000F28F9 /* day8.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day8.txt; sourceTree = "<group>"; };
+		314392E121B2350A000F28F9 /* day9.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day9.txt; sourceTree = "<group>"; };
+		314392E221B2350A000F28F9 /* day14.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day14.txt; sourceTree = "<group>"; };
+		314392E321B2350A000F28F9 /* day16.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day16.txt; sourceTree = "<group>"; };
+		314392E421B2350A000F28F9 /* day17.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day17.txt; sourceTree = "<group>"; };
+		314392E521B2350A000F28F9 /* day7.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day7.txt; sourceTree = "<group>"; };
+		314392E621B2350A000F28F9 /* day6.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day6.txt; sourceTree = "<group>"; };
+		314392E721B2350A000F28F9 /* day25.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day25.txt; sourceTree = "<group>"; };
+		314392E821B2350A000F28F9 /* day4.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day4.txt; sourceTree = "<group>"; };
+		314392E921B2350A000F28F9 /* day19.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day19.txt; sourceTree = "<group>"; };
+		314392EA21B2350A000F28F9 /* day18.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day18.txt; sourceTree = "<group>"; };
+		314392EB21B2350A000F28F9 /* day5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day5.txt; sourceTree = "<group>"; };
+		314392EC21B2350A000F28F9 /* day24.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day24.txt; sourceTree = "<group>"; };
+		314392ED21B2350A000F28F9 /* day1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day1.txt; sourceTree = "<group>"; };
+		314392EE21B2350A000F28F9 /* day20.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day20.txt; sourceTree = "<group>"; };
+		314392EF21B2350A000F28F9 /* day21.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day21.txt; sourceTree = "<group>"; };
+		314392F021B2350A000F28F9 /* day2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day2.txt; sourceTree = "<group>"; };
+		314392F121B2350A000F28F9 /* day23.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day23.txt; sourceTree = "<group>"; };
+		314392F221B2350A000F28F9 /* day22.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day22.txt; sourceTree = "<group>"; };
+		314392F421B23548000F28F9 /* Day118.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day118.swift; sourceTree = "<group>"; };
 		315684C21FE0B101009234CE /* Day3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day3.swift; sourceTree = "<group>"; };
 		315684C41FE0B12F009234CE /* day2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day2.txt; sourceTree = "<group>"; };
 		315B6A091FE751430026AF73 /* Day9.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day9.swift; sourceTree = "<group>"; };
@@ -112,7 +138,6 @@
 		31D524A12004782E0058241D /* day2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day2.txt; sourceTree = "<group>"; };
 		31D524A220047DE90058241D /* Day315.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day315.swift; sourceTree = "<group>"; };
 		31D524A420047DF40058241D /* day3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day3.txt; sourceTree = "<group>"; };
-		31D524A52004834B0058241D /* AdventOfCode-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdventOfCode-Bridging-Header.h"; sourceTree = "<group>"; };
 		31D524A9200483990058241D /* Day415.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day415.swift; sourceTree = "<group>"; };
 		31D524AB2004880E0058241D /* day5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day5.txt; sourceTree = "<group>"; };
 		31D524AC200488260058241D /* Day515.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day515.swift; sourceTree = "<group>"; };
@@ -166,6 +191,45 @@
 			path = 2017;
 			sourceTree = "<group>";
 		};
+		314392DA21B2350A000F28F9 /* 2018 */ = {
+			isa = PBXGroup;
+			children = (
+				314392ED21B2350A000F28F9 /* day1.txt */,
+				314392F021B2350A000F28F9 /* day2.txt */,
+				314392E821B2350A000F28F9 /* day4.txt */,
+				314392EB21B2350A000F28F9 /* day5.txt */,
+				314392E621B2350A000F28F9 /* day6.txt */,
+				314392E521B2350A000F28F9 /* day7.txt */,
+				314392E021B2350A000F28F9 /* day8.txt */,
+				314392E121B2350A000F28F9 /* day9.txt */,
+				314392DD21B2350A000F28F9 /* day10.txt */,
+				314392DE21B2350A000F28F9 /* day11.txt */,
+				314392DC21B2350A000F28F9 /* day12.txt */,
+				314392DB21B2350A000F28F9 /* day13.txt */,
+				314392E221B2350A000F28F9 /* day14.txt */,
+				314392DF21B2350A000F28F9 /* day15.txt */,
+				314392E321B2350A000F28F9 /* day16.txt */,
+				314392E421B2350A000F28F9 /* day17.txt */,
+				314392EA21B2350A000F28F9 /* day18.txt */,
+				314392E921B2350A000F28F9 /* day19.txt */,
+				314392EE21B2350A000F28F9 /* day20.txt */,
+				314392EF21B2350A000F28F9 /* day21.txt */,
+				314392F221B2350A000F28F9 /* day22.txt */,
+				314392F121B2350A000F28F9 /* day23.txt */,
+				314392EC21B2350A000F28F9 /* day24.txt */,
+				314392E721B2350A000F28F9 /* day25.txt */,
+			);
+			path = 2018;
+			sourceTree = "<group>";
+		};
+		314392F321B2351E000F28F9 /* 2018 */ = {
+			isa = PBXGroup;
+			children = (
+				314392F421B23548000F28F9 /* Day118.swift */,
+			);
+			path = 2018;
+			sourceTree = "<group>";
+		};
 		318AC31D1FE062A900A98B5E = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +251,7 @@
 			children = (
 				31D5249A200474040058241D /* 2015 */,
 				311E36F820047356006FE47E /* 2017 */,
+				314392F321B2351E000F28F9 /* 2018 */,
 				319347241FE088B600D4EC4F /* Inputs */,
 				318AC3291FE062A900A98B5E /* main.swift */,
 				3193472A1FE0899B00D4EC4F /* Day.swift */,
@@ -200,6 +265,7 @@
 			children = (
 				31D5249B2004740F0058241D /* 2015 */,
 				31D52499200473BB0058241D /* 2017 */,
+				314392DA21B2350A000F28F9 /* 2018 */,
 			);
 			path = Inputs;
 			sourceTree = SOURCE_ROOT;
@@ -245,7 +311,6 @@
 				31D524A9200483990058241D /* Day415.swift */,
 				31D524AC200488260058241D /* Day515.swift */,
 				312C9FD8200D496B00F8C0F4 /* Day615.swift */,
-				31D524A52004834B0058241D /* AdventOfCode-Bridging-Header.h */,
 			);
 			path = 2015;
 			sourceTree = "<group>";
@@ -290,7 +355,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Jon Shier";
 				TargetAttributes = {
 					318AC3251FE062A900A98B5E = {
@@ -340,6 +405,7 @@
 				31D5249E200474980058241D /* Day115.swift in Sources */,
 				31A87E281FE49F9500FF85D3 /* Day7.swift in Sources */,
 				312C9FD9200D496B00F8C0F4 /* Day615.swift in Sources */,
+				314392F521B23548000F28F9 /* Day118.swift in Sources */,
 				318AC32A1FE062A900A98B5E /* main.swift in Sources */,
 				31D524A0200478120058241D /* Day215.swift in Sources */,
 				31D524A320047DE90058241D /* Day315.swift in Sources */,
@@ -376,6 +442,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -383,6 +450,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -410,12 +478,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -433,6 +502,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -440,6 +510,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -461,10 +532,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -475,9 +547,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AdventOfCode/2015/AdventOfCode-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -488,8 +558,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AdventOfCode/2015/AdventOfCode-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

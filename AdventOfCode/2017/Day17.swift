@@ -54,13 +54,3 @@ final class Day17: Day {
         stageTwoOutput = "\(maxOneIndex)"
     }
 }
-
-extension Array {
-    func circularIndex(_ from: Index, offsetBy offset: Int) -> Index {
-        if from + offset >= endIndex {
-            return circularIndex(startIndex, offsetBy: from + offset - endIndex)
-        } else {
-            return from + offset
-        }
-    }
-}

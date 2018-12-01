@@ -32,10 +32,3 @@ class Day115: Day {
         stageTwoOutput = "\(position)"
     }
 }
-
-extension String {
-    /// Extremely inefficient!
-    subscript(index: Int) -> Character {
-        return self[self.index(startIndex, offsetBy: index)]
-    }
-}

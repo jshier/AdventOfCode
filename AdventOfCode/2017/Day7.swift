@@ -135,20 +135,3 @@ struct SimpleCountedSet<Element: Hashable> {
         fatalError("No element with count: \(queriedCount)")
     }
 }
-
-extension Array where Element: Equatable {
-    func allElementsEqual() -> Bool {
-        guard !isEmpty else { return false }
-        
-        var previousElement = self[startIndex]
-        for element in dropFirst() {
-            if element == previousElement {
-                previousElement = element
-            } else {
-                return false
-            }
-        }
-        
-        return true
-    }
-}

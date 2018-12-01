@@ -61,13 +61,3 @@ extension HexDirection: CustomStringConvertible {
         return rawValue
     }
 }
-
-extension Array {
-    func accumulate<Result>(_ initialResult: Result, _ nextPartialResult: (Result, Element) -> Result) -> [Result] {
-        var running = initialResult
-        return map { next in
-            running = nextPartialResult(running, next)
-            return running
-        }
-    }
-}

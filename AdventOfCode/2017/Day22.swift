@@ -311,16 +311,3 @@ private extension Direction {
         }
     }
 }
-
-extension Sequence {
-    func count(where predicate: (Element) -> Bool) -> Int {
-        var count = 0
-        for element in self {
-            if predicate(element) {
-                count += 1
-            }
-        }
-        
-        return count
-    }
-}

@@ -36,9 +36,3 @@ final class Day15: Day {
         stageTwoOutput = "\(lower16BitPowerMatches)"
     }
 }
-
-extension Int {
-    func lower16BitsEqual(lower16BitsOf int: Int) -> Bool {
-        return Int16(truncatingIfNeeded: self) == Int16(truncatingIfNeeded: int)
-    }
-}

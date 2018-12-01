@@ -55,28 +55,4 @@ final class Day6: Day {
     }
 }
 
-extension Array where Element == Int {
-    var asString: String {
-        return map(String.init).joined()
-    }
-    
-    func maxValueIndex() -> (value: Element, index: Index)? {
-        guard !isEmpty else { return nil }
-        
-        var maxValue = first!
-        var maxIndex = startIndex
-        for (index, element) in self.enumerated() {
-            if element > maxValue {
-                maxValue = element
-                maxIndex = index
-            }
-        }
-        
-        return (value: maxValue, index: maxIndex)
-    }
-    
-    func circularIndex(after: Index) -> Index {
-        let after = index(after: after)
-        return (after == endIndex) ? startIndex : after
-    }
-}
+

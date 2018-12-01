@@ -92,17 +92,3 @@ final class Day16: Day {
     }
 }
 
-extension String {
-    mutating func swapAt(_ first: Int, _ second: Int) {
-        let firstIndex = index(startIndex, offsetBy: first)
-        let secondIndex = index(startIndex, offsetBy: second)
-        swapAt(firstIndex, secondIndex)
-    }
-    
-    mutating func swapAt(_ first: Index, _ second: Index) {
-        let firstString = String(self[first])
-        let secondString = String(self[second])
-        replaceSubrange(first..<index(after: first), with: secondString)
-        replaceSubrange(second..<index(after: second), with: firstString)
-    }
-}

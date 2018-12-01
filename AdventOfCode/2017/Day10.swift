@@ -124,15 +124,3 @@ extension Array {
         return parts
     }
 }
-
-extension Character {
-    var unicodeValue: Int {
-        return Int(unicodeScalars.first!.value)
-    }
-}
-
-extension String {
-    var unicodeValues: [Int] {
-        return map { $0.unicodeValue }
-    }
-}

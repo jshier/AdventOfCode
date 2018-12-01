@@ -33,28 +33,3 @@ final class Day415: Day {
         stageTwoOutput = "\(count - 1)"
     }
 }
-
-extension String {
-    func md5Data() -> Data {
-        let messageData = Data(utf8)
-        var digestData = Data(count: Int(CC_MD5_DIGEST_LENGTH))
-        
-        _ = digestData.withUnsafeMutableBytes { digestBytes in
-            messageData.withUnsafeBytes { messageBytes in
-                CC_MD5(messageBytes, CC_LONG(messageData.count), digestBytes)
-            }
-        }
-        
-        return digestData
-    }
-    
-    func md5() -> String {
-        return md5Data().hexString
-    }
-}
-
-extension Data {
-    var hexString: String {
-        return map { String(format: "%02x", $0) }.joined()
-    }
-}

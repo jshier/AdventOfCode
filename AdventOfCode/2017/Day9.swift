@@ -62,18 +62,3 @@ final class Day9: Day {
     
     
 }
-
-extension String {
-    mutating func filteringDestructive(_ token: Character) {
-        var currentIndex = startIndex
-        while currentIndex != endIndex {
-            let character = self[currentIndex]
-            if character == token {
-                let nextIndex = index(after: currentIndex)
-                removeSubrange(currentIndex...nextIndex)
-            } else {
-                currentIndex = index(after: currentIndex)
-            }
-        }
-    }
-}

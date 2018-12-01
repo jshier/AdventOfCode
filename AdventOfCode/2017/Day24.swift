@@ -169,22 +169,3 @@ extension Port: Comparable {
         return lhs.value < rhs.value
     }
 }
-
-extension Array {
-    mutating func remove(where predicate: (Element) -> Bool) -> [Element] {
-        var currentIndex = startIndex
-        var result: [Element] = []
-        while currentIndex < endIndex {
-            let element = self[currentIndex]
-            if predicate(element) {
-                let nextIndex = index(after: currentIndex)
-                result.append(element)
-                removeSubrange(currentIndex..<nextIndex)
-            } else {
-                currentIndex = index(after: currentIndex)
-            }
-        }
-        
-        return result
-    }
-}

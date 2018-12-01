@@ -105,14 +105,3 @@ enum State {
         }
     }
 }
-
-extension MutableCollection {
-    func count(where predicate: (Element) -> Bool) -> Int {
-        var wheres = 0
-        for element in self {
-            if predicate(element) { wheres += 1 }
-        }
-        
-        return wheres
-    }
-}

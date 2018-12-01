@@ -16,21 +16,11 @@ class Day {
     
     func output() -> String {
         perform()
-        let header = "========== \(type(of: self)) ==========\n"
-        let stageOne: String
-        if let stageOneOutput = stageOneOutput {
-            stageOne = "Stage 1: \(stageOneOutput)\n"
-        } else {
-            stageOne = ""
-        }
         
-        let stageTwo: String
-        if let stageTwoOutput = stageTwoOutput {
-            stageTwo = "Stage 2: \(stageTwoOutput)\n"
-        } else {
-            stageTwo = ""
-        }
-        
-        return header + stageOne + stageTwo
+        return """
+        ========== \(type(of: self)) ==========
+        Stage 1: \(stageOneOutput ?? "No output.")
+        Stage 2: \(stageTwoOutput ?? "No output.")
+        """
     }
 }

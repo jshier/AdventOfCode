@@ -55,11 +55,3 @@ final class Day14: Day {
         stageTwoOutput = "\(regions.count)"
     }
 }
-
-extension Int {
-    var paddedBinaryRepresentation: String {
-        let string = String(self, radix: 2)
-        let padding = String(repeating: "0", count: (8 - string.count))
-        return padding + string
-    }
-}
