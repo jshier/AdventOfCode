@@ -16,6 +16,18 @@ extension String {
         return try! String(contentsOfFile: "/Users/jshier/Desktop/Code/AdventOfCode/Inputs/\(year)/day\(day).txt")
     }
     
+    func byLines() -> [String] {
+        return split(separator: "\n").map(String.init)
+    }
+    
+    func byTabs() -> [String] {
+        return split(separator: "\t").map(String.init)
+    }
+    
+    func bySpaces() -> [String] {
+        return split(separator: " ").map(String.init)
+    }
+    
     mutating func swapAt(_ first: Int, _ second: Int) {
         let firstIndex = index(startIndex, offsetBy: first)
         let secondIndex = index(startIndex, offsetBy: second)
