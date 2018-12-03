@@ -212,7 +212,7 @@ struct PointIterator: IteratorProtocol {
     var nextValue: Point
     
     init(start: Point, end: Point) {
-        precondition(start < end)
+        precondition(start <= end)
         self.start = start
         self.end = end
         nextValue = start

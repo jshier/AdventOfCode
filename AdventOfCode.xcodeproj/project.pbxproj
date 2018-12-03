@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3109AA1221B4EE53006A24D0 /* Day318.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3109AA1121B4EE53006A24D0 /* Day318.swift */; };
 		311931C321B39C7200A4A116 /* Day218.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311931C221B39C7200A4A116 /* Day218.swift */; };
 		31202D961FEF8DE0009B2C2E /* Day24.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31202D951FEF8DE0009B2C2E /* Day24.swift */; };
 		312C9FD9200D496B00F8C0F4 /* Day615.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C9FD8200D496B00F8C0F4 /* Day615.swift */; };
@@ -58,6 +59,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3109AA1121B4EE53006A24D0 /* Day318.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day318.swift; sourceTree = "<group>"; };
+		3109AA1321B4EE89006A24D0 /* day3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day3.txt; sourceTree = "<group>"; };
 		311931C221B39C7200A4A116 /* Day218.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day218.swift; sourceTree = "<group>"; };
 		31202D941FEF8DBC009B2C2E /* day24.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day24.txt; sourceTree = "<group>"; };
 		31202D951FEF8DE0009B2C2E /* Day24.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day24.swift; sourceTree = "<group>"; };
@@ -198,6 +201,7 @@
 			children = (
 				314392ED21B2350A000F28F9 /* day1.txt */,
 				314392F021B2350A000F28F9 /* day2.txt */,
+				3109AA1321B4EE89006A24D0 /* day3.txt */,
 				314392E821B2350A000F28F9 /* day4.txt */,
 				314392EB21B2350A000F28F9 /* day5.txt */,
 				314392E621B2350A000F28F9 /* day6.txt */,
@@ -229,6 +233,7 @@
 			children = (
 				314392F421B23548000F28F9 /* Day118.swift */,
 				311931C221B39C7200A4A116 /* Day218.swift */,
+				3109AA1121B4EE53006A24D0 /* Day318.swift */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				31A87E201FE4964700FF85D3 /* Day4.swift in Sources */,
 				315B6A0A1FE751430026AF73 /* Day9.swift in Sources */,
 				318AC3331FE062C700A98B5E /* Helpers.swift in Sources */,
+				3109AA1221B4EE53006A24D0 /* Day318.swift in Sources */,
 				314051CD1FF2E6F00084D053 /* Day21.swift in Sources */,
 				31D3B3BC1FEE19C70002648A /* Day23.swift in Sources */,
 				314051C01FF260B20084D053 /* Day11.swift in Sources */,
