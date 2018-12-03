@@ -37,6 +37,15 @@ final class Day318: Day {
         let twoOrMore = claimedPoints.values.count { $0.count > 1 }
 //        print(claimedPoints.map { "\($0.0): \($0.1.map { $0.id })" })
         stageOneOutput = "\(twoOrMore)"
+        var id: String?
+        loop: for claim in claims {
+            var onlyOne = 0
+            for point in claim.areaPoints {
+                if claimedPoints[point]!.count == 1 { onlyOne += 1 }
+            }
+            if onlyOne == claim.areaPoints.count { id = claim.id; break loop }
+        }
+        stageTwoOutput = id
     }
     
     struct Claim: Hashable {
@@ -60,8 +69,8 @@ struct Size: Hashable {
     
     init(_ string: String) {
         let split = string.split(separator: "x")
-        height = Int(split[0])!
-        width = Int(split[1])!
+        width = Int(split[0])!
+        height = Int(split[1])!
     }
 }
 
