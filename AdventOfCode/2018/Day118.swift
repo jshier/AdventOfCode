@@ -28,5 +28,3 @@ final class Day118: Day {
         stageTwoOutput = "\(duplicateValue.map(String.init) ?? "NoneFound")"
     }
 }
-
-
