@@ -25,18 +25,12 @@ final class Day518: Day {
 
 private extension String {
     func reacted() -> String {
-        var output = self
-        var lastCount = 0
-        while output.count != lastCount {
-            lastCount = output.count
-            let thisInput = output
-            output.removeAll(keepingCapacity: true)
-            thisInput.forEach {
-                if output.last?.isOppositeCaseOf($0) == true {
-                    output.removeLast()
-                } else {
-                    output.append($0)
-                }
+        var output = ""
+        forEach {
+            if output.last?.isOppositeCaseOf($0) == true {
+                output.removeLast()
+            } else {
+                output.append($0)
             }
         }
         
