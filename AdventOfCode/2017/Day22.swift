@@ -133,20 +133,16 @@ struct Point: Hashable {
 }
 
 extension Point {
-    var surroundingOffsets: [(Int, Int)] {
-        return [(0, 1), (1, 0), (0, -1), (-1, 0), (-1, 1), (1, -1), (1, 1), (-1, -1)]
-    }
+    static let surroundingOffsets = [(0, 1), (1, 0), (0, -1), (-1, 0), (-1, 1), (1, -1), (1, 1), (-1, -1)]
     
     var surroundingPoints: [Point] {
-        return surroundingOffsets.map { self + $0 }
+        return Point.surroundingOffsets.map { self + $0 }
     }
     
-    var adjacentOffsets: [(Int, Int)] {
-        return [(0, 1), (1, 0), (0, -1), (-1, 0)]
-    }
+    static let adjacentOffsets = [(0, 1), (1, 0), (0, -1), (-1, 0)]
     
     var adjacentPoints: [Point] {
-        return adjacentOffsets.map { self + $0 }
+        return Point.adjacentOffsets.map { self + $0 }
     }
     
     var squareDistance: Int {
@@ -162,6 +158,10 @@ extension Point {
         case .up, .down: return [Direction.left, Direction.right].map { self + $0.forwardOffset }
         case .left, .right: return [Direction.up, Direction.down].map { self + $0.forwardOffset }
         }
+    }
+    
+    func manhattanDistance(to point: Point) -> Int {
+        return abs(x - point.x) + abs(y - point.y)
     }
 }
 
