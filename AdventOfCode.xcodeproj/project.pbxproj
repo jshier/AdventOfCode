@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -45,6 +45,7 @@
 		31D524AD200488260058241D /* Day515.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D524AC200488260058241D /* Day515.swift */; };
 		31DE12B91FE6281500C48F43 /* Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE12B81FE6281500C48F43 /* Day6.swift */; };
 		31DE12BC1FE631C600C48F43 /* Day17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE12BB1FE631C600C48F43 /* Day17.swift */; };
+		31E0CB8721BB407D00998B50 /* Day718.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E0CB8621BB407D00998B50 /* Day718.swift */; };
 		31E801E521B712710031C2B3 /* Day418.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E801E421B712710031C2B3 /* Day418.swift */; };
 		31F7E4F91FEDBD9C00B397E8 /* Day22.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F7E4F81FEDBD9C00B397E8 /* Day22.swift */; };
 /* End PBXBuildFile section */
@@ -154,6 +155,7 @@
 		31DE12B81FE6281500C48F43 /* Day6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day6.swift; sourceTree = "<group>"; };
 		31DE12BA1FE631BC00C48F43 /* day17.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day17.txt; sourceTree = "<group>"; };
 		31DE12BB1FE631C600C48F43 /* Day17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day17.swift; sourceTree = "<group>"; };
+		31E0CB8621BB407D00998B50 /* Day718.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day718.swift; sourceTree = "<group>"; };
 		31E801E421B712710031C2B3 /* Day418.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day418.swift; sourceTree = "<group>"; };
 		31F7E4F71FEDBD6000B397E8 /* day22.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day22.txt; sourceTree = "<group>"; };
 		31F7E4F81FEDBD9C00B397E8 /* Day22.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day22.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				31E801E421B712710031C2B3 /* Day418.swift */,
 				31BD7A4D21B849970056CB6D /* Day518.swift */,
 				31BBF1FD21B8E48D00B3AD33 /* Day618.swift */,
+				31E0CB8621BB407D00998B50 /* Day718.swift */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -383,7 +386,7 @@
 				};
 			};
 			buildConfigurationList = 318AC3211FE062A900A98B5E /* Build configuration list for PBXProject "AdventOfCode" */;
-			compatibilityVersion = "Xcode 8.0";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -441,6 +444,7 @@
 				314051CD1FF2E6F00084D053 /* Day21.swift in Sources */,
 				31D3B3BC1FEE19C70002648A /* Day23.swift in Sources */,
 				314051C01FF260B20084D053 /* Day11.swift in Sources */,
+				31E0CB8721BB407D00998B50 /* Day718.swift in Sources */,
 				3193472B1FE0899B00D4EC4F /* Day.swift in Sources */,
 				318AC3311FE062BE00A98B5E /* Day12.swift in Sources */,
 				31D524AA200483990058241D /* Day415.swift in Sources */,
@@ -557,7 +561,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
@@ -567,7 +572,11 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -578,7 +587,11 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
