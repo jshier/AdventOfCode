@@ -8,6 +8,6 @@
 
 import Foundation
 
-let output = Day618().output()
+let output = Day918().output()
 print(output)
 

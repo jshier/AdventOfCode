@@ -89,6 +89,32 @@ extension Character {
 
 // MARK: - Array
 
+extension Array {
+    mutating func insert(_ element: Element, after: Index) -> Index {
+        let nextIndex = index(after: after)
+        if nextIndex == endIndex {
+            append(element)
+        } else {
+            insert(element, at: nextIndex)
+        }
+        
+        return nextIndex
+    }
+}
+
+extension LinkedList {
+    func insert(_ element: Element, after: Index) -> Index {
+        let nextIndex = index(after: after)
+        if nextIndex == endIndex {
+            append(element)
+        } else {
+            insert(element, at: nextIndex.tag)
+        }
+        
+        return nextIndex
+    }
+}
+
 extension Collection where Index == Int {
     func cycle() -> UnfoldSequence<Element, Int> {
         return sequence(state: 0) { (index: inout Int) in
@@ -99,7 +125,9 @@ extension Collection where Index == Int {
     }
     
     func circularIndex(_ from: Index, offsetBy offset: Int) -> Index {
-        return (from + offset) % count
+        let potentialIndex = (from + offset) % count
+        
+        return (potentialIndex < 0) ? potentialIndex + endIndex : potentialIndex
     }
     
     func circularIndex(after: Index) -> Index {
@@ -107,6 +135,22 @@ extension Collection where Index == Int {
         
         return circularIndex(after, offsetBy: 1)
     }
+}
+
+extension LinkedList {
+    func circularIndex(_ from: Int, offsetBy offset: Int) -> Index {
+        let potentialIndex = (from + offset) % count
+        let finalIndex = (potentialIndex < 0) ? potentialIndex + endIndex.tag : potentialIndex
+        let newNode = node(at: finalIndex)
+
+        return LinkedListIndex<Element>(node: newNode, tag: finalIndex)
+    }
+
+//    func circularIndex(after: Index) -> Index {
+//        guard after < endIndex else { return 0 }
+//
+//        return circularIndex(after, offsetBy: 1)
+//    }
 }
 
 extension Sequence where Element == Int {
