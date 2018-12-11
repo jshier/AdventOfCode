@@ -100,18 +100,17 @@ extension Array {
         
         return nextIndex
     }
-}
-
-extension LinkedList {
-    func insert(_ element: Element, after: Index) -> Index {
-        let nextIndex = index(after: after)
-        if nextIndex == endIndex {
-            append(element)
-        } else {
-            insert(element, at: nextIndex.tag)
+    
+    mutating func mutateForEach(_ body: (inout Element) throws -> Void) rethrows {
+        var index = self.startIndex
+        while index != self.endIndex {
+            try body(&self[index])
+            self.formIndex(after: &index)
         }
-        
-        return nextIndex
+    }
+    
+    mutating func mapInPlace(_ transform: (Element) -> Element) {
+        self = map(transform)
     }
 }
 
@@ -135,22 +134,6 @@ extension Collection where Index == Int {
         
         return circularIndex(after, offsetBy: 1)
     }
-}
-
-extension LinkedList {
-    func circularIndex(_ from: Int, offsetBy offset: Int) -> Index {
-        let potentialIndex = (from + offset) % count
-        let finalIndex = (potentialIndex < 0) ? potentialIndex + endIndex.tag : potentialIndex
-        let newNode = node(at: finalIndex)
-
-        return LinkedListIndex<Element>(node: newNode, tag: finalIndex)
-    }
-
-//    func circularIndex(after: Index) -> Index {
-//        guard after < endIndex else { return 0 }
-//
-//        return circularIndex(after, offsetBy: 1)
-//    }
 }
 
 extension Sequence where Element == Int {

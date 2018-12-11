@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3103B7A821BF3C9700301245 /* Day1018.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103B7A721BF3C9700301245 /* Day1018.swift */; };
 		3109AA1221B4EE53006A24D0 /* Day318.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3109AA1121B4EE53006A24D0 /* Day318.swift */; };
 		311931C321B39C7200A4A116 /* Day218.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311931C221B39C7200A4A116 /* Day218.swift */; };
 		31202D961FEF8DE0009B2C2E /* Day24.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31202D951FEF8DE0009B2C2E /* Day24.swift */; };
@@ -26,7 +27,6 @@
 		315B6A0F1FE77FA40026AF73 /* Day18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315B6A0E1FE77FA40026AF73 /* Day18.swift */; };
 		31635F8C1FE4F5FD004ADA7F /* Day16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31635F8B1FE4F5FD004ADA7F /* Day16.swift */; };
 		317C72C921BCD7B400C89EE1 /* Day918.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317C72C821BCD7B400C89EE1 /* Day918.swift */; };
-		317C72CB21BCF01A00C89EE1 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317C72CA21BCF01A00C89EE1 /* LinkedList.swift */; };
 		318AC32A1FE062A900A98B5E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318AC3291FE062A900A98B5E /* main.swift */; };
 		318AC3311FE062BE00A98B5E /* Day12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318AC3301FE062BE00A98B5E /* Day12.swift */; };
 		318AC3331FE062C700A98B5E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318AC3321FE062C700A98B5E /* Helpers.swift */; };
@@ -65,6 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3103B7A721BF3C9700301245 /* Day1018.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1018.swift; sourceTree = "<group>"; };
 		3109AA1121B4EE53006A24D0 /* Day318.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day318.swift; sourceTree = "<group>"; };
 		3109AA1321B4EE89006A24D0 /* day3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day3.txt; sourceTree = "<group>"; };
 		311931C221B39C7200A4A116 /* Day218.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day218.swift; sourceTree = "<group>"; };
@@ -120,7 +121,6 @@
 		31635F8A1FE4F52A004ADA7F /* day16.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day16.txt; sourceTree = "<group>"; };
 		31635F8B1FE4F5FD004ADA7F /* Day16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day16.swift; sourceTree = "<group>"; };
 		317C72C821BCD7B400C89EE1 /* Day918.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day918.swift; sourceTree = "<group>"; };
-		317C72CA21BCF01A00C89EE1 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		318AC3261FE062A900A98B5E /* AdventOfCode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AdventOfCode; sourceTree = BUILT_PRODUCTS_DIR; };
 		318AC3291FE062A900A98B5E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		318AC3301FE062BE00A98B5E /* Day12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day12.swift; sourceTree = "<group>"; };
@@ -251,6 +251,7 @@
 				31BBF1FD21B8E48D00B3AD33 /* Day618.swift */,
 				31E0CB8621BB407D00998B50 /* Day718.swift */,
 				317C72C821BCD7B400C89EE1 /* Day918.swift */,
+				3103B7A721BF3C9700301245 /* Day1018.swift */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -281,7 +282,6 @@
 				318AC3291FE062A900A98B5E /* main.swift */,
 				3193472A1FE0899B00D4EC4F /* Day.swift */,
 				318AC3321FE062C700A98B5E /* Helpers.swift */,
-				317C72CA21BCF01A00C89EE1 /* LinkedList.swift */,
 			);
 			path = AdventOfCode;
 			sourceTree = "<group>";
@@ -421,6 +421,7 @@
 				31BD7A4E21B849970056CB6D /* Day518.swift in Sources */,
 				315684C31FE0B101009234CE /* Day3.swift in Sources */,
 				31D524AD200488260058241D /* Day515.swift in Sources */,
+				3103B7A821BF3C9700301245 /* Day1018.swift in Sources */,
 				31635F8C1FE4F5FD004ADA7F /* Day16.swift in Sources */,
 				319347291FE0897B00D4EC4F /* Day1.swift in Sources */,
 				311931C321B39C7200A4A116 /* Day218.swift in Sources */,
@@ -450,7 +451,6 @@
 				3109AA1221B4EE53006A24D0 /* Day318.swift in Sources */,
 				314051CD1FF2E6F00084D053 /* Day21.swift in Sources */,
 				31D3B3BC1FEE19C70002648A /* Day23.swift in Sources */,
-				317C72CB21BCF01A00C89EE1 /* LinkedList.swift in Sources */,
 				314051C01FF260B20084D053 /* Day11.swift in Sources */,
 				31E0CB8721BB407D00998B50 /* Day718.swift in Sources */,
 				3193472B1FE0899B00D4EC4F /* Day.swift in Sources */,
@@ -517,6 +517,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
