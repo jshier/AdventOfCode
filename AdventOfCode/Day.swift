@@ -10,6 +10,9 @@ class Day {
     var stageOneOutput: String?
     var stageTwoOutput: String?
     
+    var expectedStageOneOutput: String? { nil }
+    var expectedStageTwoOutput: String? { nil }
+    
     func perform() {
         print("Must override perform in subclasses.")
     }
@@ -17,10 +20,13 @@ class Day {
     func output() -> String {
         perform()
         
+        let stageOneCorrect = (stageOneOutput == (expectedStageOneOutput ?? "Fallback")) ? "Correct!" : "Incorrect!"
+        let stageTwoCorrect = (stageTwoOutput == (expectedStageTwoOutput ?? "Fallback")) ? "Correct!" : "Incorrect!"
+        
         return """
         ========== \(type(of: self)) ==========
-        Stage 1: \(stageOneOutput ?? "No output.")
-        Stage 2: \(stageTwoOutput ?? "No output.")
+        Stage 1: \(stageOneOutput ?? "No output.") \(stageOneCorrect)
+        Stage 2: \(stageTwoOutput ?? "No output.") \(stageTwoCorrect)
         """
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 
 final class Day11: Day {
     override func perform() {
-        let fileInput = String.input(forDay: 11)
+        let fileInput = String.input(forDay: 11, year: 2017)
         //let testInput = "ne,ne,s,s"
         let input = fileInput
         let directions = input.split(separator: ",").map(String.init).compactMap(HexDirection.init)

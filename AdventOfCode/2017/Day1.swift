@@ -10,7 +10,7 @@ import Foundation
 
 final class Day1: Day {
     override func perform() {
-        let input = String.input(forDay: 1)
+        let input = String.input(forDay: 1, year: 2017)
         let calculator = CaptchaCalculator(input)
         
         stageOneOutput = "\(calculator.calculateCircularSum())"

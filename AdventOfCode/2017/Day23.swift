@@ -10,7 +10,7 @@ import Foundation
 
 final class Day23: Day {
     override func perform() {
-        let fileInput = String.input(forDay: 23)
+        let fileInput = String.input(forDay: 23, year: 2017)
         let lines = fileInput.split(separator: "\n")
         let instructions = lines.map(Instruction.init)
         var program: [String: Int] = ["a": 0, "b": 0, "c": 0, "d": 0, "e": 0, "f": 0, "g": 0, "h": 0]

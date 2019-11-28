@@ -10,7 +10,7 @@ import Foundation
 
 class Day2: Day {
     override func perform() {
-        let input = String.input(forDay: 2)
+        let input = String.input(forDay: 2, year: 2017)
         let lines = input.split(separator: "\n").map(String.init)
         let separatedLines = lines.map { $0.split(separator: "\t").map(String.init) }
         let numbers = separatedLines.map { $0.compactMap(Int.init) }

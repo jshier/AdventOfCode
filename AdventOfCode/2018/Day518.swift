@@ -10,7 +10,7 @@ import Foundation
 
 final class Day518: Day {
     override func perform() {
-        let input = String.input(forDay: 5).byLines()[0]
+        let input = String.input(forDay: 5, year: 2018).byLines()[0]
 //        let input = "dabAcCaCBAcCcaDA"
         let initialReaction = input.reacted()
 

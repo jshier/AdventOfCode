@@ -6,13 +6,14 @@
 //  Copyright © 2017 Jon Shier. All rights reserved.
 //
 
+import CryptoKit
 import CommonCrypto
 import Foundation
 
 // MARK: - String
 
 extension String {
-    static func input(forDay day: Int, year: Int = 2018) -> String {
+    static func input(forDay day: Int, year: Int) -> String {
         return try! String(contentsOfFile: "/Users/jshier/Desktop/Code/AdventOfCode/Inputs/\(year)/day\(day).txt")
     }
     
@@ -64,16 +65,7 @@ extension String {
     }
     
     func md5Data() -> Data {
-        let messageData = Data(utf8)
-        var digestData = Data(count: Int(CC_MD5_DIGEST_LENGTH))
-        
-        _ = digestData.withUnsafeMutableBytes { digestBytes in
-            messageData.withUnsafeBytes { messageBytes in
-                CC_MD5(messageBytes, CC_LONG(messageData.count), digestBytes)
-            }
-        }
-        
-        return digestData
+        return Data(Insecure.MD5.hash(data: Data(utf8)))
     }
     
     func md5() -> String {

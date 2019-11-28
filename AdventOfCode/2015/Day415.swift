@@ -9,6 +9,9 @@
 import Foundation
 
 final class Day415: Day {
+    override var expectedStageOneOutput: String? { "117946" }
+    override var expectedStageTwoOutput: String? { "3938038" }
+    
     override func perform() {
         let input = "ckczppom"
         

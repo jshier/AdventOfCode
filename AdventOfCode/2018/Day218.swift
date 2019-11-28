@@ -10,7 +10,7 @@ import Foundation
 
 final class Day218: Day {
     override func perform() {
-        let input = String.input(forDay: 2)
+        let input = String.input(forDay: 2, year: 2018)
         let lines = input.byLines()
         var sets: [NSCountedSet] = []
         for line in lines {

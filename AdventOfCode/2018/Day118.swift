@@ -9,9 +9,12 @@
 import Foundation
 
 final class Day118: Day {
+    override var expectedStageOneOutput: String? { "425" }
+    override var expectedStageTwoOutput: String? { "57538" }
+    
     override func perform() {
-        let input = String.input(forDay: 1)
-        let lines = input.split(separator: "\n").map(String.init)
+        let input = String.input(forDay: 1, year: 2018)
+        let lines = input.byLines()
         let frequencies = lines.compactMap(Int.init)
         let initialSum = frequencies.reduce(0, +)
         stageOneOutput = "\(initialSum)"

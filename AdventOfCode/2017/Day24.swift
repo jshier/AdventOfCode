@@ -8,7 +8,7 @@
 
 final class Day24: Day {
     override func perform() {
-        let fileInput = String.input(forDay: 24)
+        let fileInput = String.input(forDay: 24, year: 2017)
 //        let testInput = """
 //                        0/2
 //                        2/2
@@ -73,7 +73,7 @@ struct Bridge {
         let usableComponents = availableComponents.filter { $0.contains(value: availableValue ?? 0) }
         for component in usableComponents {
             var availableComponents = availableComponents
-            availableComponents.remove(at: availableComponents.index(of: component)!)
+            availableComponents.remove(at: availableComponents.firstIndex(of: component)!)
             let used = Component(component: component, using: availableValue ?? 0)
             let newBridge = adding(used)
             bridges.append(newBridge)

@@ -10,7 +10,7 @@ import Foundation
 
 final class Day21: Day {
     override func perform() {
-        let fileInput = String.input(forDay: 21)
+        let fileInput = String.input(forDay: 21, year: 2017)
 //        let testInput = """
 //                        ../.# => ##./#../...
 //                        .#./..#/### => #..#/..../..../#..#

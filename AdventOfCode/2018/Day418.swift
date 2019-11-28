@@ -10,7 +10,7 @@ import Foundation
 
 final class Day418: Day {
     override func perform() {
-        let input = String.input(forDay: 4)
+        let input = String.input(forDay: 4, year: 2018)
         let guardSleepMap = input.byLines()
                                  .sorted()
                                  .groupBy { $0.contains("Guard #") }

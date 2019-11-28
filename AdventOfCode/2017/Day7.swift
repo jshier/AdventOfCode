@@ -26,15 +26,15 @@ final class Day7: Day {
 //            gyxo (61)
 //            cntj (57)
 //            """
-        let input = String.input(forDay: 7)
+        let input = String.input(forDay: 7, year: 2017)
         let lines = input.split(separator: "\n").map(String.init)
         let allNames: [String] = lines.map { line in
-            let endNameIndex = line.index { $0 == " " }!
+            let endNameIndex = line.firstIndex { $0 == " " }!
             return String(line.prefix(upTo: endNameIndex))
         }
         let allWeights: [Int] = lines.map { line in
-            let startingParens = line.index { $0 == "(" }!
-            let endingParens = line.index { $0 == ")" }!
+            let startingParens = line.firstIndex { $0 == "(" }!
+            let endingParens = line.firstIndex { $0 == ")" }!
             return Int(line[line.index(after: startingParens)..<endingParens])!
         }
         let allLinks: [[String]] = lines.map { line in

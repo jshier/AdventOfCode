@@ -10,7 +10,7 @@ import Foundation
 
 final class Day19: Day {
     override func perform() {
-        let fileInput = String.input(forDay: 19)
+        let fileInput = String.input(forDay: 19, year: 2017)
 //        let testInput = """
 //                             |         
 //                             |  +--+   
@@ -42,7 +42,7 @@ final class PathMap {
             }
         }
         
-        startingPoint = Point(lines[0].index(of: "|")!.encodedOffset, 0)
+        startingPoint = Point(lines[0].firstIndex(of: "|")!.utf16Offset(in: lines[0]), 0)
     }
     
     func tokensAndStepsFollowingPath() -> (tokens: String, steps: Int) {

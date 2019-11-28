@@ -16,7 +16,7 @@ final class Day8: Day {
 //            c dec -10 if a >= 1
 //            c inc -20 if c == 10
 //            """
-        let fileInput = String.input(forDay: 8)
+        let fileInput = String.input(forDay: 8, year: 2017)
         let input = fileInput
         let lines = input.split(separator: "\n")
         let instructions = lines.map(Instruction.init)

@@ -10,7 +10,7 @@ import Foundation
 
 final class Day6: Day {
     override func perform() {
-        let fileInput = String.input(forDay: 6)
+        let fileInput = String.input(forDay: 6, year: 2017)
         let fileBanks = fileInput.split(separator: "\t")
                                  .compactMap { Int($0) }
         //let testBanks = [0, 2, 7, 0]

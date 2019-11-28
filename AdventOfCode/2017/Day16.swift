@@ -10,7 +10,7 @@ import Foundation
 
 final class Day16: Day {
     override func perform() {
-        let fileInput = String.input(forDay: 16)
+        let fileInput = String.input(forDay: 16, year: 2017)
         //let filePrograms = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p"]
         let filePrograms = "abcdefghijklmnop"
 //        let sampleInput = "s1,x3/4,pe/b"
@@ -84,8 +84,8 @@ final class Day16: Day {
             case .swapIndex(let first, let second):
                 string.swapAt(first, second)
             case .swapProgram(let first, let second):
-                let firstIndex = string.index(of: first.first!)!
-                let secondIndex = string.index(of: second.first!)!
+                let firstIndex = string.firstIndex(of: first.first!)!
+                let secondIndex = string.firstIndex(of: second.first!)!
                 string.swapAt(firstIndex, secondIndex)
             }
         }

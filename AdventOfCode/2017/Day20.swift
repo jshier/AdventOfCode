@@ -10,7 +10,7 @@ import Foundation
 
 final class Day20: Day {
     override func perform() {
-        let fileInput = String.input(forDay: 20)
+        let fileInput = String.input(forDay: 20, year: 2017)
 //        let testInput = """
 //                        p=<-6,0,0>, v=<3,0,0>, a=<0,0,0>
 //                        p=<-4,0,0>, v=<2,0,0>, a=<0,0,0>
@@ -27,7 +27,7 @@ final class Day20: Day {
             }
         }
         let distances = particles.map { $0.position.distanceToOrigin }
-        let minIndex = distances.index(of: distances.min()!)!
+        let minIndex = distances.firstIndex(of: distances.min()!)!
         stageOneOutput = "\(minIndex)"
         
         var collisionParticles = startingParticles
