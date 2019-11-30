@@ -15,62 +15,44 @@ final class Day1118: Day {
     override func perform() {
         let input = 5535
         
-        var grid: [Point: Int] = [:]
-        for point in PointSequence(start: Point(1,1), end: Point(300,300)) {
-            let rackID = point.x + 10
-            var powerLevel = rackID * point.y
-            powerLevel += input
-            powerLevel *= rackID
-            let hundreds = (powerLevel / 100) % 10
-            grid[point] = (hundreds - 5)
+        var sums: [[Int]] = Array(repeating: Array(repeating: 0, count: 301), count: 301)
+        
+        for y in 1...300 {
+            for x in 1...300 {
+                let rackID = x + 10
+                var power = rackID * y
+                power += input
+                power *= rackID
+                power = (power / 100) % 10
+                power -= 5
+                sums[y][x] = power + sums[y - 1][x] + sums[y][x - 1] - sums[y - 1][x - 1]
+            }
         }
         
-        var largestTotalPower: (upperLeft: Point, power: Int) = (Point(0,0), 0)
-        for upperLeft in PointSequence(start: Point(1,1), end: Point(298, 298)) {
-            var totalPower = 0
-            for point in PointSequence(start: upperLeft, end: Point(upperLeft.x + 2, upperLeft.y + 2)) {
-                totalPower += (grid[point] ?? 0)
+        var largestTotalPower: (upperLeft: (Int, Int), power: Int) = ((0,0), 0)
+        for y in 3...300 {
+            for x in 3...300 {
+                let total = sums[y][x] - sums[y - 3][x] - sums[y][x - 3] + sums[y - 3][x - 3]
+                if total > largestTotalPower.power {
+                    largestTotalPower = (upperLeft: (x - 2, y - 2), power: total)
+                }
             }
-            if totalPower > largestTotalPower.power { largestTotalPower = (upperLeft: upperLeft, power: totalPower) }
         }
         
         stageOneOutput = "\(largestTotalPower.upperLeft)"
         
-        struct GridPower {
-            let upperLeft: Point
-            let power: Int
-            let size: Int
-            
-            var position: String { "\(upperLeft)x\(size)" }
-        }
-        
-        let positionalPower = grid.keys.map { (newKey: "\($0)x1", originalKey: $0) }
-        var gridPowers: [String: Int] = positionalPower.reduce(into: [:]) { (result, element) in
-            result[element.newKey] = grid[element.originalKey]
-        }
-        var largestGridTotalPower = GridPower(upperLeft: Point(0,0), power: 0, size: 0)
-        for size in 2...300 {
-            for upperLeft in PointSequence(start: Point(1,1), end: Point(300 - (size - 1), 300 - (size - 1))) {
-                guard var totalPower = gridPowers["\(upperLeft)x\(size - 1)"] else {
-                    fatalError("No cached grid found!")
-                }
-                
-                for x in upperLeft.x..<(upperLeft.x + size) {
-                    totalPower += (grid[Point(x, upperLeft.y + (size - 1))] ?? 0)
-                }
-                
-                for y in upperLeft.y..<(upperLeft.y + (size - 1)) {
-                    totalPower += (grid[Point(upperLeft.x + (size - 1), y)] ?? 0)
-                }
-                
-                gridPowers["\(upperLeft)x\(size)"] = totalPower
-                
-                if totalPower > largestGridTotalPower.power {
-                    largestGridTotalPower = GridPower(upperLeft: upperLeft, power: totalPower, size: size)
+        var largestSizedTotalPower: (upperLeft: (Int, Int), power: Int, size: Int) = ((0,0), 0, 0)
+        for size in 1...300 {
+            for y in size...300 {
+                for x in size...300 {
+                    let total = sums[y][x] - sums[y - size][x] - sums[y][x - size] + sums[y - size][x - size]
+                    if total > largestSizedTotalPower.power {
+                        largestSizedTotalPower = (upperLeft: (x - size + 1, y - size + 1), power: total, size: size)
+                    }
                 }
             }
         }
         
-        stageTwoOutput = largestGridTotalPower.position
+        stageTwoOutput = "\(largestSizedTotalPower.upperLeft)x\(largestSizedTotalPower.size)"
     }
 }
