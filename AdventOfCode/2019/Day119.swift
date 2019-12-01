@@ -20,18 +20,14 @@ final class Day119: Day {
 
         stageOneOutput = "\(total)"
         
-        func fuelRequired(for mass: Int) -> Int {
-            var remainder = mass
-            var sum = -remainder
-            while remainder > 0 {
-                sum += remainder
-                remainder = (remainder / 3) - 2
-            }
-            
-            return sum
+        func fuelRequired(forTotal total: Int, nextMass mass: Int) -> Int {
+            let latest = (mass / 3) - 2
+
+            return (latest > 0) ? fuelRequired(forTotal: total + latest, nextMass: latest) : total
         }
         
-        let stage2Total = inputs.map(fuelRequired(for:)).reduce(0, +)
+        let stage2Total = inputs.reduce(0, fuelRequired(forTotal:nextMass:))
+
         stageTwoOutput = "\(stage2Total)"
     }
 }
