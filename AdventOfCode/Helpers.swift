@@ -29,6 +29,10 @@ extension String {
         split(separator: " ").map(String.init)
     }
 
+    func byCommas() -> [String] {
+        split(separator: ",").map(String.init)
+    }
+
     mutating func swapAt(_ first: Int, _ second: Int) {
         let firstIndex = index(startIndex, offsetBy: first)
         let secondIndex = index(startIndex, offsetBy: second)
