@@ -18,10 +18,10 @@ final class Day218: Day {
             line.forEach { set.add($0) }
             sets.append(set)
         }
-        let hasTwo = sets.count { (set) in
+        let hasTwo = sets.count { set in
             set.count { set.count(for: $0) == 2 } > 0
         }
-        let hasThree = sets.count { (set) in
+        let hasThree = sets.count { set in
             set.count { set.count(for: $0) == 3 } > 0
         }
         stageOneOutput = "\(hasTwo * hasThree)"
@@ -34,14 +34,14 @@ final class Day218: Day {
                 var similar = ""
                 for pair in zip(firstLine, secondLine) {
                     guard differences <= 1 else { break }
-                    
+
                     if pair.0 != pair.1 {
                         differences += 1
                     } else {
                         similar.append(pair.0)
                     }
                 }
-                
+
                 if similar.count == secondLine.count - 1 { largestSimilarity = similar; break loop }
             }
             dropping = dropping.dropFirst()

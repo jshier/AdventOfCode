@@ -29,9 +29,9 @@ final class Day20: Day {
         let distances = particles.map { $0.position.distanceToOrigin }
         let minIndex = distances.firstIndex(of: distances.min()!)!
         stageOneOutput = "\(minIndex)"
-        
+
         var collisionParticles = startingParticles
-        for _ in 0..<1_000 {
+        for _ in 0..<1000 {
             var newParticles: [Particle] = []
             for particle in collisionParticles {
                 newParticles.append(particle.move())
@@ -48,7 +48,7 @@ final class Day20: Day {
                     index = newParticles.index(after: index)
                 }
             }
-            
+
             index = newParticles.startIndex
             while index < newParticles.endIndex {
                 if positionsRemoved.contains(newParticles[index].position) {
@@ -59,7 +59,7 @@ final class Day20: Day {
             }
             collisionParticles = newParticles
         }
-        
+
         stageTwoOutput = "\(collisionParticles.count)"
     }
 }
@@ -68,31 +68,31 @@ struct Particle: Hashable {
     let position: Vector
     let velocity: Vector
     let acceleration: Vector
-    
+
     init(_ position: Vector, _ velocity: Vector, _ acceleration: Vector) {
         self.position = position
         self.velocity = velocity
         self.acceleration = acceleration
     }
-    
+
     init(_ line: Substring) {
         let components = line.components(separatedBy: ", ").map { $0.dropFirst(3).dropLast() }.map(Vector.init)
         position = components[0]
         velocity = components[1]
         acceleration = components[2]
     }
-    
+
     func move() -> Particle {
         let newVelocity = velocity + acceleration
         let newPosition = position + newVelocity
-        
+
         return Particle(newPosition, newVelocity, acceleration)
     }
 }
 
 extension Particle: CustomStringConvertible {
     var description: String {
-        return "p=\(position), v=\(velocity), a=\(acceleration)"
+        "p=\(position), v=\(velocity), a=\(acceleration)"
     }
 }
 
@@ -100,13 +100,13 @@ struct Vector: Hashable {
     let x: Int
     let y: Int
     let z: Int
-    
+
     init(_ x: Int, _ y: Int, _ z: Int) {
         self.x = x
         self.y = y
         self.z = z
     }
-    
+
     init(_ string: Substring) {
         let components = string.split(separator: ",").compactMap { Int($0) }
         x = components[0]
@@ -120,17 +120,17 @@ extension Vector {
         let x = lhs.x + rhs.x
         let y = lhs.y + rhs.y
         let z = lhs.z + rhs.z
-        
+
         return Vector(x, y, z)
     }
-    
+
     var distanceToOrigin: Int {
-        return abs(x) + abs(y) + abs(z)
+        abs(x) + abs(y) + abs(z)
     }
 }
 
 extension Vector: CustomStringConvertible {
     var description: String {
-        return "<\(x),\(y),\(z)>"
+        "<\(x),\(y),\(z)>"
     }
 }

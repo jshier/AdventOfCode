@@ -11,7 +11,7 @@ import Foundation
 final class Day11: Day {
     override func perform() {
         let fileInput = String.input(forDay: 11, year: 2017)
-        //let testInput = "ne,ne,s,s"
+        // let testInput = "ne,ne,s,s"
         let input = fileInput
         let directions = input.split(separator: ",").map(String.init).compactMap(HexDirection.init)
         let points = directions.map { $0.point }
@@ -20,19 +20,19 @@ final class Day11: Day {
 //            result = result + point
 //        }
         let point = points.reduce(Point(0, 0), +)
-        
+
         stageOneOutput = "\(point.squareDistance / 2)"
-        
+
         let intermediatePoints = points.accumulate(Point(0, 0), +)
         let farthest = intermediatePoints.max()!
-        
+
         stageTwoOutput = "\(farthest.squareDistance / 2)"
     }
 }
 
 enum HexDirection: String {
     case n, s, ne, se, nw, sw
-    
+
     var opposite: HexDirection {
         switch self {
         case .n: return .s
@@ -43,7 +43,7 @@ enum HexDirection: String {
         case .se: return .nw
         }
     }
-    
+
     var point: Point {
         switch self {
         case .n: return Point(0, 2)
@@ -58,6 +58,6 @@ enum HexDirection: String {
 
 extension HexDirection: CustomStringConvertible {
     var description: String {
-        return rawValue
+        rawValue
     }
 }

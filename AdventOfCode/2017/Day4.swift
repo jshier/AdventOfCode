@@ -17,18 +17,18 @@ final class Day4: Day {
             let totalCount = words.count
             let uniqueCount = Set(words).count
             return (totalCount, uniqueCount)
-            }
-            .reduce(0) { (result, element) -> Int in
-                return (element.0 == element.1) ? result + 1 : result
         }
-        
+        .reduce(0) { (result, element) -> Int in
+            (element.0 == element.1) ? result + 1 : result
+        }
+
         let uniqueAnagramlessPhrases = lines.map { line -> Bool in
             let words = line.split(separator: " ")
             let totalCount = words.count
             let uniqueCount = Set(words).count
-            
+
             guard totalCount == uniqueCount else { return false }
-            
+
             var anagrams: [String: [String]] = [:]
             for word in words {
                 let string = String(word)
@@ -38,15 +38,15 @@ final class Day4: Day {
                 } else {
                     anagrams[string.anagramKey] = [string]
                 }
-                if anagrams[string.anagramKey]!.count > 1  { return false }
+                if anagrams[string.anagramKey]!.count > 1 { return false }
             }
-            
+
             return true
-            }
-            .reduce(0) { (result, element) -> Int in
-                return (element) ? result + 1 : result
         }
-        
+        .reduce(0) { (result, element) -> Int in
+            element ? result + 1 : result
+        }
+
         stageOneOutput = "\(uniquePassphrases)"
         stageTwoOutput = "\(uniqueAnagramlessPhrases)"
     }
@@ -54,6 +54,6 @@ final class Day4: Day {
 
 extension String {
     var anagramKey: String {
-        return String(map { $0 }.sorted())
+        String(map { $0 }.sorted())
     }
 }

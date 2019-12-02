@@ -15,7 +15,7 @@ final class Day15: Day {
         let aFactor = 16_807
         let bFactor = 48_271
         let divisor = 2_147_483_647
-        
+
         var aResult = aStart
         var bResult = bStart
         var lower16BitMatches = 0
@@ -28,11 +28,11 @@ final class Day15: Day {
             if bResult % 8 == 0 { bPowers.append(bResult) }
             if aResult.lower16BitsEqual(lower16BitsOf: bResult) { lower16BitMatches += 1 }
         }
-        
+
         stageOneOutput = "\(lower16BitMatches)"
-        
+
         let lower16BitPowerMatches = zip(aPowers, bPowers).filter { $0.0.lower16BitsEqual(lower16BitsOf: $0.1) }.count
-        
+
         stageTwoOutput = "\(lower16BitPowerMatches)"
     }
 }

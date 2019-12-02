@@ -21,21 +21,19 @@ final class Day22: Day {
         grid.burst()
 
         stageOneOutput = "\(grid.infections)"
-        
+
         let evolutionGrid = Grid(content: input)
         evolutionGrid.evolve()
-        
+
         stageTwoOutput = "\(evolutionGrid.infections)"
     }
-    
-    
 }
 
 final class Grid {
     private var content: [Point: Node]
     private var virus: Virus
     private(set) var infections = 0
-    
+
     init(content: String) {
         let lines = content.split(separator: "\n")
         let nodes = lines.map { $0.compactMap { Node(rawValue: $0) } }
@@ -50,11 +48,11 @@ final class Grid {
                 nodeMap[point] = node
             }
         }
-        
+
         self.content = nodeMap
         virus = Virus(position: Point(0, 0), facing: .up)
     }
-    
+
     func burst() {
         for _ in 0..<10_000 {
             let currentNode = self[virus.position]
@@ -62,10 +60,9 @@ final class Grid {
             let currentPosition = virus.position
             virus = virus.simpleMove(from: self[currentPosition])
             self[currentPosition] = self[currentPosition].swap()
-            
         }
     }
-    
+
     func evolve() {
         for _ in 0..<10_000_000 {
             let currentNode = self[virus.position]
@@ -75,7 +72,7 @@ final class Grid {
             self[currentPosition] = self[currentPosition].evolve()
         }
     }
-    
+
     subscript(point: Point) -> Node {
         get {
             return content[point] ?? .clean
@@ -88,7 +85,7 @@ final class Grid {
 
 extension Grid: CustomStringConvertible {
     var description: String {
-        return content.description
+        content.description
     }
 }
 
@@ -97,7 +94,7 @@ enum Node: Character {
     case infected = "#"
     case weakened = "W"
     case flagged = "F"
-    
+
     func swap() -> Node {
         switch self {
         case .clean: return .infected
@@ -105,7 +102,7 @@ enum Node: Character {
         default: fatalError("Invalid value for swap.")
         }
     }
-    
+
     func evolve() -> Node {
         switch self {
         case .clean: return .weakened
@@ -118,7 +115,7 @@ enum Node: Character {
 
 extension Node: CustomStringConvertible {
     var description: String {
-        return String(rawValue)
+        String(rawValue)
     }
 }
 
@@ -134,46 +131,46 @@ struct Point: Hashable {
 
 extension Point {
     static let surroundingOffsets = [(0, 1), (1, 0), (0, -1), (-1, 0), (-1, 1), (1, -1), (1, 1), (-1, -1)]
-    
+
     var surroundingPoints: [Point] {
-        return Point.surroundingOffsets.map { self + $0 }
+        Point.surroundingOffsets.map { self + $0 }
     }
-    
+
     static let adjacentOffsets = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-    
+
     var adjacentPoints: [Point] {
-        return Point.adjacentOffsets.map { self + $0 }
+        Point.adjacentOffsets.map { self + $0 }
     }
-    
+
     var squareDistance: Int {
-        return abs(x) + abs(y)
+        abs(x) + abs(y)
     }
-    
+
     var straightDistance: Double {
-        return sqrt(Double(x * x + y * y))
+        sqrt(Double(x * x + y * y))
     }
-    
+
     func perpendicularPoints(for direction: Direction) -> [Point] {
         switch direction {
         case .up, .down: return [Direction.left, Direction.right].map { self + $0.forwardOffset }
         case .left, .right: return [Direction.up, Direction.down].map { self + $0.forwardOffset }
         }
     }
-    
+
     func manhattanDistance(to point: Point) -> Int {
-        return abs(x - point.x) + abs(y - point.y)
+        abs(x - point.x) + abs(y - point.y)
     }
 }
 
 extension Point: CustomStringConvertible {
     var description: String {
-        return "(\(x), \(y))"
+        "(\(x), \(y))"
     }
 }
 
 extension Point: Comparable {
     static func < (lhs: Point, rhs: Point) -> Bool {
-        return lhs.x < rhs.x || (lhs.x == rhs.x && lhs.y < rhs.y)
+        lhs.x < rhs.x || (lhs.x == rhs.x && lhs.y < rhs.y)
     }
 }
 
@@ -200,7 +197,7 @@ func += (lhs: inout Point, rhs: (x: Int, y: Int)) {
 extension Point {
     init<S: StringProtocol>(_ string: S) {
         let elements = string.split(separator: ",")
-                             .compactMap { Int($0) }
+            .compactMap { Int($0) }
         x = elements[0]
         y = elements[1]
     }
@@ -210,18 +207,18 @@ struct PointIterator: IteratorProtocol {
     let start: Point
     let end: Point
     var nextValue: Point
-    
+
     init(start: Point, end: Point) {
         precondition(start <= end)
         self.start = start
         self.end = end
         nextValue = start
     }
-    
+
     mutating func next() -> Point? {
         // Iterate x then y
         guard nextValue <= end else { return nil }
-        
+
         let current = nextValue
         if current.x < end.x {
             nextValue = Point(current.x + 1, current.y)
@@ -230,7 +227,7 @@ struct PointIterator: IteratorProtocol {
         } else if current.x == end.x && current.y == end.y {
             nextValue = Point(current.x + 1, current.y)
         }
-        
+
         return current
     }
 }
@@ -238,22 +235,22 @@ struct PointIterator: IteratorProtocol {
 struct PointSequence: Sequence {
     let start: Point
     let end: Point
-    
+
     func makeIterator() -> PointIterator {
-        return PointIterator(start: start, end: end)
+        PointIterator(start: start, end: end)
     }
 }
 
 struct Virus {
     let position: Point
     let facing: Direction
-    
+
     func simpleMove(from node: Node) -> Virus {
         let newDirection = facing.simpleTurn(from: node)
         let newPosition = position + newDirection.forwardOffset
         return Virus(position: newPosition, facing: newDirection)
     }
-    
+
     func complexMove(from node: Node) -> Virus {
         let newDirection = facing.complexTurn(from: node)
         let newPosition = position + newDirection.forwardOffset
@@ -263,7 +260,7 @@ struct Virus {
 
 enum Direction {
     case up, down, left, right
-    
+
     var forwardOffset: (Int, Int) {
         switch self {
         case .up: return (0, 1)
@@ -272,7 +269,7 @@ enum Direction {
         case .right: return (1, 0)
         }
     }
-    
+
     func turn(_ direction: Direction) -> Direction {
         switch (self, direction) {
         case (.up, .right), (.down, .left): return .right
@@ -282,7 +279,7 @@ enum Direction {
         default: fatalError("Invalid turn.")
         }
     }
-    
+
     var reverse: Direction {
         switch self {
         case .up: return .down
@@ -301,7 +298,7 @@ private extension Direction {
         default: fatalError("Invalid simple turn.")
         }
     }
-    
+
     func complexTurn(from node: Node) -> Direction {
         switch node {
         case .clean: return turn(.left)

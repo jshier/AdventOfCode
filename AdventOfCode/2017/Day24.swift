@@ -23,11 +23,11 @@ final class Day24: Day {
         let components = input.split(separator: "\n").map(Component.init)
         let bridges = Bridge(components: []).build(using: components)
         let strengths = bridges.map { $0.strength }
-        
+
         stageOneOutput = "\(strengths.max()!)"
-        
+
         let strengthsAndLengths = bridges.map { LengthAndStrength(length: $0.length, strength: $0.strength) }
-        
+
         stageTwoOutput = "\(strengthsAndLengths.max()!.strength)"
     }
 }
@@ -49,25 +49,25 @@ extension LengthAndStrength: Comparable {
 
 struct Bridge {
     let components: [Component]
-    
+
     var availableValue: Int? {
-        return components.last?.availableValue
+        components.last?.availableValue
     }
-    
+
     var strength: Int {
-        return components.map { $0.strength }.reduce(0, +)
+        components.map { $0.strength }.reduce(0, +)
     }
-    
+
     var length: Int {
-        return components.count
+        components.count
     }
-    
+
     func adding(_ component: Component) -> Bridge {
         var newComponents = components
         newComponents.append(component)
         return Bridge(components: newComponents)
     }
-    
+
     func build(using availableComponents: [Component]) -> [Bridge] {
         var bridges: [Bridge] = []
         let usableComponents = availableComponents.filter { $0.contains(value: availableValue ?? 0) }
@@ -80,14 +80,14 @@ struct Bridge {
             let newBridges = newBridge.build(using: availableComponents)
             bridges.append(contentsOf: newBridges)
         }
-        
+
         return bridges
     }
 }
 
 extension Bridge: CustomStringConvertible {
     var description: String {
-        return components.map { $0.description }.joined(separator: "--")
+        components.map { $0.description }.joined(separator: "--")
     }
 }
 
@@ -96,28 +96,28 @@ struct Component: Equatable {
     let right: Port
     let isRightUsed: Bool
     let isLeftUsed: Bool
-    
+
     init(_ substring: Substring) {
         let ports = substring.split(separator: "/")
-                             .compactMap { Int($0) }
-                             .map(Port.init)
+            .compactMap { Int($0) }
+            .map(Port.init)
         left = ports[0]
         right = ports[1]
         isLeftUsed = false
         isRightUsed = false
     }
-    
+
     init(left: Port, right: Port, isLeftUsed: Bool, isRightUsed: Bool) {
         self.left = left
         self.right = right
         self.isLeftUsed = isLeftUsed
         self.isRightUsed = isRightUsed
     }
-    
+
     init(component: Component, using value: Int) {
         left = component.left
         right = component.right
-        
+
         if left.value == value {
             isLeftUsed = true
             isRightUsed = false
@@ -128,11 +128,11 @@ struct Component: Equatable {
             fatalError("Didn't use a value.")
         }
     }
-    
+
     func contains(value: Int) -> Bool {
-        return left.value == value || right.value == value
+        left.value == value || right.value == value
     }
-    
+
     var availableValue: Int {
         if isRightUsed {
             return left.value
@@ -140,21 +140,21 @@ struct Component: Equatable {
             return right.value
         }
     }
-    
+
     var strength: Int {
-        return left.value + right.value
+        left.value + right.value
     }
 }
 
 extension Component: CustomStringConvertible {
     var description: String {
-        return "\(left.value)/\(right.value)"
+        "\(left.value)/\(right.value)"
     }
 }
 
 struct Port {
     let value: Int
-    
+
     init(_ value: Int) {
         self.value = value
     }
@@ -162,10 +162,10 @@ struct Port {
 
 extension Port: Comparable {
     static func == (lhs: Port, rhs: Port) -> Bool {
-        return lhs.value == rhs.value
+        lhs.value == rhs.value
     }
-    
+
     static func < (lhs: Port, rhs: Port) -> Bool {
-        return lhs.value < rhs.value
+        lhs.value < rhs.value
     }
 }

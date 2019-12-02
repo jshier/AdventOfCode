@@ -15,10 +15,10 @@ final class Day518: Day {
         let initialReaction = input.reacted()
 
         stageOneOutput = "\(initialReaction.count)"
-        
-        let shortest = "qwertyuiopasdfghjklzxcvbnm".map { (character) in input.filter { $0 != character && !$0.isOppositeCaseOf(character) } }
-                                                   .map { $0.reacted() }
-                                                   .min { $0.count < $1.count }!
+
+        let shortest = "qwertyuiopasdfghjklzxcvbnm".map { character in input.filter { $0 != character && !$0.isOppositeCaseOf(character) } }
+            .map { $0.reacted() }
+            .min { $0.count < $1.count }!
         stageTwoOutput = "\(shortest.count)"
     }
 }
@@ -33,13 +33,13 @@ private extension String {
                 output.append($0)
             }
         }
-        
+
         return output
     }
 }
 
 extension Character {
     func isOppositeCaseOf(_ character: Character) -> Bool {
-        return abs(unicodeValue - character.unicodeValue) == 32
+        abs(unicodeValue - character.unicodeValue) == 32
     }
 }

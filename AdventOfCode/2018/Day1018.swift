@@ -48,7 +48,7 @@ final class Day1018: Day {
         stars.simulateUntilText()
         print(stars)
     }
-    
+
     final class Stars {
         var stars: [Star]
         var time = 0
@@ -56,7 +56,7 @@ final class Day1018: Day {
         init(_ string: String) {
             stars = string.byLines().map(Star.init).sorted { $0.position < $1.position }
         }
-        
+
         func simulateUntilText() {
             var keepGoing = true
             var minHeight = Int.max
@@ -86,7 +86,7 @@ extension Day1018.Stars: CustomStringConvertible {
         let xs = Array(Set(allPoints.map { $0.x })).sorted()
         let ys = Array(Set(allPoints.map { $0.y })).sorted()
         var output = ""
-        
+
         for y in ys {
             for x in xs {
                 if positions.contains(Point(x, y)) {
@@ -97,7 +97,7 @@ extension Day1018.Stars: CustomStringConvertible {
             }
             output.append("\n")
         }
-        
+
         return output + "\nTime: \(time)"
     }
 }
@@ -110,15 +110,15 @@ struct Star {
 extension Star {
     init(_ string: String) {
         let pointString = string.drop { $0 != "<" }
-                                .dropFirst()
-                                .prefix { $0 != ">" }
-                                .filter { $0 != " " }
+            .dropFirst()
+            .prefix { $0 != ">" }
+            .filter { $0 != " " }
         position = Point(pointString)
         let velocityString = string.reversed()
-                                   .dropFirst()
-                                   .prefix { $0 != "<" }
-                                   .reversed()
-                                   .filter { $0 != " " }
+            .dropFirst()
+            .prefix { $0 != "<" }
+            .reversed()
+            .filter { $0 != " " }
         velocity = Vector2D(String(velocityString))
     }
 }
@@ -126,7 +126,7 @@ extension Star {
 struct Vector2D {
     let dx: Int
     let dy: Int
-    
+
     init(_ string: String) {
         let components = string.trimmingCharacters(in: .whitespaces).split(separator: ",")
         dx = Int(components[0])!
@@ -135,5 +135,5 @@ struct Vector2D {
 }
 
 func + (lhs: Point, rhs: Vector2D) -> Point {
-    return Point(lhs.x + rhs.dx, lhs.y + rhs.dy)
+    Point(lhs.x + rhs.dx, lhs.y + rhs.dy)
 }

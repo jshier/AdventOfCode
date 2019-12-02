@@ -12,11 +12,11 @@ class Day5: Day {
     override func perform() {
         let input = String.input(forDay: 5, year: 2017)
         let instructions = input.split(separator: "\n").map(String.init).compactMap(Int.init)
-        
+
         stageOneOutput = "\(performStageOneProgram(with: instructions))"
         stageTwoOutput = "\(performStageTwoProgram(with: instructions))"
     }
-    
+
     func performStageOneProgram(with program: [Int]) -> Int {
         var instructions = program
         var index = instructions.startIndex
@@ -27,10 +27,10 @@ class Day5: Day {
             index = index + jump
             steps += 1
         }
-        
+
         return steps
     }
-    
+
     func performStageTwoProgram(with program: [Int]) -> Int {
         var instructions = program
         var index = instructions.startIndex
@@ -41,7 +41,7 @@ class Day5: Day {
             index = index + jump
             steps += 1
         }
-        
+
         return steps
     }
 }

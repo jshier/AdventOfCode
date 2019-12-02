@@ -17,13 +17,13 @@ final class Day318: Day {
 //        #3 @ 5,5: 2x2
 //        #4 @ 0,0: 1x1
 //        """
-        let claims: [Claim] = input.byLines().map { (line) in
+        let claims: [Claim] = input.byLines().map { line in
             let first = line.components(separatedBy: " @ ")
             let seconds = first[1].components(separatedBy: ": ")
             let id = first[0]
             let origin = Point(seconds[0])
             let size = Size(seconds[1])
-            
+
             return Claim(id: id, origin: origin, size: size)
         }
         var claimedPoints: [Point: Set<Claim>] = [:]
@@ -47,12 +47,12 @@ final class Day318: Day {
         }
         stageTwoOutput = id
     }
-    
+
     struct Claim: Hashable {
         let id: String
         let origin: Point
         let size: Size
-        
+
         var areaPoints: [Point] {
             let points = origin * size
             precondition(points.count == size.area)
@@ -64,9 +64,9 @@ final class Day318: Day {
 struct Size: Hashable {
     let height: Int
     let width: Int
-    
-    var area: Int { return height * width }
-    
+
+    var area: Int { height * width }
+
     init(_ string: String) {
         let split = string.split(separator: "x")
         width = Int(split[0])!
@@ -82,7 +82,7 @@ extension Size: ExpressibleByStringLiteral {
 
 extension Size: CustomStringConvertible {
     var description: String {
-        return "\(width)x\(height)"
+        "\(width)x\(height)"
     }
 }
 

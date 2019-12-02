@@ -12,12 +12,12 @@ final class Day6: Day {
     override func perform() {
         let fileInput = String.input(forDay: 6, year: 2017)
         let fileBanks = fileInput.split(separator: "\t")
-                                 .compactMap { Int($0) }
-        //let testBanks = [0, 2, 7, 0]
+            .compactMap { Int($0) }
+        // let testBanks = [0, 2, 7, 0]
         var banks = fileBanks
         var seen: Set<String> = [banks.asString]
         var redistributions = 0
-        
+
         func redistribute() {
             var (value, index) = banks.maxValueIndex()!
             banks[index] = 0
@@ -27,7 +27,7 @@ final class Day6: Day {
                 value -= 1
             }
         }
-        
+
         @discardableResult
         func redistributeUntilDuplicate() -> String {
             while true {
@@ -41,18 +41,16 @@ final class Day6: Day {
                 }
             }
         }
-        
+
         redistributeUntilDuplicate()
-        
+
         stageOneOutput = "\(redistributions)"
-        
+
         seen.removeAll()
         seen.insert(banks.asString)
-        
+
         redistributions = 0
         redistributeUntilDuplicate()
         stageTwoOutput = "\(redistributions)"
     }
 }
-
-

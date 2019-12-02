@@ -17,19 +17,19 @@ final class Day14: Day {
         let hashes = lines.map { $0.rawKnotHash() }
         let binaryStrings = hashes.map { $0.map { $0.paddedBinaryRepresentation }.joined() }
         let ones = binaryStrings.map { $0.count { $0 == "1" } }.reduce(0, +)
-        
+
         stageOneOutput = "\(ones)"
-        
+
         var points: Set<Point> = []
         for (y, line) in binaryStrings.enumerated() {
             for (x, character) in line.enumerated() {
                 guard character == "1" else { continue }
-                
+
                 let currentPoint = Point(x, y)
                 points.insert(currentPoint)
             }
         }
-        
+
         func adjacentPoints(for localPoints: Set<Point>) -> Set<Point> {
             let adjacents = Set(localPoints.flatMap { $0.adjacentPoints })
             let containedPoints = points.intersection(adjacents)
@@ -41,17 +41,17 @@ final class Day14: Day {
                 return adjacentPoints(for: localPoints.union(newPoints))
             }
         }
-        
+
         var regions: Set<Set<Point>> = []
         var containedPoints: Set<Point> = []
         for point in points {
             guard !containedPoints.contains(point) else { continue }
-            
+
             let adjacents = adjacentPoints(for: [point])
             regions.insert(adjacentPoints(for: [point]))
             adjacents.forEach { containedPoints.insert($0) }
         }
-        
+
         stageTwoOutput = "\(regions.count)"
     }
 }

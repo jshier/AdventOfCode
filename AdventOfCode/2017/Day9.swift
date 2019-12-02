@@ -36,22 +36,22 @@ final class Day9: Day {
             }
             return (score: score, garbageScore: garbageScore)
         }
-        
+
         let scores = calculateScores()
         stageOneOutput = "\(scores.score)"
         stageTwoOutput = "\(scores.garbageScore)"
     }
-    
+
     enum Block {
         case group, garbage
-        
+
         var start: String {
             switch self {
             case .group: return "{"
             case .garbage: return "<"
             }
         }
-        
+
         var end: String {
             switch self {
             case .group: return "}"
@@ -59,6 +59,4 @@ final class Day9: Day {
             }
         }
     }
-    
-    
 }

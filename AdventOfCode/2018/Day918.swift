@@ -15,7 +15,7 @@ final class Day918: Day {
         let game = MarbleGame(input)
         let highPlayerScore = game.play()
         stageOneOutput = "\(highPlayerScore.score)"
-        
+
         let biggerGame = MarbleGame(players: game.players, finalMarbleValue: game.finalMarbleValue * 100)
         let biggerHigherPlayerScore = biggerGame.play()
         stageTwoOutput = "\(biggerHigherPlayerScore.score)"
@@ -26,52 +26,52 @@ final class Day918: Day {
             let number: Int
             var previous: Marble?
             var next: Marble?
-            
+
             init(number: Int, previous: Marble?, next: Marble?) {
                 self.number = number
-                
+
                 self.previous = previous
                 self.next = next
             }
-            
+
             func insertAfter(value: Int) -> Marble {
-                let newMarble = Marble(number: value, previous: self, next: self.next)
+                let newMarble = Marble(number: value, previous: self, next: next)
                 next?.previous = newMarble
                 next = newMarble
-                
+
                 return newMarble
             }
-            
+
             func remove() -> Marble {
                 previous?.next = next
                 next?.previous = previous
-                
+
                 return self
             }
         }
-        
+
         let players: Int
         let finalMarbleValue: Int
-        
+
         var scores: [Int: Int] = [:] // player number: score
-        
+
         init(_ string: String) {
             players = Int(string.prefix { $0 != " " })!
             finalMarbleValue = Int(String(string.dropLast(7).reversed().prefix { $0 != " " }.reversed()))!
         }
-        
+
         init(players: Int, finalMarbleValue: Int) {
             self.players = players
             self.finalMarbleValue = finalMarbleValue
         }
-        
+
         func play() -> (player: Int, score: Int) {
             var current = Marble(number: 0, previous: nil, next: nil)
             current.next = current
             current.previous = current
-            
+
             let turns = Array(1...players)
-            
+
             for (player, marble) in zip(turns.cycle(), 1...finalMarbleValue).lazy {
                 if marble % 23 == 0 {
                     scores[player] = scores[player, default: 0] + marble
@@ -81,14 +81,12 @@ final class Day918: Day {
                 } else {
                     current = current.next!.insertAfter(value: marble)
                 }
-                
+
 //                if marble % 100_000 == 0 { print("\(marble)") }
             }
             let maxPlayerScore = scores.max { $0.1 < $1.1 }!
-            
+
             return (player: maxPlayerScore.key, score: maxPlayerScore.value)
         }
     }
 }
-
-

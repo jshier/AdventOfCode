@@ -17,7 +17,7 @@ final class Day17: Day {
         buffer.reserveCapacity(50_000_000)
         var currentValue = 1
         var insertedIndex = 0
-        
+
         func insert(upTo value: Int) {
             while currentValue <= value {
                 let circularIndex = buffer.circularIndex(insertedIndex, offsetBy: input)
@@ -27,11 +27,11 @@ final class Day17: Day {
                 insertedIndex = insertionIndex
             }
         }
-        
+
         insert(upTo: 2017)
-        
+
         stageOneOutput = "\(buffer[buffer.index(after: insertedIndex)])"
-        
+
         func endInsert(upTo value: Int) -> Int {
             var maxOneIndex = 0
             while currentValue <= value {
@@ -45,10 +45,10 @@ final class Day17: Day {
                 currentValue += 1
                 insertedIndex = insertionIndex
             }
-            
+
             return maxOneIndex
         }
-        
+
         let maxOneIndex = endInsert(upTo: 50_000_000)
 
         stageTwoOutput = "\(maxOneIndex)"

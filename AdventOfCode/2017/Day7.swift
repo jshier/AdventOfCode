@@ -45,60 +45,59 @@ final class Day7: Day {
                 return []
             }
         }
-        let namesAndWeights = Dictionary(zip(allNames, allWeights)) { (_, rhs) in return rhs }
-        let namesAndLinks = Dictionary(zip(allNames, allLinks)) { (_, rhs) in return rhs }
+        let namesAndWeights = Dictionary(zip(allNames, allWeights)) { _, rhs in rhs }
+        let namesAndLinks = Dictionary(zip(allNames, allLinks)) { _, rhs in rhs }
 
-        
         let uniqueNames = Set(allNames)
         let uniqueHostedNames = Set(allLinks.flatMap { $0 })
         let baseName = uniqueNames.subtracting(uniqueHostedNames)
         let baseProgramName = baseName.first!
-        
+
         stageOneOutput = baseProgramName
-        
+
         func createProgram(_ name: String) -> Program {
-            return Program(name: name, weight: namesAndWeights[name]!, heldPrograms: namesAndLinks[name]?.map(createProgram) ?? [])
+            Program(name: name, weight: namesAndWeights[name]!, heldPrograms: namesAndLinks[name]?.map(createProgram) ?? [])
         }
-        
+
         let baseProgram = createProgram(baseProgramName)
-        
+
         stageTwoOutput = "\(baseProgram.heldWeightMismatch)"
         baseProgram.findWeightMismatch()
-        
+
 //        let baseProgram = programs.first { $0.name == baseProgramName }!
 //        let programMap = Dictionary(uniqueKeysWithValues: zip(programs.map { $0.name }, programs))
 //        let weights = Dictionary(uniqueKeysWithValues: zip(programs.map { $0.name }, programs.map { $0.weight }))
     }
-    
+
     struct Program {
         let name: String
         let weight: Int
         let heldPrograms: [Program]
-        
+
         var heldNames: [String] {
-            return heldPrograms.map { $0.name }
+            heldPrograms.map { $0.name }
         }
-        
+
         var heldWeight: Int {
-            return heldPrograms.map { $0.totalWeight }.reduce(0, +)
+            heldPrograms.map { $0.totalWeight }.reduce(0, +)
         }
-        
+
         var totalWeight: Int {
-            return heldWeight + weight
+            heldWeight + weight
         }
-        
+
         var heldWeights: [Int] {
-            return heldPrograms.map { $0.heldWeight }
+            heldPrograms.map { $0.heldWeight }
         }
-        
+
         var heldTotalWeights: [Int] {
-            return heldPrograms.map { $0.totalWeight }
+            heldPrograms.map { $0.totalWeight }
         }
-        
+
         var heldWeightMismatch: Bool {
-            return !heldTotalWeights.allElementsEqual()
+            !heldTotalWeights.allElementsEqual()
         }
-        
+
         func findWeightMismatch() {
             if !heldTotalWeights.allElementsEqual() {
                 print(heldPrograms.map { $0.heldTotalWeights })
@@ -113,25 +112,25 @@ final class Day7: Day {
 
 struct SimpleCountedSet<Element: Hashable> {
     let counts: [Element: Int]
-    
+
     init(_ array: [Element]) {
         var counts: [Element: Int] = [:]
         for element in array {
             guard let count = counts[element] else { counts[element] = 1; break }
-            
+
             counts[element] = count + 1
         }
-        
+
         self.counts = counts
     }
-    
+
     func element(for queriedCount: Int) -> Element {
         for (element, count) in counts {
             if queriedCount == count {
                 return element
             }
         }
-        
+
         fatalError("No element with count: \(queriedCount)")
     }
 }

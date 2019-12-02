@@ -23,23 +23,22 @@ final class Day21: Day {
         art.enhance(iterations: iterations)
 
         stageOneOutput = "\(art.pixelsOn)"
-        
+
         let stageTwoArt = FractalArt(lines: input.split(separator: "\n").map(String.init))
         stageTwoArt.enhance(iterations: 18)
-        
+
         stageTwoOutput = "\(stageTwoArt.pixelsOn)"
-        
     }
-    
+
     final class FractalArt {
         private var image: [String]
         private let rules: [String: String]
-        private var size: Int { return image.count }
+        private var size: Int { image.count }
         var pixelsOn: Int {
-            return image.map { $0.count { $0 == "#" } }.reduce(0, +)
+            image.map { $0.count { $0 == "#" } }.reduce(0, +)
         }
-        
-        init(lines: [String]){
+
+        init(lines: [String]) {
             var buildingRules: [String: String] = [:]
             let separatedRules = lines.map { $0.components(separatedBy: " => ") }
             for separatedRule in separatedRules {
@@ -50,7 +49,7 @@ final class Day21: Day {
             rules = buildingRules
             image = ".#./..#/###".asArray()
         }
-        
+
         func enhance(iterations: Int = 5) {
             for _ in 0..<iterations {
                 if size % 2 == 0 {
@@ -73,7 +72,7 @@ final class Day21: Day {
                 } else {
                     assert(size % 3 == 0)
                     guard size > 3 else { image = rules[image.asRuleString()]!.asArray(); continue }
-                    
+
                     let splits = image.splitInto3x3()
                     let strings = splits.map { $0.asRuleString() }
                     let transformed = strings.map { rules[$0]! }
@@ -98,20 +97,20 @@ final class Day21: Day {
 
 private extension String {
     func asArray() -> [String] {
-        return split(separator: "/").map(String.init)
+        split(separator: "/").map(String.init)
     }
 }
 
 private extension Array where Element == String {
     func asRuleString() -> String {
-        return joined(separator: "/")
+        joined(separator: "/")
     }
-    
+
     func splitInto2x2() -> [[String]] {
         assert(count % 2 == 0)
-        
+
         var intermediate: [[String]] = []
-        
+
         var yIndex = startIndex
         while yIndex < endIndex {
             let firstY = yIndex
@@ -129,15 +128,15 @@ private extension Array where Element == String {
             }
             yIndex = index(after: secondY)
         }
-        
+
         return intermediate
     }
-    
+
     func splitInto3x3() -> [[String]] {
         assert(count % 3 == 0)
-        
+
         var intermediate: [[String]] = []
-        
+
         var yIndex = startIndex
         while yIndex < endIndex {
             let firstY = yIndex
@@ -160,25 +159,25 @@ private extension Array where Element == String {
             }
             yIndex = index(after: thirdY)
         }
-        
+
         return intermediate
     }
-    
+
 //    func splitIntoSquares(size: Int) -> [[String]] {
 //        assert(count % size == 0)
-//        
+//
 //        var result: [[String]] = []
-//        
+//
 //        var yIndex = startIndex
 //        while yIndex < endIndex {
 //            let yIndicies = [yIndex] + next(count - 1, indexesAfter: yIndex)
 //            let ys = self[yIndex..<index(count, after: yIndex)]
-//            
-//            
-//            
+//
+//
+//
 //            yIndex = index(count, after: yIndex)
 //        }
-//        
+//
 //        return result
 //    }
 }
@@ -189,18 +188,18 @@ extension Collection {
         var lastIndex = index
         for _ in 0..<count {
             lastIndex = self.index(after: lastIndex)
-            
+
             guard lastIndex != endIndex else { break }
-            
+
             indexes.append(lastIndex)
         }
-        
+
         return indexes
     }
-    
+
     func index(_ count: Int, after index: Index) -> Index {
         guard let lastIndex = next(count, indexesAfter: index).last else { return index }
-        
+
         return lastIndex
     }
 }
@@ -221,16 +220,16 @@ extension String {
 
 extension Array where Element == String {
     func flipVertical() -> [String] {
-        return reversed()
+        reversed()
     }
-    
+
     func flipHorizontal() -> [String] {
-        return map { String($0.reversed()) }
+        map { String($0.reversed()) }
     }
-    
+
     func rotateRight() -> [String] {
         var rotatedRight: [String] = []
-        
+
         var index = self[0].startIndex
         while index < self[0].endIndex {
             var rotatedRow = ""
@@ -240,12 +239,11 @@ extension Array where Element == String {
             rotatedRight.append(rotatedRow)
             index = self[0].index(after: index)
         }
-        
+
         return rotatedRight
     }
-    
+
     func rotateLeft() -> [String] {
-        return rotateRight().map { String($0.reversed()) }
+        rotateRight().map { String($0.reversed()) }
     }
-    
 }

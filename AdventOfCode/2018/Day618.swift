@@ -12,13 +12,13 @@ final class Day618: Day {
     override func perform() {
 //        let input = String.input(forDay: 6)
         let input = """
-                    1,1
-                    1,6
-                    8,3
-                    3,4
-                    5,5
-                    8,9
-                    """
+        1,1
+        1,6
+        8,3
+        3,4
+        5,5
+        8,9
+        """
         let points = input.byLines().map(Point.init)
         let sorted = points.sorted()
         var closestPointMap: [Point: Point] = [:]
@@ -28,7 +28,7 @@ final class Day618: Day {
             var shortestDistance = Int.max
             for actualPoint in sorted {
                 guard shortestDistance != 0 else { continue outer }
-                
+
                 let distance = actualPoint.manhattanDistance(to: point)
                 if distance < shortestDistance {
                     closestPointMap[point] = actualPoint

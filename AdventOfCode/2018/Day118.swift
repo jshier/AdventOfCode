@@ -11,7 +11,7 @@ import Foundation
 final class Day118: Day {
     override var expectedStageOneOutput: String? { "425" }
     override var expectedStageTwoOutput: String? { "57538" }
-    
+
     override func perform() {
         let input = String.input(forDay: 1, year: 2018)
         let lines = input.byLines()
@@ -27,7 +27,7 @@ final class Day118: Day {
             if seen.contains(accumulate) { duplicateValue = accumulate; break }
             seen.insert(accumulate)
         }
-        
+
         stageTwoOutput = "\(duplicateValue.map(String.init) ?? "NoneFound")"
     }
 }

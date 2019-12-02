@@ -11,11 +11,11 @@ import Foundation
 final class Day16: Day {
     override func perform() {
         let fileInput = String.input(forDay: 16, year: 2017)
-        //let filePrograms = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p"]
+        // let filePrograms = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p"]
         let filePrograms = "abcdefghijklmnop"
 //        let sampleInput = "s1,x3/4,pe/b"
 //        let samplePrograms = ["a", "b", "c", "d", "e"]
-        
+
         let input = fileInput
         var programs = filePrograms
         let moves = input.split(separator: ",").map(Move.init)
@@ -25,7 +25,7 @@ final class Day16: Day {
         }
         stageOneOutput = programs
         cache[filePrograms] = programs
-        
+
         for i in 1..<1_000_000_000 {
             if i % 1_000_000 == 0 { print(i) }
             if let result = cache[programs] {
@@ -40,12 +40,12 @@ final class Day16: Day {
         }
         stageTwoOutput = programs
     }
-    
+
     enum Move {
         case spin(size: Int)
         case swapIndex(first: Int, second: Int)
         case swapProgram(first: String, second: String)
-        
+
         init(rawMove: Substring) {
             let move = rawMove.dropFirst()
             switch rawMove.prefix(1) {
@@ -61,7 +61,7 @@ final class Day16: Day {
                 fatalError()
             }
         }
-        
+
 //        func perform(on programs: inout [String]) {
 //            switch self {
 //            case .spin(let size):
@@ -76,14 +76,14 @@ final class Day16: Day {
 //                programs.swapAt(firstIndex, secondIndex)
 //            }
 //        }
-        
+
         func perform(on string: inout String) {
             switch self {
-            case .spin(let size):
+            case let .spin(size):
                 string = String(string.dropFirst(string.count - size) + string.prefix(string.count - size))
-            case .swapIndex(let first, let second):
+            case let .swapIndex(first, second):
                 string.swapAt(first, second)
-            case .swapProgram(let first, let second):
+            case let .swapProgram(first, second):
                 let firstIndex = string.firstIndex(of: first.first!)!
                 let secondIndex = string.firstIndex(of: second.first!)!
                 string.swapAt(firstIndex, secondIndex)
@@ -91,4 +91,3 @@ final class Day16: Day {
         }
     }
 }
-

@@ -14,16 +14,16 @@ final class Day315: Day {
 //        let testInput = "^>v<"
         let input = fileInput
         let directions = input.map(Direction.init)
-        
-        var deliveryMap: [Point : Int] = [Point(0, 0) : 1]
+
+        var deliveryMap: [Point: Int] = [Point(0, 0): 1]
         var currentPoint = Point(0, 0)
         for direction in directions {
             currentPoint += direction.forwardOffset
             deliveryMap[currentPoint, default: 0] += 1
         }
-        
+
         stageOneOutput = "\(deliveryMap.values.count { $0 >= 1 })"
-        
+
         var roboMap: [Point: Int] = [:]
         var santaPoint = Point(0, 0)
         var roboPoint = santaPoint
@@ -33,7 +33,7 @@ final class Day315: Day {
             roboPoint += directions[index + 1].forwardOffset
             roboMap[roboPoint, default: 0] += 1
         }
-        
+
         stageTwoOutput = "\(roboMap.values.count { $0 >= 1 })"
     }
 }

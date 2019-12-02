@@ -12,9 +12,9 @@ final class Day19: Day {
     override func perform() {
         let fileInput = String.input(forDay: 19, year: 2017)
 //        let testInput = """
-//                             |         
-//                             |  +--+   
-//                             A  |  C   
+//                             |
+//                             |  +--+
+//                             A  |  C
 //                         F---|----E|--+
 //                             |  |  |  D
 //                             +B-+  +--+
@@ -23,7 +23,7 @@ final class Day19: Day {
         let lines = input.split(separator: "\n")
         let pathMap = PathMap(lines)
         let tokensAndSteps = pathMap.tokensAndStepsFollowingPath()
-        
+
         stageOneOutput = tokensAndSteps.tokens
         stageTwoOutput = "\(tokensAndSteps.steps)"
     }
@@ -31,20 +31,20 @@ final class Day19: Day {
 
 final class PathMap {
     private var map: [Point: Character] = [:]
-    let startingPoint: Point    
-    
+    let startingPoint: Point
+
     init(_ lines: [Substring]) {
         for (y, line) in lines.enumerated() {
             for (x, character) in line.enumerated() {
                 guard character != " " else { continue }
-                
+
                 map[Point(x, -y)] = character
             }
         }
-        
+
         startingPoint = Point(lines[0].firstIndex(of: "|")!.utf16Offset(in: lines[0]), 0)
     }
-    
+
     func tokensAndStepsFollowingPath() -> (tokens: String, steps: Int) {
         var direction = Direction.down
         var currentPoint = startingPoint
@@ -53,7 +53,7 @@ final class PathMap {
         while let currentCharacter = map[currentPoint] {
             switch currentCharacter {
             case "-", "|": currentPoint += direction.forwardOffset
-            case "+": 
+            case "+":
                 let left = direction.turn(.left)
                 let leftPoint = currentPoint + left.forwardOffset
                 let right = direction.turn(.right)
@@ -67,11 +67,11 @@ final class PathMap {
                 } else {
                     fatalError("Impossible!")
                 }
-            default: 
+            default:
                 tokens.append(currentCharacter)
                 currentPoint += direction.forwardOffset
             }
-            
+
             steps += 1
         }
         return (tokens, steps)

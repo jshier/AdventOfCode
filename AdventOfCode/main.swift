@@ -10,4 +10,3 @@ import Foundation
 
 let output = Day119().output()
 print(output)
-

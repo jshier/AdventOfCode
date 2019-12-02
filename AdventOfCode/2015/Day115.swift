@@ -13,22 +13,22 @@ class Day115: Day {
         let input = String.input(forDay: 1, year: 2015)
         let opens = input.count { $0 == "(" }
         let closeds = input.count { $0 == ")" }
-        
+
         stageOneOutput = "\(opens - closeds)"
-        
+
         var value = 0
         var position = 0
-        
+
         while value != -1 {
             if input[position] == "(" {
                 value += 1
             } else {
                 value -= 1
             }
-            
+
             position += 1
         }
-        
+
         stageTwoOutput = "\(position)"
     }
 }

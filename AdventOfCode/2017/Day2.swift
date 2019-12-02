@@ -17,7 +17,7 @@ class Day2: Day {
         let differences = numbers.map { $0.max()! - $0.min()! }
         let checksum = differences.reduce(0, +)
         stageOneOutput = "\(checksum)"
-        
+
         let moduluses = numbers.map { (sequence) -> Int in
             var remainingNumbers = sequence.dropFirst()
             for value in sequence {
@@ -29,7 +29,7 @@ class Day2: Day {
                         return max / min
                     }
                 }
-                
+
                 remainingNumbers = remainingNumbers.dropFirst()
             }
             return 0

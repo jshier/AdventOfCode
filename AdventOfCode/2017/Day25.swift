@@ -15,7 +15,7 @@ final class Day25: Day {
         let steps = fileSteps
         let tape = Tape(steps: steps)
         tape.perform()
-        
+
         stageOneOutput = "\(tape.checksum())"
     }
 }
@@ -25,11 +25,11 @@ final class Tape {
     private var state = State.a
     private let steps: Int
     private var position = 0
-    
+
     init(steps: Int) {
         self.steps = steps
     }
-    
+
     func perform() {
         var stepsPerformed = 0
         while stepsPerformed < steps {
@@ -37,22 +37,22 @@ final class Tape {
             stepsPerformed += 1
         }
     }
-    
+
     func checksum() -> Int {
-        return tape.values.count { $0 == true }
+        tape.values.count { $0 == true }
     }
 }
 
 enum State {
     case a, b, c, d, e, f
-    
+
     func perform(using value: inout Bool, position: inout Int) -> State {
         let originalValue = value
         value = mutate(value: value)
         position = move(from: position, using: originalValue)
         return nextState(using: originalValue)
     }
-    
+
     private func mutate(value: Bool) -> Bool {
         switch value {
         case true:
@@ -67,7 +67,7 @@ enum State {
             }
         }
     }
-    
+
     private func move(from position: Int, using value: Bool) -> Int {
         switch value {
         case true:
@@ -82,7 +82,7 @@ enum State {
             }
         }
     }
-    
+
     private func nextState(using value: Bool) -> State {
         switch value {
         case true:

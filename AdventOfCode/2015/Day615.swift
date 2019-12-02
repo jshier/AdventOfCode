@@ -19,24 +19,24 @@ final class Day615: Day {
         let input = fileInput
         let lights = Lights(input: input, size: 999)
         lights.setup()
-        
+
         stageOneOutput = "\(lights.lightsLit)"
         stageTwoOutput = "\(lights.totalBrightness)"
     }
-    
+
     final class Lights {
         let rules: [Rule]
         var state: [Point: Bool] = [:]
         var brightnessState: [Point: Int] = [:]
-        
+
         var lightsLit: Int {
-            return state.values.count { $0 }
+            state.values.count { $0 }
         }
-        
+
         var totalBrightness: Int {
-            return brightnessState.values.reduce(0, +)
+            brightnessState.values.reduce(0, +)
         }
-        
+
         init(input: String, size: Int) {
             rules = input.split(separator: "\n").map(Rule.init)
             for point in PointSequence(start: Point(0, 0), end: Point(size, size)) {
@@ -44,7 +44,7 @@ final class Day615: Day {
                 brightnessState[point] = 0
             }
         }
-        
+
         func setup() {
             for rule in rules {
                 for point in PointSequence(start: rule.start, end: rule.end) {
@@ -53,27 +53,27 @@ final class Day615: Day {
                 }
             }
         }
-        
+
         struct Rule {
             let start: Point
             let end: Point
             let action: Action
-            
+
             enum Action: Substring {
                 case on = "turn on"
                 case off = "turn off"
                 case toggle
             }
-            
+
             init(_ substring: Substring) {
                 let sides = substring.components(separatedBy: " through ")
-                
+
                 let actionStart = sides[0].split(separator: " ")
                 start = Point(actionStart.last!)
                 end = Point(sides[1])
                 action = (Action(rawValue: sides[0].prefix(6)) ?? Action(rawValue: sides[0].prefix(7)) ?? Action(rawValue: sides[0].prefix(8)))!
             }
-            
+
             func apply(to bool: Bool) -> Bool {
                 switch action {
                 case .on: return true
@@ -81,7 +81,7 @@ final class Day615: Day {
                 case .toggle: return !bool
                 }
             }
-            
+
             func apply(to int: Int) -> Int {
                 switch action {
                 case .on: return int + 1
@@ -95,9 +95,9 @@ final class Day615: Day {
 
 extension Bool {
     func toggled() -> Bool {
-        return !self
+        !self
     }
-    
+
     mutating func toggle() {
         self = !self
     }

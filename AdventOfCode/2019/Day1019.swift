@@ -11,7 +11,7 @@ import Foundation
 final class Day1019: Day {
     override var expectedStageOneOutput: String? { nil }
     override var expectedStageTwoOutput: String? { nil }
-    
+
     override func perform() {
         let input = String.input(forDay: 10, year: 2019)
     }

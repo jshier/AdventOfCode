@@ -34,18 +34,18 @@ final class Day8: Day {
                 state[registerToModify] = newValue
             }
         }
-        
+
         let largestValueInRegister = state.values.max()!
         stageOneOutput = "\(largestValueInRegister)"
         stageTwoOutput = "\(largestValueEverSeen)"
     }
-    
+
     struct Instruction {
         let register: String
         let action: Action
         let amount: Int
         let condition: Condition
-        
+
         init(line: Substring) {
             let split = line.components(separatedBy: " if ")
             let registerActionAmount = split[0].split(separator: " ")
@@ -54,15 +54,15 @@ final class Day8: Day {
             amount = Int(registerActionAmount[2])!
             condition = Condition(line: split[1])
         }
-        
+
         func performAction(using initialValue: Int) -> Int {
-            return action.operation(initialValue, amount)
+            action.operation(initialValue, amount)
         }
-        
+
         enum Action: String {
             case increase = "inc"
             case decrease = "dec"
-            
+
             var operation: (Int, Int) -> Int {
                 switch self {
                 case .increase:
@@ -72,23 +72,23 @@ final class Day8: Day {
                 }
             }
         }
-        
+
         struct Condition {
             let register: String
             let comparison: Comparison
             let value: Int
-            
+
             init(line: String) {
                 let split = line.split(separator: " ")
                 register = String(split[0])
                 comparison = Comparison(rawValue: String(split[1]))!
                 value = Int(split[2])!
             }
-            
+
             func evaluate(_ input: Int) -> Bool {
-                return comparison.comparator(input, value)
+                comparison.comparator(input, value)
             }
-            
+
             enum Comparison: String {
                 case greaterThan = ">"
                 case lessThan = "<"
@@ -96,7 +96,7 @@ final class Day8: Day {
                 case lessThanOrEqualTo = "<="
                 case greaterThanOrEqualTo = ">="
                 case notEqual = "!="
-                
+
                 var comparator: (Int, Int) -> Bool {
                     switch self {
                     case .greaterThan: return (>)
