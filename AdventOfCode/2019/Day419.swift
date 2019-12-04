@@ -9,10 +9,61 @@
 import Foundation
 
 final class Day419: Day {
-    override var expectedStageOneOutput: String? { nil }
-    override var expectedStageTwoOutput: String? { nil }
+    override var expectedStageOneOutput: String? { "2779" }
+    override var expectedStageTwoOutput: String? { "1972" }
 
     override func perform() {
-        let input = String.input(forDay: 4, year: 2019)
+        // let input = "108457-562041"
+        let passwords = (108_457...562_041).compactMap { ($0.containsDoublesAndIncreases) ? $0 : nil }
+
+        stageOneOutput = "\(passwords.count)"
+
+        let realPasswords = passwords.compactMap { $0.containsAtLeastOneDouble ? $0 : nil }
+
+        stageTwoOutput = "\(realPasswords.count)"
+    }
+}
+
+extension Int {
+    var containsDoublesAndIncreases: Bool {
+        var containsDoubles = false
+        var value = self
+        var lastDigit = value % 10
+        value /= 10
+        while value > 0 {
+            let digit = value % 10
+            if digit > lastDigit {
+                return false
+            }
+            value /= 10
+            if lastDigit == digit { containsDoubles = true }
+            lastDigit = digit
+        }
+
+        return containsDoubles
+    }
+
+    var containsAtLeastOneDouble: Bool {
+        var value = self
+        var digitCounts: [Int: Int] = [:]
+        while value > 0 {
+            let digit = value % 10
+            digitCounts[digit, default: 0] += 1
+            value /= 10
+        }
+
+        return digitCounts.values.contains(2)
+    }
+
+    var digits: [Int] {
+        var digits: [Int] = []
+        var value = self
+        while value > 0 {
+            let remainder = value % 10
+            digits.append(remainder)
+            value = value / 10
+        }
+
+        return digits.reversed()
     }
 }
