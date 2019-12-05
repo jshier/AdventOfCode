@@ -45,14 +45,14 @@ extension Int {
 
     var containsAtLeastOneDouble: Bool {
         var value = self
-        var digitCounts: [Int: Int] = [:]
+        var digitCounts: [Int] = Array(repeating: 0, count: 10)
         while value > 0 {
             let digit = value % 10
-            digitCounts[digit, default: 0] += 1
+            digitCounts[digit] += 1
             value /= 10
         }
 
-        return digitCounts.values.contains(2)
+        return digitCounts.contains(2)
     }
 
     var digits: [Int] {
