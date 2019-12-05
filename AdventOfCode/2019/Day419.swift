@@ -61,7 +61,7 @@ extension Int {
         while value > 0 {
             let remainder = value % 10
             digits.append(remainder)
-            value = value / 10
+            value /= 10
         }
 
         return digits.reversed()
