@@ -8,5 +8,5 @@
 
 import Foundation
 
-let output = Day419().output()
+let output = Day519().output()
 print(output)
