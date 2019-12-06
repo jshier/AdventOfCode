@@ -11,6 +11,7 @@
 		3109AA1221B4EE53006A24D0 /* Day318.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3109AA1121B4EE53006A24D0 /* Day318.swift */; };
 		311931C321B39C7200A4A116 /* Day218.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311931C221B39C7200A4A116 /* Day218.swift */; };
 		31202D961FEF8DE0009B2C2E /* Day24.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31202D951FEF8DE0009B2C2E /* Day24.swift */; };
+		312A787A239A1B72002B9FC4 /* SwiftGraph in Frameworks */ = {isa = PBXBuildFile; productRef = 312A7879239A1B72002B9FC4 /* SwiftGraph */; };
 		312C9FD9200D496B00F8C0F4 /* Day615.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C9FD8200D496B00F8C0F4 /* Day615.swift */; };
 		313240D31FF0BD3400E3B690 /* Day25.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313240D21FF0BD3400E3B690 /* Day25.swift */; };
 		3136B8631FE0D94100CB98FE /* Day5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3136B8621FE0D94100CB98FE /* Day5.swift */; };
@@ -247,6 +248,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				312A787A239A1B72002B9FC4 /* SwiftGraph in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +516,9 @@
 			dependencies = (
 			);
 			name = AdventOfCode;
+			packageProductDependencies = (
+				312A7879239A1B72002B9FC4 /* SwiftGraph */,
+			);
 			productName = AdventOfCode;
 			productReference = 318AC3261FE062A900A98B5E /* AdventOfCode */;
 			productType = "com.apple.product-type.tool";
@@ -544,6 +549,9 @@
 				Base,
 			);
 			mainGroup = 318AC31D1FE062A900A98B5E;
+			packageReferences = (
+				312A7878239A1B72002B9FC4 /* XCRemoteSwiftPackageReference "SwiftGraph" */,
+			);
 			productRefGroup = 318AC3271FE062A900A98B5E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -800,6 +808,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		312A7878239A1B72002B9FC4 /* XCRemoteSwiftPackageReference "SwiftGraph" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/davecom/SwiftGraph.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		312A7879239A1B72002B9FC4 /* SwiftGraph */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 312A7878239A1B72002B9FC4 /* XCRemoteSwiftPackageReference "SwiftGraph" */;
+			productName = SwiftGraph;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 318AC31E1FE062A900A98B5E /* Project object */;
 }

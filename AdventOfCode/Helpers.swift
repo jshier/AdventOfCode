@@ -18,19 +18,19 @@ extension String {
     }
 
     func byLines() -> [String] {
-        split(separator: "\n").map(String.init)
+        trimmingCharacters(in: .whitespacesAndNewlines).split(separator: "\n").map(String.init)
     }
 
     func byTabs() -> [String] {
-        split(separator: "\t").map(String.init)
+        trimmingCharacters(in: .whitespacesAndNewlines).split(separator: "\t").map(String.init)
     }
 
     func bySpaces() -> [String] {
-        split(separator: " ").map(String.init)
+        trimmingCharacters(in: .whitespacesAndNewlines).split(separator: " ").map(String.init)
     }
 
     func byCommas() -> [String] {
-        split(separator: ",").map(String.init)
+        trimmingCharacters(in: .whitespacesAndNewlines).split(separator: ",").map(String.init)
     }
 
     mutating func swapAt(_ first: Int, _ second: Int) {
