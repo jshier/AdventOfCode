@@ -18,19 +18,23 @@ extension String {
     }
 
     func byLines() -> [String] {
-        trimmingCharacters(in: .whitespacesAndNewlines).split(separator: "\n").map(String.init)
+        trimmingWhitespace().split(separator: "\n").map(String.init)
     }
 
     func byTabs() -> [String] {
-        trimmingCharacters(in: .whitespacesAndNewlines).split(separator: "\t").map(String.init)
+        trimmingWhitespace().split(separator: "\t").map(String.init)
     }
 
     func bySpaces() -> [String] {
-        trimmingCharacters(in: .whitespacesAndNewlines).split(separator: " ").map(String.init)
+        trimmingWhitespace().split(separator: " ").map(String.init)
     }
 
     func byCommas() -> [String] {
-        trimmingCharacters(in: .whitespacesAndNewlines).split(separator: ",").map(String.init)
+        trimmingWhitespace().split(separator: ",").map(String.init)
+    }
+    
+    func trimmingWhitespace() -> String {
+        trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     mutating func swapAt(_ first: Int, _ second: Int) {
@@ -108,6 +112,21 @@ extension Array {
     mutating func mapInPlace(_ transform: (Element) -> Element) {
         self = map(transform)
     }
+
+    func decompose() -> (Element, [Element])? {
+        guard let x = first else { return nil }
+        return (x, Array(self[1..<count]))
+    }
+
+    func between(x: Element) -> [[Element]] {
+        guard let (head, tail) = decompose() else { return [[x]] }
+        return [[x] + self] + tail.between(x: x).map { [head] + $0 }
+    }
+
+    func permutations() -> [[Element]] {
+        guard let (head, tail) = self.decompose() else { return [[]] }
+        return tail.permutations().flatMap { $0.between(x: head) }
+    }
 }
 
 extension Collection where Index == Int {
@@ -160,6 +179,25 @@ extension Collection where Element: Equatable {
         guard !isEmpty else { return false }
 
         return allSatisfy { $0 == first }
+    }
+}
+
+extension Collection {
+    public func chunked(into size: Int) -> [SubSequence] {
+        var chunks: [SubSequence] = []
+        var i = startIndex
+        
+        while let nextIndex = index(i, offsetBy: size, limitedBy: endIndex) {
+            let chunk = self[i..<nextIndex]
+            chunks.append(chunk)
+            i = nextIndex
+        }
+        
+        if i != endIndex {
+            chunks.append(self[i...])
+        }
+        
+        return chunks
     }
 }
 

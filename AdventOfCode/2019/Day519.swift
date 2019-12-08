@@ -21,48 +21,6 @@ final class Day519: Day {
 //        let input = "3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99"
         let values = input.byCommas().asInts()
 
-        enum Instruction: Int {
-            case add = 1
-            case multiply
-            case input
-            case output
-            case jumpIfTrue
-            case jumpIfFalse
-            case lessThan
-            case equals
-            case exit = 99
-            case crash = 0
-
-            var neededModes: Int {
-                switch self {
-                case .add, .multiply, .jumpIfTrue, .jumpIfFalse, .lessThan, .equals: return 2
-                case .input, .output: return 1
-                default: return 0
-                }
-            }
-
-            func moveInstructionPointer(_ ip: inout Int) {
-                switch self {
-                case .add, .multiply, .lessThan, .equals: ip += 3
-                case .jumpIfTrue, .jumpIfFalse: ip += 2
-                case .input, .output: ip += 1
-                default: break
-                }
-            }
-        }
-
-        enum ParameterMode: Int {
-            case position = 0
-            case immediate
-
-            func value(from initialValue: Int, appliedTo memory: [Int]) -> Int {
-                switch self {
-                case .position: return memory[initialValue]
-                case .immediate: return initialValue
-                }
-            }
-        }
-
         final class Program {
             let id: Int
             var memory: [Int]
@@ -138,6 +96,48 @@ final class Day519: Day {
                 }
 
                 return output
+            }
+
+            enum Instruction: Int {
+                case add = 1
+                case multiply
+                case input
+                case output
+                case jumpIfTrue
+                case jumpIfFalse
+                case lessThan
+                case equals
+                case exit = 99
+                case crash = 0
+
+                var neededModes: Int {
+                    switch self {
+                    case .add, .multiply, .jumpIfTrue, .jumpIfFalse, .lessThan, .equals: return 2
+                    case .input, .output: return 1
+                    default: return 0
+                    }
+                }
+
+                func moveInstructionPointer(_ ip: inout Int) {
+                    switch self {
+                    case .add, .multiply, .lessThan, .equals: ip += 3
+                    case .jumpIfTrue, .jumpIfFalse: ip += 2
+                    case .input, .output: ip += 1
+                    default: break
+                    }
+                }
+            }
+
+            enum ParameterMode: Int {
+                case position = 0
+                case immediate
+
+                func value(from initialValue: Int, appliedTo memory: [Int]) -> Int {
+                    switch self {
+                    case .position: return memory[initialValue]
+                    case .immediate: return initialValue
+                    }
+                }
             }
         }
 
