@@ -32,7 +32,7 @@ extension String {
     func byCommas() -> [String] {
         trimmingWhitespace().split(separator: ",").map(String.init)
     }
-    
+
     func trimmingWhitespace() -> String {
         trimmingCharacters(in: .whitespacesAndNewlines)
     }
@@ -186,17 +186,17 @@ extension Collection {
     public func chunked(into size: Int) -> [SubSequence] {
         var chunks: [SubSequence] = []
         var i = startIndex
-        
+
         while let nextIndex = index(i, offsetBy: size, limitedBy: endIndex) {
             let chunk = self[i..<nextIndex]
             chunks.append(chunk)
             i = nextIndex
         }
-        
+
         if i != endIndex {
             chunks.append(self[i...])
         }
-        
+
         return chunks
     }
 }
