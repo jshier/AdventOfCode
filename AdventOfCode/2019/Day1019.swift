@@ -13,7 +13,7 @@ final class Day1019: Day {
     override var expectedStageTwoOutput: String? { nil }
 
     override func perform() {
-//        let input = String.input(forDay: 10, year: 2019)
+        let input = String.input(forDay: 10, year: 2019)
 //        let input = """
 //        .#..#
 //        .....
@@ -45,18 +45,18 @@ final class Day1019: Day {
 //        ....f...c.
 //        ...e..d..c
 //        """
-        let input = """
-        #.#...#.#.
-        .###....#.
-        .#....#...
-        ##.#.#.#.#
-        ....#.#.#.
-        .##..###.#
-        ..#...##..
-        ..##....##
-        ......#...
-        .####.###.
-        """
+//        let input = """
+//        o.o...#.#.
+//        .o#o....#.
+//        .)....#...
+//        o#.0.#.#.#
+//        ....#.#.#.
+//        .xo..##x.#
+//        ..o...#x..
+//        ..o#....##
+//        ......#...
+//        .xo##.###.
+//        """
         let lines = input.byLines()
         let asteroids: [Point: Bool] = lines.enumerated().reduce(into: [:]) { (output, offsetElement) in
             let y = offsetElement.offset
@@ -79,23 +79,19 @@ final class Day1019: Day {
                     guard !((offset.x == 0) && (offset.y == 0)) else { continue }
                     
                     let position = point + offset
-                    
+//                    
 //                    print("Point: \(point)")
 //                    print("Offset: \(offset)")
 //                    print("Position: \(position)")
                     
                     
                     if asteroids[position] == true  {
-                        let isVisible = !visibles.map { $0.offset }.contains {
-//                            let isMultiple: Bool
-//                            switch ($0.x, $0.y) {
-//                            case (0, 0): fatalError("Should've already filtered this out.")
-//                            case (0, _): isMultiple = (offset.x == 0) && ((offset.y / $0.y) > 0)
-//                            case (_, 0): isMultiple = (offset.y == 0) && ((offset.x / $0.x) > 0)
-//                            default: isMultiple = (offset.y * $0.x) == (offset.x * $0.y)
-//                            }
-//                            if isMultiple { print("\(offset) is multiple of \($0)") }
-                            return (offset.y * $0.x) == (offset.x * $0.y)
+                        let isVisible = !visibles.map { $0.offset }
+                                                 .contains { 
+                                                    let isMultiple = (offset.y * $0.x) == (offset.x * $0.y) && 
+                                                        ((offset.y.signum() == $0.y.signum()) && (offset.x.signum() == $0.x.signum()))
+//                                                    if isMultiple { print("\(offset) is multiple of \($0)") }
+                                                    return isMultiple
                         }
                         if isVisible {
                             visibles.append((point: position, offset: offset))
@@ -111,7 +107,10 @@ final class Day1019: Day {
         
         let sorted = allVisibles.sorted { $0.value.count < $1.value.count }
         let mostVisible = sorted.last!
-        print(mostVisible.key)
+
         stageOneOutput = "\(mostVisible.value.count)"
+        
+        let mostVisiblePoint = mostVisible.key
+        
     }
 }
