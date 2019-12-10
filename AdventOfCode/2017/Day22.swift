@@ -160,6 +160,11 @@ extension Point {
     func manhattanDistance(to point: Point) -> Int {
         abs(x - point.x) + abs(y - point.y)
     }
+    
+//    func isMultiple(of point: Point) -> Bool {
+//        // 1x2 is multiple of 2x4
+//        // x 
+//    }
 }
 
 extension Point: CustomStringConvertible {
