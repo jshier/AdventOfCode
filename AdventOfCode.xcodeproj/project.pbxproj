@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3103B7A821BF3C9700301245 /* Day1018.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103B7A721BF3C9700301245 /* Day1018.swift */; };
 		3109AA1221B4EE53006A24D0 /* Day318.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3109AA1121B4EE53006A24D0 /* Day318.swift */; };
+		310C94D423A061460010DCCD /* VectorMath in Frameworks */ = {isa = PBXBuildFile; productRef = 310C94D323A061460010DCCD /* VectorMath */; };
 		311931C321B39C7200A4A116 /* Day218.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311931C221B39C7200A4A116 /* Day218.swift */; };
 		31202D961FEF8DE0009B2C2E /* Day24.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31202D951FEF8DE0009B2C2E /* Day24.swift */; };
 		312A787A239A1B72002B9FC4 /* SwiftGraph in Frameworks */ = {isa = PBXBuildFile; productRef = 312A7879239A1B72002B9FC4 /* SwiftGraph */; };
@@ -249,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				312A787A239A1B72002B9FC4 /* SwiftGraph in Frameworks */,
+				310C94D423A061460010DCCD /* VectorMath in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +520,7 @@
 			name = AdventOfCode;
 			packageProductDependencies = (
 				312A7879239A1B72002B9FC4 /* SwiftGraph */,
+				310C94D323A061460010DCCD /* VectorMath */,
 			);
 			productName = AdventOfCode;
 			productReference = 318AC3261FE062A900A98B5E /* AdventOfCode */;
@@ -551,6 +554,7 @@
 			mainGroup = 318AC31D1FE062A900A98B5E;
 			packageReferences = (
 				312A7878239A1B72002B9FC4 /* XCRemoteSwiftPackageReference "SwiftGraph" */,
+				310C94D223A061460010DCCD /* XCRemoteSwiftPackageReference "VectorMath" */,
 			);
 			productRefGroup = 318AC3271FE062A900A98B5E /* Products */;
 			projectDirPath = "";
@@ -810,6 +814,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		310C94D223A061460010DCCD /* XCRemoteSwiftPackageReference "VectorMath" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nicklockwood/VectorMath.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
 		312A7878239A1B72002B9FC4 /* XCRemoteSwiftPackageReference "SwiftGraph" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/davecom/SwiftGraph.git";
@@ -821,6 +833,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		310C94D323A061460010DCCD /* VectorMath */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 310C94D223A061460010DCCD /* XCRemoteSwiftPackageReference "VectorMath" */;
+			productName = VectorMath;
+		};
 		312A7879239A1B72002B9FC4 /* SwiftGraph */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 312A7878239A1B72002B9FC4 /* XCRemoteSwiftPackageReference "SwiftGraph" */;

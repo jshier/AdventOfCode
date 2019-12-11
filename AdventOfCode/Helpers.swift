@@ -232,6 +232,12 @@ extension Int {
         let padding = String(repeating: "0", count: 8 - string.count)
         return padding + string
     }
+
+    func greatestCommonDivisor(with other: Int) -> Int {
+        if self == 0 { return other }
+
+        return (other % self).greatestCommonDivisor(with: self)
+    }
 }
 
 extension Data {

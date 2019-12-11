@@ -9,8 +9,8 @@
 import Foundation
 
 final class Day1019: Day {
-    override var expectedStageOneOutput: String? { nil }
-    override var expectedStageTwoOutput: String? { nil }
+    override var expectedStageOneOutput: String? { "329" }
+    override var expectedStageTwoOutput: String? { "512" }
 
     override func perform() {
         let input = String.input(forDay: 10, year: 2019)
@@ -57,60 +57,64 @@ final class Day1019: Day {
 //        ......#...
 //        .xo##.###.
 //        """
+//        let input = """
+//        .#....###24...#..
+//        ##...##.13#67..9#
+//        ##...#...5.8####.
+//        ..#.....X...###..
+//        ..#.#.....#....##
+//        """
+
         let lines = input.byLines()
-        let asteroids: [Point: Bool] = lines.enumerated().reduce(into: [:]) { (output, offsetElement) in
+
+        let asteroids: Set<Point> = lines.enumerated().reduce(into: []) { output, offsetElement in
             let y = offsetElement.offset
-            for (x, character) in offsetElement.element.enumerated() {
-                output[Point(x, y)] = (character != ".")
+            for (x, character) in offsetElement.element.enumerated() where character != "." {
+                output.insert(Point(x, y))
             }
         }
-        
-        var allVisibles: [Point: [(point: Point, offset: (x: Int, y: Int))]] = [:]
-        for point in asteroids.filter({ $0.value }).keys {
-            var visibles: [(point: Point, offset: (x: Int, y: Int))] = []
-            // 0 - x to count - x
-            // 0 - y to count - y
-            let xs = ((0 - point.x)..<(lines[0].count - point.x)).sorted { abs($0) < abs($1) }
-            for xOffset in xs {
-                let ys = ((0 - point.y)..<(lines.count - point.y)).sorted { abs($0) < abs($1) }
-                for yOffset in ys {
-                    let offset = (x: xOffset, y: yOffset)
-                    
-                    guard !((offset.x == 0) && (offset.y == 0)) else { continue }
-                    
-                    let position = point + offset
-//                    
-//                    print("Point: \(point)")
-//                    print("Offset: \(offset)")
-//                    print("Position: \(position)")
-                    
-                    
-                    if asteroids[position] == true  {
-                        let isVisible = !visibles.map { $0.offset }
-                                                 .contains { 
-                                                    let isMultiple = (offset.y * $0.x) == (offset.x * $0.y) && 
-                                                        ((offset.y.signum() == $0.y.signum()) && (offset.x.signum() == $0.x.signum()))
-//                                                    if isMultiple { print("\(offset) is multiple of \($0)") }
-                                                    return isMultiple
-                        }
-                        if isVisible {
-                            visibles.append((point: position, offset: offset))
-                        } else {
-                            
-                        }
-                    }
+        var visibles: [Point: Set<Offset>] = [:]
+        for potential in asteroids {
+            var offsets: Set<Offset> = []
+            let rest = asteroids.subtracting([potential]).sorted {
+                potential.distance(to: $0) < potential.distance(to: $1)
+            }
+            for other in rest {
+                let offset = potential.offset(of: other)
+                if !offsets.contains(where: { offset.isMultiple(of: $0) }) {
+                    let divisor = abs(offset.dx.greatestCommonDivisor(with: offset.dy))
+                    offsets.insert(Offset(offset.dx / divisor, offset.dy / divisor))
                 }
             }
-            
-            allVisibles[point] = visibles
+            visibles[potential] = offsets
         }
-        
-        let sorted = allVisibles.sorted { $0.value.count < $1.value.count }
-        let mostVisible = sorted.last!
+
+        let mostVisible = visibles.max { $0.value.count < $1.value.count }!
 
         stageOneOutput = "\(mostVisible.value.count)"
-        
+
         let mostVisiblePoint = mostVisible.key
-        
+        var asteroidsToLaser = asteroids.subtracting([mostVisiblePoint]).sorted { mostVisiblePoint.distance(to: $0) < mostVisiblePoint.distance(to: $1) }
+        var laseredAsteroids: [Point] = []
+        let offsetsByAngle = mostVisible.value.sorted {
+            let start = Offset(0, -1)
+            let first = start.clockwiseAngle(to: $0)
+            let second = start.clockwiseAngle(to: $1)
+
+            return first < second
+        }
+
+        while !asteroidsToLaser.isEmpty {
+            for offset in offsetsByAngle {
+                if let index = asteroidsToLaser.firstIndex(where: { mostVisiblePoint.offset(of: $0).isMultiple(of: offset) }) {
+                    laseredAsteroids.append(asteroidsToLaser[index])
+                    asteroidsToLaser.remove(at: index)
+                }
+            }
+        }
+
+        let twoHundredth = laseredAsteroids[199]
+
+        stageTwoOutput = "\(twoHundredth.x * 100 + twoHundredth.y)"
     }
 }

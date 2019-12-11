@@ -9,6 +9,15 @@
           "revision": "3e9ed26e380b40fcadf80ef5d588829ced251673",
           "version": "3.0.0"
         }
+      },
+      {
+        "package": "VectorMath",
+        "repositoryURL": "https://github.com/nicklockwood/VectorMath.git",
+        "state": {
+          "branch": null,
+          "revision": "2de2585f455dc8e15d642ca51b29b1917e68fd1e",
+          "version": "0.4.1"
+        }
       }
     ]
   },

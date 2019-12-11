@@ -160,11 +160,15 @@ extension Point {
     func manhattanDistance(to point: Point) -> Int {
         abs(x - point.x) + abs(y - point.y)
     }
-    
-//    func isMultiple(of point: Point) -> Bool {
-//        // 1x2 is multiple of 2x4
-//        // x 
-//    }
+
+    func offset(of point: Point) -> Offset {
+        Offset(point.x - x, point.y - y)
+    }
+
+    func distance(to point: Point) -> Double {
+        sqrt(Double(((point.x - x) * (point.x - x)) +
+                ((point.y - y) * (point.y - y))))
+    }
 }
 
 extension Point: CustomStringConvertible {
@@ -188,6 +192,12 @@ func + (lhs: Point, rhs: Point) -> Point {
 func + (lhs: Point, rhs: (x: Int, y: Int)) -> Point {
     let x = lhs.x + rhs.x
     let y = lhs.y + rhs.y
+    return Point(x, y)
+}
+
+func + (lhs: Point, rhs: Offset) -> Point {
+    let x = lhs.x + rhs.dx
+    let y = lhs.y + rhs.dy
     return Point(x, y)
 }
 
@@ -243,6 +253,37 @@ struct PointSequence: Sequence {
 
     func makeIterator() -> PointIterator {
         PointIterator(start: start, end: end)
+    }
+}
+
+struct Offset: Hashable {
+    let dx, dy: Int
+}
+
+extension Offset {
+    init(_ dx: Int, _ dy: Int) {
+        self.dx = dx
+        self.dy = dy
+    }
+}
+
+extension Offset {
+    var length: Int {
+        dx * dx + dy * dy
+    }
+
+    func clockwiseAngle(to offset: Offset) -> Double {
+        var angle = atan2(Double(offset.dy), Double(offset.dx)) - atan2(Double(dy), Double(dx))
+
+        if angle < 0 { angle += 2 * Double.pi }
+
+        return angle
+    }
+
+    func isMultiple(of other: Offset) -> Bool {
+        (dy * other.dx) == (dx * other.dy) &&
+            ((dy.signum() == other.dy.signum()) &&
+                (dx.signum() == other.dx.signum()))
     }
 }
 
