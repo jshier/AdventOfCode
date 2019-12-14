@@ -238,6 +238,10 @@ extension Int {
 
         return (other % self).greatestCommonDivisor(with: self)
     }
+
+    func lowestCommonMultiple(with other: Int) -> Int {
+        abs(self * other) / greatestCommonDivisor(with: other)
+    }
 }
 
 extension Data {

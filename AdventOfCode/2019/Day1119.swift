@@ -11,42 +11,42 @@ import Foundation
 final class Day1119: Day {
     override var expectedStageOneOutput: String? { "2441" }
     override var expectedStageTwoOutput: String? {
-    """
-    \n
-    ###  #### ###  #### ###  ###  #  #  ##
-    #  #    # #  # #    #  # #  # # #  #  #
-    #  #   #  #  # ###  #  # #  # ##   #
-    ###   #   ###  #    ###  ###  # #  #
-    #    #    # #  #    #    # #  # #  #  #
-    #    #### #  # #    #    #  # #  #  ##
-    \n
-    """
+        """
+        \n
+        ###  #### ###  #### ###  ###  #  #  ##
+        #  #    # #  # #    #  # #  # # #  #  #
+        #  #   #  #  # ###  #  # #  # ##   #
+        ###   #   ###  #    ###  ###  # #  #
+        #    #    # #  #    #    # #  # #  #  #
+        #    #### #  # #    #    #  # #  #  ##
+        \n
+        """
     }
 
     override func perform() {
         let input = String.input(forDay: 11, year: 2019)
         let program = input.byCommas().asInts()
-        
+
         let first = PaintingRobot(program: program, initialColor: .black)
         first.paint()
-        
+
         stageOneOutput = "\(first.panels.keys.count)"
-        
+
         let second = PaintingRobot(program: program, initialColor: .white)
         second.paint()
-        
+
         var minX = Int.max
         var maxX = Int.min
         var minY = Int.max
         var maxY = Int.min
-        
+
         for point in second.panels.keys {
             minX = min(minX, point.x)
             maxX = max(maxX, point.x)
             minY = min(minY, point.y)
             maxY = max(maxY, point.y)
         }
-        
+
         var output = ""
         for y in (minY...maxY).reversed() {
             for x in minX...maxX {
@@ -54,41 +54,41 @@ final class Day1119: Day {
             }
             output.append("\n")
         }
-        
+
         output = output.split(separator: "\n")
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .joined(separator: "\n")
-        
+
         stageTwoOutput = """
         \n
         \(output)
         \n
         """
     }
-    
+
     final class PaintingRobot {
         enum PanelColor: Int { case black, white }
-        
+
         private(set) var panels: [Point: PanelColor]
         private var currentLocation = Point(0, 0)
         private var currentDirection = Direction.up
         private let brain: IntcodeComputer
-        
+
         init(program: [Int], initialColor: PanelColor) {
             brain = IntcodeComputer(inputs: [initialColor.rawValue], memory: program, yieldOnOutput: .yes(count: 2))
             panels = [Point(0, 0): initialColor]
         }
-        
+
         func paint() {
             while true {
                 brain.execute()
-                
+
                 guard !brain.isHalted else { break }
-                
+
                 let outputs = brain.outputs
-                
+
                 guard outputs.count == 2 else { fatalError() }
-                
+
                 brain.outputs = []
                 let color = PanelColor(rawValue: outputs[0])!
                 panels[currentLocation] = color
@@ -105,12 +105,12 @@ final class IntcodeComputer {
     var output: Int? { outputs.last }
     var outputs: [Int] = []
     private(set) var isHalted = false
-    
+
     private var memory: [Int: Int]
     private var ip = 0
     private var relativeBase = 0
     private let yieldOnOutput: YieldOnOutput
-    
+
     init(inputs: [Int], memory: [Int], yieldOnOutput: YieldOnOutput = .no) {
         self.inputs = inputs
         self.memory = memory.enumerated().reduce(into: [:]) { output, offsetElement in
@@ -234,7 +234,7 @@ final class IntcodeComputer {
         case immediate
         case relative
     }
-    
+
     enum YieldOnOutput {
         case no
         case yes(count: Int)
