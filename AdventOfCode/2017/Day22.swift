@@ -119,7 +119,9 @@ extension Node: CustomStringConvertible {
     }
 }
 
-struct Point: Hashable {
+struct Point: Hashable, Codable {
+    static let origin = Point(0, 0)
+
     let x: Int
     let y: Int
 
@@ -304,8 +306,8 @@ struct Virus {
     }
 }
 
-enum Direction {
-    case up, down, left, right
+enum Direction: Int, CaseIterable {
+    case up = 1, down, left, right
 
     var forwardOffset: (Int, Int) {
         switch self {
@@ -333,6 +335,10 @@ enum Direction {
         case .left: return .right
         case .right: return .left
         }
+    }
+
+    func offset(_ point: Point) -> Point {
+        point + forwardOffset
     }
 }
 

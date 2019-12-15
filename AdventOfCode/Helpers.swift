@@ -244,6 +244,16 @@ extension Int {
     }
 }
 
+func greatestCommonDivisor(_ lhs: Int, _ rhs: Int) -> Int {
+    if rhs == 0 { return lhs }
+
+    return greatestCommonDivisor(rhs, lhs % rhs)
+}
+
+func leastCommonMultiple(_ lhs: Int, _ rhs: Int) -> Int {
+    abs(lhs * rhs) / greatestCommonDivisor(lhs, rhs)
+}
+
 extension Data {
     var hexString: String {
         map { String(format: "%02x", $0) }.joined()
@@ -257,5 +267,23 @@ extension Array where Element == String {
 
     func asDoubles() -> [Double] {
         compactMap(Double.init)
+    }
+}
+
+extension Dictionary where Key == Point {
+    func print(perElement: (_ element: Value) -> String) -> String {
+        let minX = keys.map { $0.x }.min()!
+        let maxX = keys.map { $0.x }.max()!
+        let minY = keys.map { $0.y }.min()!
+        let maxY = keys.map { $0.y }.max()!
+
+        var output = ""
+        for y in (minY...maxY).reversed() {
+            for x in minX...maxX {
+                output += perElement(self[Point(x, y)]!)
+            }
+            output += "\n"
+        }
+        return output
     }
 }

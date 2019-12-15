@@ -75,7 +75,7 @@ final class Day1119: Day {
         private let brain: IntcodeComputer
 
         init(program: [Int], initialColor: PanelColor) {
-            brain = IntcodeComputer(inputs: [initialColor.rawValue], memory: program, yieldOnOutput: .yes(count: 2))
+            brain = IntcodeComputer(program: program, input: [initialColor.rawValue], yieldOnOutput: .yes(count: 2))
             panels = [Point(0, 0): initialColor]
         }
 
@@ -94,41 +94,44 @@ final class Day1119: Day {
                 panels[currentLocation] = color
                 currentDirection = (outputs[1] == 0) ? currentDirection.turn(.left) : currentDirection.turn(.right)
                 currentLocation = currentLocation + currentDirection.forwardOffset
-                brain.inputs = [panels[currentLocation, default: .black].rawValue]
+                brain.input = [panels[currentLocation, default: .black].rawValue]
             }
         }
     }
 }
 
 final class IntcodeComputer {
-    var inputs: [Int]
+    var input: [Int]
     var output: Int? { outputs.last }
     var outputs: [Int] = []
     private(set) var isHalted = false
 
-    private var memory: [Int: Int]
+    private var program: [Int: Int]
     private var ip = 0
     private var relativeBase = 0
+    private let yieldForInput: Bool
     private let yieldOnOutput: YieldOnOutput
 
-    init(inputs: [Int], memory: [Int], yieldOnOutput: YieldOnOutput = .no) {
-        self.inputs = inputs
-        self.memory = memory.enumerated().reduce(into: [:]) { output, offsetElement in
+    init(program: [Int], input: [Int], yieldForInput: Bool = false, yieldOnOutput: YieldOnOutput = .no) {
+        self.program = program.enumerated().reduce(into: [:]) { output, offsetElement in
             output[offsetElement.offset] = offsetElement.element
         }
+        self.input = input
+        self.yieldForInput = yieldForInput
         self.yieldOnOutput = yieldOnOutput
     }
 
     subscript(_ i: Int) -> Int {
-        get { memory[i, default: 0] }
-        set { memory[i] = newValue }
+        get { program[i, default: 0] }
+        set { program[i] = newValue }
     }
 
     subscript(_ range: ClosedRange<Int>) -> [Int] {
         range.map { self[$0] }
     }
 
-    func execute() {
+    @discardableResult
+    func execute() -> ReturnCode {
         loop: while true {
             let opCode = self[ip]
             let instruction = Instruction(rawValue: opCode % 100)!
@@ -166,25 +169,39 @@ final class IntcodeComputer {
             case .multiply:
                 self[parameters[2]] = parameters[0] * parameters[1]
             case .input:
-                let input = inputs.removeFirst()
-                self[parameters[0]] = input
+                if yieldForInput && input.isEmpty {
+                    ip -= (instruction.operations.count + 1)
+                    return .needInput
+                } else {
+                    self[parameters[0]] = input.removeFirst()
+                }
+//                let value: Int
+//                switch input {
+//                case let .constant(constant):
+//                    value = constant
+//                case var .direct(inputs):
+//                    value = inputs.removeFirst()
+//                    input = .direct(inputs)
+//                case .prompt:
+//                    print("Enter input: ")
+//                    value = readLine().flatMap { Int($0) }!
+//                case .yield:
+//                    break loop
+//                }
+//                self[parameters[0]] = value
             case .output:
                 outputs.append(parameters[0])
                 switch yieldOnOutput {
                 case .no: continue
                 case let .yes(count):
                     if outputs.count == count {
-                        break loop
+                        return .producedOutput
                     }
                 }
             case .jumpIfTrue:
-                if parameters[0] != 0 {
-                    ip = parameters[1]
-                }
+                if parameters[0] != 0 { ip = parameters[1] }
             case .jumpIfFalse:
-                if parameters[0] == 0 {
-                    ip = parameters[1]
-                }
+                if parameters[0] == 0 { ip = parameters[1] }
             case .lessThan:
                 self[parameters[2]] = (parameters[0] < parameters[1]) ? 1 : 0
             case .equals:
@@ -193,10 +210,10 @@ final class IntcodeComputer {
                 relativeBase += parameters[0]
             case .exit:
                 isHalted = true
-                break loop
+                return .exited
             case .crash:
                 print("Crashing!")
-                break loop
+                return .crash
             }
         }
     }
@@ -238,5 +255,16 @@ final class IntcodeComputer {
     enum YieldOnOutput {
         case no
         case yes(count: Int)
+    }
+
+    enum ReturnCode {
+        case exited, needInput, producedOutput, crash
+    }
+
+    enum Input {
+        case constant(Int)
+        case direct([Int])
+        case prompt
+        case yield(Int)
     }
 }
