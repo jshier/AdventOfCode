@@ -9,19 +9,19 @@
 import Foundation
 
 final class Day1419: Day {
-    override var expectedStageOneOutput: String? { nil }
-    override var expectedStageTwoOutput: String? { nil }
+    override var expectedStageOneOutput: String? { "337862" }
+    override var expectedStageTwoOutput: String? { "3687786" }
 
     override func perform() {
-//        let input = String.input(forDay: 14, year: 2019)
-        let input = """
-        10 ORE => 10 A
-        1 ORE => 1 B
-        7 A, 1 B => 1 C
-        7 A, 1 C => 1 D
-        7 A, 1 D => 1 E
-        7 A, 1 E => 1 FUEL
-        """
+        let input = String.input(forDay: 14, year: 2019)
+//        let input = """
+//        10 ORE => 10 A
+//        1 ORE => 1 B
+//        7 A, 1 B => 1 C
+//        7 A, 1 C => 1 D
+//        7 A, 1 D => 1 E
+//        7 A, 1 E => 1 FUEL
+//        """
 //        let input = """
 //        9 ORE => 2 A
 //        8 ORE => 3 B
@@ -31,23 +31,58 @@ final class Day1419: Day {
 //        4 C, 1 A => 1 CA
 //        2 AB, 3 BC, 4 CA => 1 FUEL
 //        """
+
         let reactions = input.byLines().map(Reaction.init)
-        let fuel = reactions.first { $0.product.id == "FUEL" }!
-        let ores = findOre(for: fuel.product, in: reactions)
-        print(ores)
-        print(ores.map { $0.quantity }.reduce(0, +))
-    }
+        let byProducts: [String: (quantity: Int, reactants: [Reactant])] = reactions.reduce(into: [:]) { output, reaction in
+            output[reaction.product.id] = (reaction.product.quantity, reaction.reactants)
+        }
+        var surplus: [String: Int] = [:]
 
-    func findOre(for reactant: Reactant, in reactions: [Reaction]) -> [Reactant] {
-        guard reactant.id != "ORE" else { return [reactant] }
+        func findOre(for id: String, quantity: Int) -> Int {
+            guard id != "ORE" else { return quantity }
 
-        let sourceReaction = reactions.first { $0.product.id == reactant.id }!
-        let reactants = sourceReaction.reactants.map { newReactant -> Reactant in
-            let multiplier = max(reactant.quantity / sourceReaction.product.quantity, 1)
-            return Reactant(quantity: newReactant.quantity * multiplier, id: newReactant.id)
-        }.flatMap { findOre(for: $0, in: reactions) }
+            guard quantity > surplus[id, default: 0] else {
+                surplus[id, default: 0] -= quantity
+                return 0
+            }
 
-        return reactants
+            var quantity = quantity
+            quantity -= surplus[id, default: 0]
+            surplus[id] = 0
+            var ore = 0
+            let reaction = byProducts[id]!
+            let copies = Int(ceil(Double(quantity) / Double(reaction.quantity)))
+
+            for reactant in reaction.reactants {
+                let amount = reactant.quantity * copies
+                ore += findOre(for: reactant.id, quantity: amount)
+            }
+            surplus[id, default: 0] += (reaction.quantity * copies) - quantity
+
+            return ore
+        }
+
+        stageOneOutput = "\(findOre(for: "FUEL", quantity: 1))"
+
+        surplus.removeAll(keepingCapacity: true)
+
+        var ore = 1_000_000_000_000
+        var target = ore
+        var fuel = 0
+        var previousSurplus = surplus
+        while (ore > 0) && (target > 0) {
+            surplus = previousSurplus
+            let oreUsed = findOre(for: "FUEL", quantity: target)
+            if oreUsed > ore {
+                target /= 2
+            } else {
+                fuel += target
+                ore -= oreUsed
+                previousSurplus = surplus
+            }
+        }
+
+        stageTwoOutput = "\(fuel)"
     }
 
     struct Reactant {
