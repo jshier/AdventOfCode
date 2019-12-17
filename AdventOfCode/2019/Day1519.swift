@@ -23,8 +23,8 @@ final class Day1519: Day {
         stageOneOutput = "\(edges.count)"
 
         let farthestFromOxygen = droid.movements.dijkstra(root: oxygen, startDistance: 0).0.compactMap { $0 }.max()!
+
         stageTwoOutput = "\(farthestFromOxygen)"
-//        print(droid.map, currentLocation: .origin)
     }
 
     final class RepairDroid {
