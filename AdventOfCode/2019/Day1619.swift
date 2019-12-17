@@ -10,7 +10,7 @@ import Foundation
 
 final class Day1619: Day {
     override var expectedStageOneOutput: String? { "70856418" }
-    override var expectedStageTwoOutput: String? { nil }
+    override var expectedStageTwoOutput: String? { "87766336" }
 
     override func perform() {
         let input = String.input(forDay: 16, year: 2019)
@@ -19,12 +19,11 @@ final class Day1619: Day {
         let digits = input.trimmingWhitespace().chunked(into: 1).map(String.init).compactMap(Int.init)
         let pattern = [0, 1, 0, -1]
 
-        func calculateTransform(for digits: [Int], repeated: Int = 1) -> [Int] {
+        func calculateTransform(for digits: [Int]) -> [Int] {
             var transformDigits = digits
             var newDigits: [Int] = []
             newDigits.reserveCapacity(digits.count)
             for _ in 0..<100 {
-//                let start = CFAbsoluteTimeGetCurrent()
                 newDigits.removeAll(keepingCapacity: true)
                 for index in 0..<transformDigits.count {
                     let onesIndices = stride(from: index, to: transformDigits.count, by: 4 * (index + 1))
@@ -42,9 +41,7 @@ final class Day1619: Day {
 
                     newDigits.append(abs(ones - negatives) % 10)
                 }
-//                print(newDigits)
                 transformDigits = newDigits
-//                print("Cycle \(cycle) took \(CFAbsoluteTimeGetCurrent() - start)")
             }
             return transformDigits
         }
@@ -55,17 +52,20 @@ final class Day1619: Day {
         let needed = (digits.count * 10_000) - offset
         var lastDigits: [Int] = []
         lastDigits.reserveCapacity(needed)
-        let reversed = Array(digits.reversed())
-        var previousSum = 0
-        for index in 0..<needed {
-            let circularIndex = index % reversed.count
-//            print(circularIndex)
-            let newSum = reversed[circularIndex] + previousSum
-            lastDigits.append(newSum % 10)
-            previousSum = newSum
+        var reversed = Array(digits.reversed())
+        for _ in 0..<100 {
+            var previousSum = 0
+            lastDigits.removeAll(keepingCapacity: true)
+            for index in 0..<needed {
+                let circularIndex = index % reversed.count
+                let newSum = reversed[circularIndex] + previousSum
+                lastDigits.append(newSum % 10)
+                previousSum = newSum
+            }
+            reversed = lastDigits
         }
 
-        stageTwoOutput = lastDigits.reversed().prefix(8).map(String.init).joined()
+        stageTwoOutput = reversed.reversed().prefix(8).map(String.init).joined()
     }
 }
 
