@@ -287,3 +287,22 @@ extension Dictionary where Key == Point {
         return output
     }
 }
+
+extension Sequence where Element == Point {
+    func print(lowestToHighest: Bool = true, perElement: (_ contained: Bool) -> String) -> String {
+        let values = sorted()
+        let minX = values.map { $0.x }.min()!
+        let maxX = values.map { $0.x }.max()!
+        let minY = values.map { $0.y }.min()!
+        let maxY = values.map { $0.y }.max()!
+
+        var output = ""
+        for y in minY...maxY {
+            for x in minX...maxX {
+                output += perElement(values.contains(Point(x, y)))
+            }
+            output += "\n"
+        }
+        return (lowestToHighest ? output : output.split(separator: "\n").reversed().joined(separator: "\n"))
+    }
+}

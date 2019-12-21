@@ -106,14 +106,21 @@ final class IntcodeComputer {
     var outputs: [Int] = []
     private(set) var isHalted = false
 
-    private var program: [Int: Int]
+    private let program: [Int]
+    private let originalMemory: [Int: Int]
+    private var memory: [Int: Int]
     private var ip = 0
     private var relativeBase = 0
     private let yieldForInput: Bool
     private let yieldOnOutput: YieldOnOutput
 
     init(program: [Int], input: [Int], yieldForInput: Bool = false, yieldOnOutput: YieldOnOutput = .no) {
-        self.program = program.enumerated().reduce(into: [:]) { output, offsetElement in
+        self.program = program
+
+        originalMemory = program.enumerated().reduce(into: [:]) { output, offsetElement in
+            output[offsetElement.offset] = offsetElement.element
+        }
+        memory = program.enumerated().reduce(into: [:]) { output, offsetElement in
             output[offsetElement.offset] = offsetElement.element
         }
         self.input = input
@@ -122,12 +129,19 @@ final class IntcodeComputer {
     }
 
     subscript(_ i: Int) -> Int {
-        get { program[i, default: 0] }
-        set { program[i] = newValue }
+        get { memory[i, default: 0] }
+        set { memory[i] = newValue }
     }
 
     subscript(_ range: ClosedRange<Int>) -> [Int] {
         range.map { self[$0] }
+    }
+
+    func reset() {
+        ip = 0
+        isHalted = false
+        memory.removeAll(keepingCapacity: true)
+        memory = originalMemory
     }
 
     @discardableResult

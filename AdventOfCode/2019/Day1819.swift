@@ -27,30 +27,31 @@ final class Day1819: Day {
 //        #d.....................#
 //        ########################
 //        """
-//        let input = """
-//        ########################
-//        #...............b.C.D.f#
-//        #.######################
-//        #.....@.a.B.c.d.A.e.F.g#
-//        ########################
-//        """
         let input = """
-        #################
-        #i.G..c...e..H.p#
-        ########.########
-        #j.A..b...f..D.o#
-        ########@########
-        #k.E..a...g..B.n#
-        ########.########
-        #l.F..d...h..C.m#
-        #################
+        ########################
+        #...............b.C.D.f#
+        #.######################
+        #.....@.a.B.c.d.A.e.F.g#
+        ########################
         """
+//        let input = """
+//        #################
+//        #i.G..c...e..H.p#
+//        ########.########
+//        #j.A..b...f..D.o#
+//        ########@########
+//        #k.E..a...g..B.n#
+//        ########.########
+//        #l.F..d...h..C.m#
+//        #################
+//        """
 
         let lines = input.byLines()
         let byCharacter = lines.map { $0.map { $0 } }
         var navigablePoints: [Point: String] = [:]
-        var keys: Set<Point> = []
-        var doors: [String: Point] = [:]
+        var uniquePoints: [String: Point] = [:]
+        var allKeys: Set<Point> = []
+        var allDoors: Set<Point> = []
         for y in 0..<lines.count {
             for x in 0..<lines[0].count {
                 let character = byCharacter[y][x]
@@ -63,9 +64,11 @@ final class Day1819: Day {
                 navigablePoints[point] = string
 
                 if character.isLetter && character.isUppercase {
-                    doors[string] = point
+                    allDoors.insert(point)
+                    uniquePoints[string] = point
                 } else if character.isLetter && character.isLowercase {
-                    keys.insert(point)
+                    allKeys.insert(point)
+                    uniquePoints[string] = point
                 }
             }
         }
@@ -85,59 +88,60 @@ final class Day1819: Day {
 
         addPoints(adjacentTo: atPoint)
 
-        let allPaths: [Point: [Point: [WeightedGraph<Point, Int>.E]]] = keys.reduce(into: [:]) { output, element in
-            let pathsToOtherKeys: [Point: [WeightedGraph<Point, Int>.E]] = keys.subtracting([element]).reduce(into: [:]) { subOutput, subElement in
+        let allPaths: [Point: [Point: [WeightedGraph<Point, Int>.E]]] = allKeys.union([atPoint]).reduce(into: [:]) { output, element in
+            let pathsToOtherKeys: [Point: [WeightedGraph<Point, Int>.E]] = allKeys.subtracting([element]).reduce(into: [:]) { subOutput, subElement in
                 subOutput[subElement] = graph.bfs(from: element, to: subElement)
             }
             output[element] = pathsToOtherKeys
         }
 
-//        print(graph)
+        func findRoutes(from start: Point,
+                        keepingPath path: [WeightedGraph<Point, Int>.E],
+                        keys: Set<Point>,
+                        doors: Set<Point>) -> [[WeightedGraph<Point, Int>.E]] {
+            guard !keys.isEmpty || !doors.isEmpty else { return [path] }
 
-        // Find all routes from point to available keys
-        // Filter any routes with a door
-        // Remove destination key and door from their collections.
-        // Repeat
+            let availableKeyPaths = allPaths[start]!.filter { element in
+                let (keyPoint, keyPath) = element
 
-//        func findRoutes(from start: Point,
-//                        keepingPath path: [WeightedGraph<Point, Int>.E],
-//                        keys: Set<Point>,
-//                        doors: [String: Point]) -> [[WeightedGraph<Point, Int>.E]] {
-//            guard !keys.isEmpty || !doors.isEmpty else { return [path] }
-//
-//            let all = graph.findAllBfs(from: start) { keys.contains($0) }
-//            let doorIndices = Set(doors.values.compactMap { graph.indexOfVertex($0) })
-//            let available = all.filter { $0.count { doorIndices.contains($0.u) || doorIndices.contains($0.v) } == 0 }
-//            let availableKeyPoints = available.compactMap { $0.last?.v }.map { graph.vertexAtIndex($0) }
-//            let remainingPaths: [[[WeightedGraph<Point, Int>.E]]] = zip(available, availableKeyPoints).map { input in
-//                let (newPath, keyPoint) = input
-//                let key = navigablePoints[keyPoint]!
-//                let door = key.uppercased()
-//                let newKeys = keys.subtracting([keyPoint])
-//                var newDoors = doors
-//                newDoors.removeValue(forKey: door)
-//                let additionalRoutes = findRoutes(from: keyPoint, keepingPath: newPath, keys: newKeys, doors: newDoors)
-//
-//                return additionalRoutes
-//            }
-//            // For each key point, start the process again.
-//            let allPaths = remainingPaths.flatMap { $0 }
-//            let fullPaths = allPaths.map { path + $0 }
-//
-//            return fullPaths
-//        }
-//
-//        let routes = findRoutes(from: atPoint, keepingPath: [], keys: keys, doors: doors)
-        ////        let description = routes.map { $0.map { "\(graph.vertexAtIndex($0.u)) > \(graph.vertexAtIndex($0.v))" } }
-//        let shortestRoute = routes.min { $0.count < $1.count } ?? []
-//        let shortestKeys = shortestRoute
-//            .map { graph.vertexAtIndex($0.v) }
-//            .compactMap { navigablePoints[$0] }
-//            .filter { Character($0).isLowercase }
-//            .reduce(into: [String]()) { if !$0.contains($1) { $0.append($1) } }
-//            .joined(separator: ", ")
-//
-//        print(shortestKeys)
-//        print(shortestRoute.count)
+                guard keys.contains(keyPoint) else { return false }
+
+                let pathPoints: Set<Point> = keyPath.reduce(into: []) { output, edge in
+                    output.insert(graph.vertexAtIndex(edge.u))
+                    output.insert(graph.vertexAtIndex(edge.v))
+                }
+                let pathContainsDoor = !doors.isDisjoint(with: pathPoints)
+
+                return !pathContainsDoor
+            }
+
+            let paths: [[[WeightedGraph<Point, Int>.E]]] = availableKeyPaths.map { element in
+                let (keyPoint, keyPath) = element
+                let key = navigablePoints[keyPoint]!
+                let newDoors = uniquePoints[key.uppercased()].map { doors.subtracting([$0]) } ?? []
+
+                return findRoutes(from: keyPoint,
+                                  keepingPath: keyPath,
+                                  keys: keys.subtracting([keyPoint]),
+                                  doors: newDoors)
+            }
+
+            let fullPaths = paths.flatMap { $0 }.map { path + $0 }
+
+            return fullPaths
+        }
+
+        let routes = findRoutes(from: atPoint, keepingPath: [], keys: allKeys, doors: allDoors)
+        //        let description = routes.map { $0.map { "\(graph.vertexAtIndex($0.u)) > \(graph.vertexAtIndex($0.v))" } }
+        let shortestRoute = routes.min { $0.count < $1.count } ?? []
+        let shortestKeys = shortestRoute
+            .map { graph.vertexAtIndex($0.v) }
+            .compactMap { navigablePoints[$0] }
+            .filter { Character($0).isLowercase }
+            .reduce(into: [String]()) { if !$0.contains($1) { $0.append($1) } }
+            .joined(separator: ", ")
+
+        print(shortestKeys)
+        print(shortestRoute.count)
     }
 }
