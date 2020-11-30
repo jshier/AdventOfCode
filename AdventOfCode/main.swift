@@ -6,7 +6,9 @@
 //  Copyright © 2017 Jon Shier. All rights reserved.
 //
 
-import Foundation
+@_exported import Algorithms
+@_exported import Numerics
+@_exported import SE0270_RangeSet
 
-let output = Day1919().output()
+let output = Day1619().output()
 print(output)

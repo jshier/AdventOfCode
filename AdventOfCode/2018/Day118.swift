@@ -22,7 +22,7 @@ final class Day118: Day {
         var duplicateValue: Int?
         var accumulate = 0
         seen.insert(accumulate)
-        for number in frequencies.cycle() {
+        for number in frequencies.cycled() {
             accumulate += number
             if seen.contains(accumulate) { duplicateValue = accumulate; break }
             seen.insert(accumulate)

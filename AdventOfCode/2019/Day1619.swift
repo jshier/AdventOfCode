@@ -17,7 +17,6 @@ final class Day1619: Day {
 //        let input = "12345678"
 //        let input = "03036732577212944063491565474664"
         let digits = input.trimmingWhitespace().chunked(into: 1).map(String.init).compactMap(Int.init)
-        let pattern = [0, 1, 0, -1]
 
         func calculateTransform(for digits: [Int]) -> [Int] {
             var transformDigits = digits
@@ -26,7 +25,7 @@ final class Day1619: Day {
             for _ in 0..<100 {
                 newDigits.removeAll(keepingCapacity: true)
                 for index in 0..<transformDigits.count {
-                    let onesIndices = stride(from: index, to: transformDigits.count, by: 4 * (index + 1))
+                    let onesIndices = (index..<transformDigits.count).striding(by: 4 * (index + 1))
                     let onesSubSums = onesIndices.map {
                         transformDigits[$0..<min($0 + (index + 1), transformDigits.endIndex)].reduce(0, +)
                     }
@@ -48,7 +47,7 @@ final class Day1619: Day {
 
         stageOneOutput = String(calculateTransform(for: digits).map(String.init).joined().prefix(8))
 
-        let offset = digits.prefix(7).reversed().enumerated().reduce(0) { $0 + (Int(pow(10, Double($1.offset))) * $1.element) }
+        let offset = digits.lazy.prefix(7).reversed().enumerated().reduce(0) { $0 + (Int(pow(10, Double($1.offset))) * $1.element) }
         let needed = (digits.count * 10_000) - offset
         var lastDigits: [Int] = []
         lastDigits.reserveCapacity(needed)
@@ -66,19 +65,5 @@ final class Day1619: Day {
         }
 
         stageTwoOutput = reversed.reversed().prefix(8).map(String.init).joined()
-    }
-}
-
-extension Sequence {
-    func duplicateByElement(count: Int) -> [Element] {
-        flatMap { repeatElement($0, count: count) }
-    }
-}
-
-extension Collection where Index == Int {
-    func cycle(toLength length: Int) -> [Element] {
-        if count >= length { return Array(prefix(length)) }
-
-        return zip(0..<length, cycle()).map { $1 }
     }
 }

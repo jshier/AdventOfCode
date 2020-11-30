@@ -2,6 +2,33 @@
   "object": {
     "pins": [
       {
+        "package": "swift-algorithms",
+        "repositoryURL": "https://github.com/apple/swift-algorithms",
+        "state": {
+          "branch": "main",
+          "revision": "ad6dc7a143fd6d57908975b647706b6ab7898583",
+          "version": null
+        }
+      },
+      {
+        "package": "swift-numerics",
+        "repositoryURL": "https://github.com/apple/swift-numerics",
+        "state": {
+          "branch": "main",
+          "revision": "4a2cbc186b1f8cbbc1ace12cef43d65784b2559e",
+          "version": null
+        }
+      },
+      {
+        "package": "swift-se0270-range-set",
+        "repositoryURL": "https://github.com/apple/swift-se0270-range-set",
+        "state": {
+          "branch": "main",
+          "revision": "120fc7efe17b11f7eedd94e7a5e1885fc69efb49",
+          "version": null
+        }
+      },
+      {
         "package": "SwiftGraph",
         "repositoryURL": "https://github.com/davecom/SwiftGraph.git",
         "state": {

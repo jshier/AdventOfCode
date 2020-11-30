@@ -72,7 +72,7 @@ final class Day918: Day {
 
             let turns = Array(1...players)
 
-            for (player, marble) in zip(turns.cycle(), 1...finalMarbleValue).lazy {
+            for (player, marble) in zip(turns.cycled(), 1...finalMarbleValue).lazy {
                 if marble % 23 == 0 {
                     scores[player] = scores[player, default: 0] + marble
                     let removed = (current.previous?.previous?.previous?.previous?.previous?.previous?.previous?.remove())!

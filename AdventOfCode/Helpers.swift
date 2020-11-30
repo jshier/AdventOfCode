@@ -130,14 +130,6 @@ extension Array {
 }
 
 extension Collection where Index == Int {
-    func cycle() -> UnfoldSequence<Element, Int> {
-        sequence(state: 0) { (index: inout Int) in
-            let x = self[index]
-            index = self.circularIndex(after: index)
-            return x
-        }
-    }
-
     func circularIndex(_ from: Index, offsetBy offset: Int) -> Index {
         let potentialIndex = (from + offset) % count
 
@@ -219,6 +211,10 @@ extension Sequence {
             running = nextPartialResult(running, next)
             return running
         }
+    }
+    
+    func duplicateByElement(count: Int) -> [Element] {
+        flatMap { repeatElement($0, count: count) }
     }
 }
 
