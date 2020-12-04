@@ -218,6 +218,24 @@ extension Sequence {
     }
 }
 
+extension Sequence where Element: Equatable {
+    func count(of element: Element) -> Int {
+        count { $0 == element }
+    }
+}
+
+extension Sequence where Element: AdditiveArithmetic {
+    func sum() -> Element {
+        reduce(Element.zero, +)
+    }
+}
+
+extension Sequence where Element: Numeric {
+    func product() -> Element {
+        reduce(1, *)
+    }
+}
+
 extension Int {
     func lower16BitsEqual(lower16BitsOf int: Int) -> Bool {
         Int16(truncatingIfNeeded: self) == Int16(truncatingIfNeeded: int)
