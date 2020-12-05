@@ -24,26 +24,14 @@ final class Day520: Day {
 //        """
         let passes = input.byLines()
         let seatIDs: [Int] = passes.map { line in
-            let row = line.prefix(7).reduce((0, 127)) { result, character -> (Int, Int) in
-                if character == "F" {
-                    return (result.0, (result.1 - result.0) / 2 + result.0)
-                } else {
-                    let dividend = (Double(result.1 - result.0) / 2).rounded(.up)
-                    return (Int(dividend) + result.0, result.1)
-                }
-            }
-            let column = line.suffix(3).reduce((0, 7)) { result, character -> (Int, Int) in
-                if character == "L" {
-                    return (result.0, (result.1 - result.0) / 2 + result.0)
-                } else {
-                    let dividend = (Double(result.1 - result.0) / 2).rounded(.up)
-                    return (Int(dividend) + result.0, result.1)
-                }
-            }
-            return row.0 * 8 + column.0
-        }.sorted()
+            let row = line.prefix(7).reversed().enumerated().reduce(0) { ($1.1 == "B") ? ($0 | 1 << $1.0) : $0 }
+            let column = line.suffix(3).reversed().enumerated().reduce(0) { ($1.1 == "R") ? ($0 | 1 << $1.0) : $0 }
+            return row * 8 + column
+        }
+        .sorted()
         
         stageOneOutput = "\(seatIDs.max()!)"
+        
         let seatID = zip(seatIDs, seatIDs.dropFirst()).first { $1 - $0 == 2 }!.0 + 1
         
         stageTwoOutput = "\(seatID)"

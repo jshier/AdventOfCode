@@ -10,5 +10,5 @@
 @_exported import Numerics
 @_exported import SE0270_RangeSet
 
-let output = Day420().output()
+let output = Day520().output()
 print(output)
