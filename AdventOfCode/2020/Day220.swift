@@ -15,7 +15,7 @@ final class Day220: Day {
 
     override func perform() {
         let input = String.input(forDay: 2, year: 2020)
-        let separatedInput = input.trimmingWhitespace()
+        let separatedInput = input
             .byLines()
             .map { $0.split(separator: ":").map { String($0).trimmingWhitespace() } }
         
@@ -25,7 +25,7 @@ final class Day220: Day {
             
             init(_ string: String) {
                 let parts = string.split(separator: " ")
-                let bounds = parts[0].split(separator: "-").map(String.init).compactMap(Int.init)
+                let bounds = parts[0].split(separator: "-").map(String.init).asInts()
                 range = bounds[0]...bounds[1]
                 character = Character(String(parts[1]))
             }

@@ -2,11 +2,20 @@
   "object": {
     "pins": [
       {
+        "package": "Regex",
+        "repositoryURL": "https://github.com/jshier/Regex",
+        "state": {
+          "branch": "master",
+          "revision": "ee257e563894ad2c7b7046729f84c0bd72d61747",
+          "version": null
+        }
+      },
+      {
         "package": "swift-algorithms",
         "repositoryURL": "https://github.com/apple/swift-algorithms",
         "state": {
           "branch": "main",
-          "revision": "ff01a02c078132aeeee5855c4dc50a80928be9fb",
+          "revision": "3864606e00177c3438db075df56659cdfbc01ca8",
           "version": null
         }
       },

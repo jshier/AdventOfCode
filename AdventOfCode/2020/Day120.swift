@@ -14,7 +14,7 @@ final class Day120: Day {
 
     override func perform() {
         let input = String.input(forDay: 1, year: 2020)
-        let ints = Set(input.trimmingWhitespace().byLines().compactMap(Int.init))
+        let ints = Set(input.byLines().asInts())
         let pairsProduct = ints
             .first { ints.contains(2020 - $0) }
             .map { $0 * (2020 - $0) }!

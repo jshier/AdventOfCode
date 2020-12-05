@@ -105,6 +105,7 @@
 		31D524AD200488260058241D /* Day515.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D524AC200488260058241D /* Day515.swift */; };
 		31DE12B91FE6281500C48F43 /* Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE12B81FE6281500C48F43 /* Day6.swift */; };
 		31DE12BC1FE631C600C48F43 /* Day17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE12BB1FE631C600C48F43 /* Day17.swift */; };
+		31DE7DBE257AA6D80017DA9B /* Regex in Frameworks */ = {isa = PBXBuildFile; productRef = 31DE7DBD257AA6D80017DA9B /* Regex */; };
 		31E0CB8721BB407D00998B50 /* Day718.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E0CB8621BB407D00998B50 /* Day718.swift */; };
 		31E801E521B712710031C2B3 /* Day418.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E801E421B712710031C2B3 /* Day418.swift */; };
 		31F7E4F91FEDBD9C00B397E8 /* Day22.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F7E4F81FEDBD9C00B397E8 /* Day22.swift */; };
@@ -329,6 +330,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31DE7DBE257AA6D80017DA9B /* Regex in Frameworks */,
 				3191E1AA257327E100A8811A /* Algorithms in Frameworks */,
 				312A787A239A1B72002B9FC4 /* SwiftGraph in Frameworks */,
 				310799962574607C00B54639 /* SE0270_RangeSet in Frameworks */,
@@ -678,6 +680,7 @@
 				3191E1B02573284500A8811A /* RealModule */,
 				3191E1B22573284500A8811A /* Numerics */,
 				310799952574607C00B54639 /* SE0270_RangeSet */,
+				31DE7DBD257AA6D80017DA9B /* Regex */,
 			);
 			productName = AdventOfCode;
 			productReference = 318AC3261FE062A900A98B5E /* AdventOfCode */;
@@ -715,6 +718,7 @@
 				3191E1A8257327E100A8811A /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				3191E1AD2573284500A8811A /* XCRemoteSwiftPackageReference "swift-numerics" */,
 				310799942574607C00B54639 /* XCRemoteSwiftPackageReference "swift-se0270-range-set" */,
+				31DE7DBC257AA6D80017DA9B /* XCRemoteSwiftPackageReference "Regex" */,
 			);
 			productRefGroup = 318AC3271FE062A900A98B5E /* Products */;
 			projectDirPath = "";
@@ -1043,6 +1047,14 @@
 				kind = branch;
 			};
 		};
+		31DE7DBC257AA6D80017DA9B /* XCRemoteSwiftPackageReference "Regex" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jshier/Regex";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1080,6 +1092,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3191E1AD2573284500A8811A /* XCRemoteSwiftPackageReference "swift-numerics" */;
 			productName = Numerics;
+		};
+		31DE7DBD257AA6D80017DA9B /* Regex */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31DE7DBC257AA6D80017DA9B /* XCRemoteSwiftPackageReference "Regex" */;
+			productName = Regex;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

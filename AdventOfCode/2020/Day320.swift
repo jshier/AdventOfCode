@@ -28,7 +28,7 @@ final class Day320: Day {
 //        .#..#...#.#
 //        """
         
-        let characterGrid = input.trimmingWhitespace().byLines().map(Array.init)
+        let characterGrid = input.byLines().map(Array.init)
         
         func countTreesForSlope(right: Int, down: Int) -> Int {
             var trees = 0

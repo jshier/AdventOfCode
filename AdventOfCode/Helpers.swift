@@ -20,6 +20,10 @@ extension String {
     func byLines() -> [String] {
         trimmingWhitespace().split(separator: "\n").map(String.init)
     }
+    
+    func byParagraphs() -> [String] {
+        trimmingWhitespace().components(separatedBy: "\n\n")
+    }
 
     func byTabs() -> [String] {
         trimmingWhitespace().split(separator: "\t").map(String.init)
@@ -274,7 +278,7 @@ extension Data {
     }
 }
 
-extension Array where Element == String {
+extension Sequence where Element == String {
     func asInts() -> [Int] {
         compactMap(Int.init)
     }
