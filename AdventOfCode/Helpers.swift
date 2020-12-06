@@ -220,6 +220,18 @@ extension Sequence {
     func duplicateByElement(count: Int) -> [Element] {
         flatMap { repeatElement($0, count: count) }
     }
+    
+    func reduce<Result>(_ nextPartialResult: (_ partialResult: Result, Element) throws -> Result) rethrows -> Result? where Result == Element {
+        var iterator = makeIterator()
+        guard let initialResult = iterator.next() else { return nil }
+        return try IteratorSequence(iterator).reduce(initialResult, nextPartialResult)
+    }
+    
+    func reduce<Result>(_ nextPartialResult: (_ partialResult: inout Result, Element) throws -> Void) rethrows -> Result? where Result == Element {
+        var iterator = makeIterator()
+        guard let initialResult = iterator.next() else { return nil }
+        return try IteratorSequence(iterator).reduce(into: initialResult, nextPartialResult)
+    }
 }
 
 extension Sequence where Element: Equatable {
