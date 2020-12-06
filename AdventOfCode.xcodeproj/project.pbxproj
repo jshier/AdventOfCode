@@ -98,6 +98,7 @@
 		31BBF1FE21B8E48D00B3AD33 /* Day618.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BBF1FD21B8E48D00B3AD33 /* Day618.swift */; };
 		31BD7A4E21B849970056CB6D /* Day518.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BD7A4D21B849970056CB6D /* Day518.swift */; };
 		31D3B3BC1FEE19C70002648A /* Day23.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3B3BB1FEE19C70002648A /* Day23.swift */; };
+		31D511A4257CA2480009B5AB /* CountedSet in Frameworks */ = {isa = PBXBuildFile; productRef = 31D511A3257CA2480009B5AB /* CountedSet */; };
 		31D5249E200474980058241D /* Day115.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D5249D200474980058241D /* Day115.swift */; };
 		31D524A0200478120058241D /* Day215.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D5249F200478120058241D /* Day215.swift */; };
 		31D524A320047DE90058241D /* Day315.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D524A220047DE90058241D /* Day315.swift */; };
@@ -334,6 +335,7 @@
 				3191E1AA257327E100A8811A /* Algorithms in Frameworks */,
 				312A787A239A1B72002B9FC4 /* SwiftGraph in Frameworks */,
 				310799962574607C00B54639 /* SE0270_RangeSet in Frameworks */,
+				31D511A4257CA2480009B5AB /* CountedSet in Frameworks */,
 				310C94D423A061460010DCCD /* VectorMath in Frameworks */,
 				3191E1B12573284500A8811A /* RealModule in Frameworks */,
 				3191E1B32573284500A8811A /* Numerics in Frameworks */,
@@ -681,6 +683,7 @@
 				3191E1B22573284500A8811A /* Numerics */,
 				310799952574607C00B54639 /* SE0270_RangeSet */,
 				31DE7DBD257AA6D80017DA9B /* Regex */,
+				31D511A3257CA2480009B5AB /* CountedSet */,
 			);
 			productName = AdventOfCode;
 			productReference = 318AC3261FE062A900A98B5E /* AdventOfCode */;
@@ -719,6 +722,7 @@
 				3191E1AD2573284500A8811A /* XCRemoteSwiftPackageReference "swift-numerics" */,
 				310799942574607C00B54639 /* XCRemoteSwiftPackageReference "swift-se0270-range-set" */,
 				31DE7DBC257AA6D80017DA9B /* XCRemoteSwiftPackageReference "Regex" */,
+				31D511A2257CA2480009B5AB /* XCRemoteSwiftPackageReference "CountedSet" */,
 			);
 			productRefGroup = 318AC3271FE062A900A98B5E /* Products */;
 			projectDirPath = "";
@@ -1047,6 +1051,14 @@
 				kind = branch;
 			};
 		};
+		31D511A2257CA2480009B5AB /* XCRemoteSwiftPackageReference "CountedSet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jshier/CountedSet";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		31DE7DBC257AA6D80017DA9B /* XCRemoteSwiftPackageReference "Regex" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jshier/Regex";
@@ -1092,6 +1104,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3191E1AD2573284500A8811A /* XCRemoteSwiftPackageReference "swift-numerics" */;
 			productName = Numerics;
+		};
+		31D511A3257CA2480009B5AB /* CountedSet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31D511A2257CA2480009B5AB /* XCRemoteSwiftPackageReference "CountedSet" */;
+			productName = CountedSet;
 		};
 		31DE7DBD257AA6D80017DA9B /* Regex */ = {
 			isa = XCSwiftPackageProductDependency;

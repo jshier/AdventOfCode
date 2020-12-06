@@ -7,8 +7,9 @@
 //
 
 @_exported import Algorithms
+@_exported import CountedSet
 @_exported import Numerics
 @_exported import SE0270_RangeSet
 
-let output = Day520().output()
+let output = Day620().output()
 print(output)

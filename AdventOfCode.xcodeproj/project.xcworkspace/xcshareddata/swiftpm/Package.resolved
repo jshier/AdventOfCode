@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "CountedSet",
+        "repositoryURL": "https://github.com/jshier/CountedSet",
+        "state": {
+          "branch": "master",
+          "revision": "9da0578bf96929dcca01ca1a8ff3dd9771905bd4",
+          "version": null
+        }
+      },
+      {
         "package": "Regex",
         "repositoryURL": "https://github.com/jshier/Regex",
         "state": {
