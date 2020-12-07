@@ -10,6 +10,7 @@
 @_exported import CountedSet
 @_exported import Numerics
 @_exported import SE0270_RangeSet
+@_exported import SwiftGraph
 
-let output = Day620().output()
+let output = Day720().output()
 print(output)
