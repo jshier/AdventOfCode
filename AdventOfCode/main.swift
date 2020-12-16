@@ -12,5 +12,5 @@
 @_exported import SE0270_RangeSet
 @_exported import SwiftGraph
 
-let output = Day720().output()
+let output = Day1520().output()
 print(output)

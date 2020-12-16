@@ -14,5 +14,95 @@ final class Day1220: Day {
 
     override func perform() {
         let input = String.input(forDay: 12, year: 2020)
+//        let input = """
+//        F10
+//        N3
+//        F7
+//        R90
+//        F11
+//        """
+        
+        enum Action {
+            case forward(Int)
+            case move(Direction, Int)
+            case turn(Direction, Int)
+            
+            init(_ string: String) {
+                let number = Int(string.dropFirst().suffix(3))!
+                switch string.first {
+                case "N":
+                    self = .move(.up, number)
+                case "S":
+                    self = .move(.down, number)
+                case "E":
+                    self = .move(.right, number)
+                case "W":
+                    self = .move(.left, number)
+                case "L":
+                    self = .turn(.left, (number / 90))
+                case "R":
+                    self = .turn(.right, (number / 90))
+                case "F":
+                    self = .forward(number)
+                default:
+                    fatalError()
+                }
+            }
+        }
+        
+        struct Ship {
+            private(set) var position: Point = .init(0, 0)
+            private(set) var facing: Direction = .right
+            
+            mutating func apply(_ action: Action) {
+                switch action {
+                case let .forward(distance):
+                    for _ in 0..<distance {
+                        position += facing.forwardOffset
+                    }
+                case let .move(direction, distance):
+                    for _ in 0..<distance {
+                        position += direction.forwardOffset
+                    }
+                case let .turn(direction, times):
+                    for _ in 0..<times {
+                        facing = facing.turn(direction)
+                    }
+                }
+            }
+        }
+        
+        let actions = input.byLines().map(Action.init)
+        var ship = Ship()
+        actions.forEach { ship.apply($0) }
+        
+        stageOneOutput = "\(ship.position.manhattanDistance(to: .init(0, 0)))"
+        
+        struct WaypointShip {
+            private(set) var position: Point = .init(0, 0)
+            private var waypoint = Point(10, 1)
+            
+            mutating func apply(_ action: Action) {
+                switch action {
+                case let .forward(distance):
+                    for _ in 0..<distance {
+                        position += waypoint
+                    }
+                case let .move(direction, distance):
+                    for _ in 0..<distance {
+                        waypoint += direction.forwardOffset
+                    }
+                case let .turn(direction, times):
+                    for _ in 0..<times {
+                        waypoint = waypoint.rotated(direction)
+                    }
+                }
+            }
+        }
+        
+        var waypointShip = WaypointShip()
+        actions.forEach { waypointShip.apply($0) }
+        
+        stageTwoOutput = "\(waypointShip.position.manhattanDistance(to: .init(0, 0)))"
     }
 }

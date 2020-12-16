@@ -17,19 +17,19 @@ final class Day22: Day {
 //                        ...
 //                        """
         let input = fileInput
-        let grid = Grid(content: input)
+        let grid = VirusGrid(content: input)
         grid.burst()
 
         stageOneOutput = "\(grid.infections)"
 
-        let evolutionGrid = Grid(content: input)
+        let evolutionGrid = VirusGrid(content: input)
         evolutionGrid.evolve()
 
         stageTwoOutput = "\(evolutionGrid.infections)"
     }
 }
 
-final class Grid {
+final class VirusGrid {
     private var content: [Point: Node]
     private var virus: Virus
     private(set) var infections = 0
@@ -83,7 +83,7 @@ final class Grid {
     }
 }
 
-extension Grid: CustomStringConvertible {
+extension VirusGrid: CustomStringConvertible {
     var description: String {
         content.description
     }
@@ -170,6 +170,19 @@ extension Point {
     func distance(to point: Point) -> Double {
         sqrt(Double(((point.x - x) * (point.x - x)) +
                 ((point.y - y) * (point.y - y))))
+    }
+    
+    func rotated(_ direction: Direction) -> Point {
+        switch direction {
+        case .left:
+            return Point(-y, x)
+        case .right:
+            return Point(y, -x)
+        case .up: // Unimplemented
+            return self
+        case .down: // Unimplemented
+            return self
+        }
     }
 }
 

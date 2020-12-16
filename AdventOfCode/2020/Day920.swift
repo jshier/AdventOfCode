@@ -9,10 +9,32 @@
 import Foundation
 
 final class Day920: Day {
-    override var expectedStageOneOutput: String? { nil }
-    override var expectedStageTwoOutput: String? { nil }
+    override var expectedStageOneOutput: String? { "542529149" }
+    override var expectedStageTwoOutput: String? { "75678618" }
 
     override func perform() {
         let input = String.input(forDay: 9, year: 2020)
+        let windowSize = 25
+        let numbers = input.byLines().asInts()
+
+        let invalidWindow = numbers.lazy
+            .slidingWindows(ofCount: windowSize + 1)
+            .first { window in
+                !window.prefix(25).combinations(ofCount: 2).contains { $0.sum() == window.last }
+            }
+        let invalidValue = invalidWindow!.last!
+        
+        stageOneOutput = "\(invalidValue)"
+        
+        let matchingWindow = (2..<numbers.count).lazy
+            .compactMap { count in
+                numbers.lazy.slidingWindows(ofCount: count).filter { $0.last! < invalidValue }.first { $0.sum() == invalidValue }
+            }
+            .first
+        
+        let (min, max) = (matchingWindow!.min()!, matchingWindow!.max()!)
+        
+        stageTwoOutput = "\(min + max)"
+        //0.34263
     }
 }
