@@ -19,17 +19,19 @@ final class Day1520: Day {
         
         struct Game {
             private let numbers: [Int]
-            var spoken: [Int: Int]
+            var spoken: [Int] = []
             
             init(_ numbers: [Int]) {
                 self.numbers = numbers
-                spoken = Dictionary(uniqueKeysWithValues: numbers.indexed().map { ($0.1, $0.0 + 1) })
             }
             
             mutating func play(untilTurn maxTurns: Int) -> Int {
+                spoken = Array(repeating: 0, count: maxTurns)
+                numbers.indexed().forEach { spoken[$0.1] = $0.0 + 1 }
                 var last = numbers.last!
                 for turn in numbers.count..<maxTurns {
-                    let value = spoken[last].map { turn - $0 } ?? 0
+                    let previous = spoken[last]
+                    let value = (previous == 0) ? 0 : turn - spoken[last]
                     spoken[last] = turn
                     last = value
                 }
