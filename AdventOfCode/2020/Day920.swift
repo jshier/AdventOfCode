@@ -18,7 +18,7 @@ final class Day920: Day {
         let numbers = input.byLines().asInts()
 
         let invalidWindow = numbers.lazy
-            .slidingWindows(ofCount: windowSize + 1)
+            .windows(ofCount: windowSize + 1)
             .first { window in
                 !window.prefix(25).combinations(ofCount: 2).contains { $0.sum() == window.last }
             }
@@ -28,7 +28,7 @@ final class Day920: Day {
         
         let matchingWindow = (2..<numbers.count).lazy
             .compactMap { count in
-                numbers.lazy.slidingWindows(ofCount: count).filter { $0.last! < invalidValue }.first { $0.sum() == invalidValue }
+                numbers.lazy.windows(ofCount: count).filter { $0.last! < invalidValue }.first { $0.sum() == invalidValue }
             }
             .first
         

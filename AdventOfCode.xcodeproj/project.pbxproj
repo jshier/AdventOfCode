@@ -11,6 +11,10 @@
 		310799962574607C00B54639 /* SE0270_RangeSet in Frameworks */ = {isa = PBXBuildFile; productRef = 310799952574607C00B54639 /* SE0270_RangeSet */; };
 		3109AA1221B4EE53006A24D0 /* Day318.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3109AA1121B4EE53006A24D0 /* Day318.swift */; };
 		310C94D423A061460010DCCD /* VectorMath in Frameworks */ = {isa = PBXBuildFile; productRef = 310C94D323A061460010DCCD /* VectorMath */; };
+		31186DB5261BE228009991A5 /* StringDecoder in Frameworks */ = {isa = PBXBuildFile; productRef = 31186DB4261BE228009991A5 /* StringDecoder */; };
+		31186DB9261BE262009991A5 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 31186DB8261BE262009991A5 /* OrderedCollections */; };
+		31186DBB261BE262009991A5 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 31186DBA261BE262009991A5 /* DequeModule */; };
+		31186DBD261BE262009991A5 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 31186DBC261BE262009991A5 /* Collections */; };
 		311931C321B39C7200A4A116 /* Day218.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311931C221B39C7200A4A116 /* Day218.swift */; };
 		31202D961FEF8DE0009B2C2E /* Day24.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31202D951FEF8DE0009B2C2E /* Day24.swift */; };
 		312A787A239A1B72002B9FC4 /* SwiftGraph in Frameworks */ = {isa = PBXBuildFile; productRef = 312A7879239A1B72002B9FC4 /* SwiftGraph */; };
@@ -24,7 +28,6 @@
 		314051CA1FF2A8AE0084D053 /* Day20.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314051C91FF2A8AE0084D053 /* Day20.swift */; };
 		314051CD1FF2E6F00084D053 /* Day21.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314051CC1FF2E6F00084D053 /* Day21.swift */; };
 		314392F521B23548000F28F9 /* Day118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314392F421B23548000F28F9 /* Day118.swift */; };
-		3150B70D25803505000DFAF6 /* StringDecoder in Frameworks */ = {isa = PBXBuildFile; productRef = 3150B70C25803505000DFAF6 /* StringDecoder */; };
 		315684C31FE0B101009234CE /* Day3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315684C21FE0B101009234CE /* Day3.swift */; };
 		315B6A0A1FE751430026AF73 /* Day9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315B6A091FE751430026AF73 /* Day9.swift */; };
 		315B6A0C1FE765EC0026AF73 /* Day10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315B6A0B1FE765EC0026AF73 /* Day10.swift */; };
@@ -32,7 +35,6 @@
 		31635F8C1FE4F5FD004ADA7F /* Day16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31635F8B1FE4F5FD004ADA7F /* Day16.swift */; };
 		3175D146238F3190007FAB8E /* Day1118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175D145238F3190007FAB8E /* Day1118.swift */; };
 		317C72C921BCD7B400C89EE1 /* Day918.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317C72C821BCD7B400C89EE1 /* Day918.swift */; };
-		31856FA62582F97700EA014F /* Reductions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31856FA52582F97700EA014F /* Reductions.swift */; };
 		318667C5238F29F5005DAACC /* Day619.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318667AC238F29F5005DAACC /* Day619.swift */; };
 		318667C6238F29F5005DAACC /* Day2219.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318667AD238F29F5005DAACC /* Day2219.swift */; };
 		318667C7238F29F5005DAACC /* Day519.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318667AE238F29F5005DAACC /* Day519.swift */; };
@@ -209,7 +211,6 @@
 		3175D144238F2AE8007FAB8E /* day3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day3.txt; sourceTree = "<group>"; };
 		3175D145238F3190007FAB8E /* Day1118.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1118.swift; sourceTree = "<group>"; };
 		317C72C821BCD7B400C89EE1 /* Day918.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day918.swift; sourceTree = "<group>"; };
-		31856FA52582F97700EA014F /* Reductions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reductions.swift; sourceTree = "<group>"; };
 		318667AC238F29F5005DAACC /* Day619.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day619.swift; sourceTree = "<group>"; };
 		318667AD238F29F5005DAACC /* Day2219.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day2219.swift; sourceTree = "<group>"; };
 		318667AE238F29F5005DAACC /* Day519.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day519.swift; sourceTree = "<group>"; };
@@ -334,10 +335,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3150B70D25803505000DFAF6 /* StringDecoder in Frameworks */,
+				31186DB9261BE262009991A5 /* OrderedCollections in Frameworks */,
+				31186DB5261BE228009991A5 /* StringDecoder in Frameworks */,
 				31DE7DBE257AA6D80017DA9B /* Regex in Frameworks */,
+				31186DBD261BE262009991A5 /* Collections in Frameworks */,
 				3191E1AA257327E100A8811A /* Algorithms in Frameworks */,
 				312A787A239A1B72002B9FC4 /* SwiftGraph in Frameworks */,
+				31186DBB261BE262009991A5 /* DequeModule in Frameworks */,
 				310799962574607C00B54639 /* SE0270_RangeSet in Frameworks */,
 				31D511A4257CA2480009B5AB /* CountedSet in Frameworks */,
 				310C94D423A061460010DCCD /* VectorMath in Frameworks */,
@@ -523,7 +527,6 @@
 				318AC3291FE062A900A98B5E /* main.swift */,
 				3193472A1FE0899B00D4EC4F /* Day.swift */,
 				318AC3321FE062C700A98B5E /* Helpers.swift */,
-				31856FA52582F97700EA014F /* Reductions.swift */,
 			);
 			path = AdventOfCode;
 			sourceTree = "<group>";
@@ -689,7 +692,10 @@
 				310799952574607C00B54639 /* SE0270_RangeSet */,
 				31DE7DBD257AA6D80017DA9B /* Regex */,
 				31D511A3257CA2480009B5AB /* CountedSet */,
-				3150B70C25803505000DFAF6 /* StringDecoder */,
+				31186DB4261BE228009991A5 /* StringDecoder */,
+				31186DB8261BE262009991A5 /* OrderedCollections */,
+				31186DBA261BE262009991A5 /* DequeModule */,
+				31186DBC261BE262009991A5 /* Collections */,
 			);
 			productName = AdventOfCode;
 			productReference = 318AC3261FE062A900A98B5E /* AdventOfCode */;
@@ -729,7 +735,8 @@
 				310799942574607C00B54639 /* XCRemoteSwiftPackageReference "swift-se0270-range-set" */,
 				31DE7DBC257AA6D80017DA9B /* XCRemoteSwiftPackageReference "Regex" */,
 				31D511A2257CA2480009B5AB /* XCRemoteSwiftPackageReference "CountedSet" */,
-				3150B70B25803505000DFAF6 /* XCRemoteSwiftPackageReference "StringDecoder" */,
+				31186DB3261BE228009991A5 /* XCRemoteSwiftPackageReference "StringDecoder" */,
+				31186DB7261BE262009991A5 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 318AC3271FE062A900A98B5E /* Products */;
 			projectDirPath = "";
@@ -810,7 +817,6 @@
 				318667CC238F29F5005DAACC /* Day819.swift in Sources */,
 				318667D7238F29F5005DAACC /* Day919.swift in Sources */,
 				3191E1DE2573414500A8811A /* Day1820.swift in Sources */,
-				31856FA62582F97700EA014F /* Reductions.swift in Sources */,
 				31BBF1FE21B8E48D00B3AD33 /* Day618.swift in Sources */,
 				3191E1D32573414500A8811A /* Day2520.swift in Sources */,
 				3175D146238F3190007FAB8E /* Day1118.swift in Sources */,
@@ -1037,20 +1043,28 @@
 				minimumVersion = 0.4.1;
 			};
 		};
+		31186DB3261BE228009991A5 /* XCRemoteSwiftPackageReference "StringDecoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:SlaunchaMan/StringDecoder.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		31186DB7261BE262009991A5 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		312A7878239A1B72002B9FC4 /* XCRemoteSwiftPackageReference "SwiftGraph" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/davecom/SwiftGraph.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 3.0.0;
-			};
-		};
-		3150B70B25803505000DFAF6 /* XCRemoteSwiftPackageReference "StringDecoder" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:SlaunchaMan/StringDecoder.git";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 		3191E1A8257327E100A8811A /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
@@ -1098,15 +1112,30 @@
 			package = 310C94D223A061460010DCCD /* XCRemoteSwiftPackageReference "VectorMath" */;
 			productName = VectorMath;
 		};
+		31186DB4261BE228009991A5 /* StringDecoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31186DB3261BE228009991A5 /* XCRemoteSwiftPackageReference "StringDecoder" */;
+			productName = StringDecoder;
+		};
+		31186DB8261BE262009991A5 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31186DB7261BE262009991A5 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		31186DBA261BE262009991A5 /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31186DB7261BE262009991A5 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		31186DBC261BE262009991A5 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31186DB7261BE262009991A5 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
 		312A7879239A1B72002B9FC4 /* SwiftGraph */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 312A7878239A1B72002B9FC4 /* XCRemoteSwiftPackageReference "SwiftGraph" */;
 			productName = SwiftGraph;
-		};
-		3150B70C25803505000DFAF6 /* StringDecoder */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3150B70B25803505000DFAF6 /* XCRemoteSwiftPackageReference "StringDecoder" */;
-			productName = StringDecoder;
 		};
 		3191E1A9257327E100A8811A /* Algorithms */ = {
 			isa = XCSwiftPackageProductDependency;
