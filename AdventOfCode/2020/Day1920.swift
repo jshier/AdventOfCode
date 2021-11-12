@@ -8,11 +8,11 @@
 
 import Foundation
 
-final class Day1920: Day {
-    override var expectedStageOneOutput: String? { nil }
-    override var expectedStageTwoOutput: String? { nil }
-
-    override func perform() {
-        let input = String.input(forDay: 19, year: 2020)
-    }
-}
+//final class Day1920: Day {
+//    override var expectedStageOneOutput: String? { nil }
+//    override var expectedStageTwoOutput: String? { nil }
+//
+//    override func perform() {
+//        let input = String.input(forDay: 19, year: 2020)
+//    }
+//}
