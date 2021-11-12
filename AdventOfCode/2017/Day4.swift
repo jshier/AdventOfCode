@@ -12,13 +12,13 @@ final class Day4: Day {
     override func perform() {
         let input = String.input(forDay: 7, year: 2017)
         let lines = input.split(separator: "\n")
-        let uniquePassphrases: Int = lines.map { (line) -> (Int, Int) in
+        let uniquePassphrases: Int = lines.map { line -> (Int, Int) in
             let words = line.split(separator: " ")
             let totalCount = words.count
             let uniqueCount = Set(words).count
             return (totalCount, uniqueCount)
         }
-        .reduce(0) { (result, element) -> Int in
+        .reduce(0) { result, element -> Int in
             (element.0 == element.1) ? result + 1 : result
         }
 
@@ -43,7 +43,7 @@ final class Day4: Day {
 
             return true
         }
-        .reduce(0) { (result, element) -> Int in
+        .reduce(0) { result, element -> Int in
             element ? result + 1 : result
         }
 

@@ -18,7 +18,7 @@ class Day2: Day {
         let checksum = differences.reduce(0, +)
         stageOneOutput = "\(checksum)"
 
-        let moduluses = numbers.map { (sequence) -> Int in
+        let moduluses = numbers.map { sequence -> Int in
             var remainingNumbers = sequence.dropFirst()
             for value in sequence {
                 for otherValue in remainingNumbers {

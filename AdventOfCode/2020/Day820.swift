@@ -14,15 +14,15 @@ final class Day820: Day {
 
     override func perform() {
         let input = String.input(forDay: 8, year: 2020)
-        
+
         struct Instruction: Equatable {
             enum Operation: String {
                 case acc, jmp, nop
             }
-            
+
             let op: Operation
             let argument: Int
-            
+
             var alternate: Instruction {
                 switch op {
                 case .acc: return self
@@ -31,19 +31,19 @@ final class Day820: Day {
                 }
             }
         }
-        
+
         let instructions: [Instruction] = input.byLines().map { line in
             let parts = line.split(separator: " ").map(String.init)
             let op = Instruction.Operation(rawValue: parts[0])!
             return Instruction(op: op, argument: Int(parts[1])!)
         }
-        
+
         final class Runner {
             enum Result {
                 case loop(Int)
                 case finished(Int)
                 case none
-                
+
                 var value: Int? {
                     switch self {
                     case let .loop(value), let .finished(value): return value
@@ -51,12 +51,12 @@ final class Day820: Day {
                     }
                 }
             }
-            
+
             private let instructions: [Instruction]
             private var accumulator: Int
             private var programCounter: Int
             private var executedIndices = Set<Int>()
-            
+
             init(_ instructions: [Instruction],
                  initialProgramCounter: Int = 0,
                  initialAccumulator: Int = 0,
@@ -66,15 +66,15 @@ final class Day820: Day {
                 accumulator = initialAccumulator
                 self.executedIndices = executedIndices
             }
-            
+
             func runUntilDuplicate() -> Int {
                 runUntilResult().value!
             }
-            
+
             func runUntilResult() -> Result {
                 while programCounter < instructions.count {
                     guard !executedIndices.contains(programCounter) else { return .loop(accumulator) }
-                    
+
                     let instruction = instructions[programCounter]
                     let offset: Int
                     switch instruction.op {
@@ -86,38 +86,38 @@ final class Day820: Day {
                     case .nop:
                         offset = 1
                     }
-                    
+
                     executedIndices.insert(programCounter)
                     programCounter += offset
                 }
-                
+
                 return .finished(accumulator)
             }
-            
+
             func runAttemptingToAutocorrect() -> Result {
                 for index in instructions.indices {
                     let instruction = instructions[index]
                     let alternate = instruction.alternate
-                    
+
                     guard alternate != instruction else { continue }
-                    
+
                     var correctedInstructions = instructions
                     correctedInstructions[index] = alternate
                     let runner = Runner(correctedInstructions)
                     let result = runner.runUntilResult()
-                    
+
                     if case .finished = result {
                         return result
                     }
                 }
-                
+
                 return .none
             }
         }
-        
+
         let runner = Runner(instructions)
         let lastAccumulatorValue = runner.runUntilDuplicate()
-        
+
         stageOneOutput = "\(lastAccumulatorValue)"
 
         let stageTwoRunner = Runner(instructions)

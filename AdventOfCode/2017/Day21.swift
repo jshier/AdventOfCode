@@ -213,7 +213,7 @@ extension String {
         let rotatedLeft = lines.rotateLeft()
         let rightFlip = rotatedRight.flipVertical()
         let leftFlip = rotatedLeft.flipVertical()
-        let permutations = [self.asArray(), flippedVertical, flippedHorizontal, rotatedRight, rotatedLeft, rightFlip, leftFlip]
+        let permutations = [asArray(), flippedVertical, flippedHorizontal, rotatedRight, rotatedLeft, rightFlip, leftFlip]
         return Set(permutations.map { $0.joined(separator: "/") })
     }
 }

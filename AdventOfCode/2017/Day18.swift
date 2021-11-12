@@ -70,7 +70,7 @@ final class Day18: Day {
 
         subscript(register: String) -> Int {
             get {
-                return registers[register, default: (register == "p") ? id : 0]
+                registers[register, default: (register == "p") ? id : 0]
             }
             set {
                 registers[register] = newValue

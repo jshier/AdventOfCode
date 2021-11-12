@@ -75,7 +75,7 @@ final class VirusGrid {
 
     subscript(point: Point) -> Node {
         get {
-            return content[point] ?? .clean
+            content[point] ?? .clean
         }
         set {
             content[point] = newValue
@@ -171,7 +171,7 @@ extension Point {
         sqrt(Double(((point.x - x) * (point.x - x)) +
                 ((point.y - y) * (point.y - y))))
     }
-    
+
     func rotated(_ direction: Direction) -> Point {
         switch direction {
         case .left:

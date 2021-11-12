@@ -18,15 +18,15 @@ final class Day120: Day {
         let pairsProduct = ints
             .first { ints.contains(2020 - $0) }
             .map { $0 * (2020 - $0) }!
-        
+
         stageOneOutput = "\(pairsProduct)"
-        
+
         let tripleProduct = ints
             .lazy
             .combinations(ofCount: 2)
             .first { ints.contains(2020 - $0.sum()) }
             .map { $0.product() * (2020 - $0.sum()) }!
-        
+
         stageTwoOutput = "\(tripleProduct)"
     }
 }

@@ -27,9 +27,9 @@ final class Day320: Day {
 //        #...##....#
 //        .#..#...#.#
 //        """
-        
+
         let characterGrid = input.byLines().map(Array.init)
-        
+
         func countTreesForSlope(right: Int, down: Int) -> Int {
             var trees = 0
             var x = 0
@@ -40,14 +40,14 @@ final class Day320: Day {
                 }
                 x = nextX
             }
-            
+
             return trees
         }
-        
+
         stageOneOutput = "\(countTreesForSlope(right: 3, down: 1))"
-        
+
         let treeCounts = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)].map(countTreesForSlope(right:down:))
-        
+
         stageTwoOutput = "\(treeCounts.product())"
     }
 }

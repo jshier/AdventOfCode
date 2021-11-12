@@ -12,7 +12,7 @@ final class Day12: Day {
     override func perform() {
         let input = String.input(forDay: 12, year: 2017)
         let lines = input.split(separator: "\n")
-        let separatedLines = lines.map { (line) -> [String: [String]] in
+        let separatedLines = lines.map { line -> [String: [String]] in
             let sides = line.components(separatedBy: " <-> ")
             return [sides[0]: sides[1].components(separatedBy: ", ")]
         }

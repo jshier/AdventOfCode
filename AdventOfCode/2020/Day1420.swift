@@ -26,17 +26,17 @@ final class Day1420: Day {
 //        mask = 00000000000000000000000000000000X0XX
 //        mem[26] = 1
 //        """
-        
+
         enum Action {
             case updateBitmask([(index: Int, value: Int)]) // I
             case writeMemory(location: Int, value: Int)
-            
+
             init(_ string: String) {
                 let parts = string.components(separatedBy: " = ")
                 if parts[0] == "mask" {
                     self = .updateBitmask(parts[1].map { $0 }.reversed().indexed().map { tuple in
-                            (index: tuple.index, element: Int(String(tuple.element)) ?? 2)
-                        }
+                        (index: tuple.index, element: Int(String(tuple.element)) ?? 2)
+                    }
                     )
                 } else {
                     let location = Int(parts[0].dropFirst(4).prefix { $0.isASCII && $0.isWholeNumber })!
@@ -45,17 +45,17 @@ final class Day1420: Day {
                 }
             }
         }
-        
+
         let actions = input.byLines().map(Action.init)
-        
+
         struct State {
             var memory: [Int: Int] = [:]
             var currentBitmask: [(index: Int, value: Int)] = []
-            
+
             var memorySum: Int {
                 memory.values.sum()
             }
-            
+
             mutating func applyStage1(_ action: Action) {
                 switch action {
                 case let .updateBitmask(bitmask):
@@ -65,7 +65,7 @@ final class Day1420: Day {
                         if value.value == 1 {
                             return result | (1 << value.index)
                         } else if value.value == 0 {
-                            return result & (~(1 << value.index))
+                            return result & ~(1 << value.index)
                         } else {
                             return result
                         }
@@ -73,7 +73,7 @@ final class Day1420: Day {
                     memory[location] = newValue
                 }
             }
-            
+
             mutating func applyStage2(_ action: Action) {
                 switch action {
                 case let .updateBitmask(bitmask):
@@ -89,25 +89,25 @@ final class Day1420: Day {
                             fatalError()
                         }
                     }
-                    
+
                     let floatingLocations = currentBitmask[twosStart...].map { $0.index }
                     let locations: [Int] = floatingLocations.reduce(into: [processedLocation]) { locations, floatingIndex in
-                        locations = locations.map { [($0 | (1 << floatingIndex)), ($0 & (~(1 << floatingIndex)))] }.flatMap { $0 }
+                        locations = locations.map { [$0 | (1 << floatingIndex), $0 & ~(1 << floatingIndex)] }.flatMap { $0 }
                     }
-                   
+
                     locations.forEach { memory[$0] = value }
                 }
             }
         }
-        
+
         var stageOneState = State()
         actions.forEach { stageOneState.applyStage1($0) }
-        
+
         stageOneOutput = "\(stageOneState.memorySum)"
-        
+
         var stageTwoState = State()
         actions.forEach { stageTwoState.applyStage2($0) }
-        
+
         stageTwoOutput = "\(stageTwoState.memorySum)"
     }
 }

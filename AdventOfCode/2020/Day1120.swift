@@ -26,21 +26,21 @@ final class Day1120: Day {
 //        L.LLLLLL.L
 //        L.LLLLL.LL
 //        """
-        
+
         enum Seat: String, CustomStringConvertible {
             case empty = "L"
             case taken = "X"
             case floor = "."
-            
+
             var description: String { rawValue }
         }
-        
+
         let initialSeats = input.byLines().map { $0.map(String.init).compactMap(Seat.init(rawValue:)) }
-        
+
         let initialGrid = Grid(initialSeats)
 //        let points = initialGrid.containedPoints
 //        let seatPoints = points.filter { !(initialGrid[$0] == .floor) }
-        
+
         var grids: [Grid<Seat>] = [initialGrid]
         var iterations = 0
         while let grid = grids.last {
@@ -51,7 +51,7 @@ final class Day1120: Day {
                     let value = grid[point]
                     if value == .floor {
                         return .floor
-                        
+
                     } else {
                         let surrounding = grid.surroundingValues(for: point)
                         let occupiedCount = surrounding.count { $0 == .taken }
@@ -71,7 +71,7 @@ final class Day1120: Day {
                 grids.append(Grid(newValues))
             }
         }
-        
+
         let finalSeatsTaken = grids.last?.values.reduce(0) { $0 + $1.count(of: .taken) } ?? 0
         print(iterations)
         stageOneOutput = "\(finalSeatsTaken)"
@@ -80,25 +80,25 @@ final class Day1120: Day {
 
 struct Grid<T> {
     private(set) var values: [[T]]
-    
+
     var height: Int { values.count }
     var width: Int { values.first?.count ?? 0 }
-    
+
     var containedPoints: [Point] {
         Array(PointSequence(start: .init(0, 0), end: .init(width - 1, height - 1)))
     }
-    
+
     init(_ values: [[T]]) {
         self.values = values
     }
-    
-    subscript (_ point: Point) -> T {
+
+    subscript(_ point: Point) -> T {
         get { values[point.y][point.x] }
         set { values[point.y][point.x] = newValue }
     }
-    
+
     func surroundingValues(for point: Point) -> [T] {
-        let points: [Point] =  point.surroundingPoints.filter { ($0.x >= 0 && $0.x < values[0].count) && ($0.y >= 0 && $0.y < values.count) }
+        let points: [Point] = point.surroundingPoints.filter { ($0.x >= 0 && $0.x < values[0].count) && ($0.y >= 0 && $0.y < values.count) }
         return points.map { self[$0] }
     }
 }

@@ -16,13 +16,13 @@ final class Day620: Day {
         let input = String.input(forDay: 6, year: 2020)
         let groupAnswers = input.byParagraphs()
         let answers = groupAnswers.map {
-            $0.byLines().reduce(into: Set<Character>()) { (output, answers) in
+            $0.byLines().reduce(into: Set<Character>()) { output, answers in
                 answers.forEach { output.insert($0) }
             }
         }
-        
+
         stageOneOutput = "\(answers.map(\.count).sum())"
-        
+
         let everyoneAnswers = groupAnswers.map {
             $0.byLines().map { line in
                 line.reduce(into: Set<Character>()) { output, character in
@@ -30,11 +30,11 @@ final class Day620: Day {
                 }
             }
         }
-        
+
         let union = everyoneAnswers.compactMap {
             $0.reduce { $0 = $0.intersection($1) }
         }
-        
+
         stageTwoOutput = "\(union.map(\.count).sum())"
     }
 }

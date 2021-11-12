@@ -2,6 +2,7 @@
 
 --symlinks ignore
 --exclude Inputs
+--swiftversion 5.5
 
 # format options
 
@@ -14,7 +15,8 @@
 --fractiongrouping disabled
 --ifdef outdent
 --importgrouping testable-top
---ranges no-space
+--modifierorder acl, override, setterACL, dynamic, mutators, lazy, final, required, convenience, typeMethods, owned
+--nospaceoperators ..<, ...
 --stripunusedargs closure-only
 --wraparguments after-first
 --wrapcollections after-first
@@ -23,3 +25,4 @@
 
 --enable isEmpty
 --disable andOperator
+--disable wrapMultilineStatementBraces

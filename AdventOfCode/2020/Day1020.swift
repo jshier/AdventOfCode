@@ -63,15 +63,15 @@ final class Day1020: Day {
         """
         let adapters = input.byLines().asInts().sorted()
         let jolts = Array(chain(chain([0], adapters), [adapters.last! + 3]))
-        
+
         let differences = zip(jolts, jolts.dropFirst()).map { $0.1 - $0.0 }
-        
+
         let numberOfOnes = differences.count(of: 1)
         let numberOfThrees = differences.count(of: 3)
         print(Array(differences))
 
         stageOneOutput = "\(numberOfOnes * numberOfThrees)"
-        
+
         // Reduce problem space.
         // All three difference locations must remain
         // For all sequences of 1s, how many combinations (1s, 2s, or 3s) are there.
@@ -88,7 +88,7 @@ final class Day1020: Day {
         // 111, 21, 12 = ( 3 | 2)
         // 1111, 211, 112, 121, 22 = (4 | 4)
         // 11111, 2111, 1211, 1121, 1112, 221, 212, 122 (5 | 7)
-        
+
         print(combinations)
     }
 }

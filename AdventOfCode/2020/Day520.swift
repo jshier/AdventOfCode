@@ -29,11 +29,11 @@ final class Day520: Day {
             return row * 8 + column
         }
         .sorted()
-        
+
         stageOneOutput = "\(seatIDs.max()!)"
-        
+
         let seatID = zip(seatIDs, seatIDs.dropFirst()).first { $1 - $0 == 2 }!.0 + 1
-        
+
         stageTwoOutput = "\(seatID)"
     }
 }

@@ -12,14 +12,14 @@ final class Day819: Day {
     override var expectedStageOneOutput: String? { "1806" }
     override var expectedStageTwoOutput: String? {
         """
-        
+
           11  11  1111 111   11  
            1 1  1 1    1  1 1  1 
            1 1  1 111  1  1 1  1 
            1 1111 1    111  1111 
         1  1 1  1 1    1 1  1  1 
          11  1  1 1    1  1 1  1 
-        
+
         """
     }
 

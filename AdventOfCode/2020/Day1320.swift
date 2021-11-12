@@ -21,7 +21,7 @@ final class Day1320: Day {
         let lines = input.byLines()
         let earliestTime = Int(lines[0])!
         let busses = lines[1].byCommas().compactMap(Int.init)
-        
+
         var foundBus = 0
         var time = earliestTime
         outer: while foundBus == 0 {
@@ -33,9 +33,9 @@ final class Day1320: Day {
             }
             time += 1
         }
-        
+
         stageOneOutput = "\((time - earliestTime) * foundBus)"
-        
+
         let indexedBusses = lines[1].byCommas().map { Int($0) ?? 1 }.indexed().filter { $1 != 1 }
         // Find n where n + index is a multiple of nextElement
         // Step is the multiple of the previous step and next value
@@ -53,7 +53,7 @@ final class Day1320: Day {
             }
             step = step * next
         }
-        
+
         stageTwoOutput = "\(commonTime)"
     }
 }

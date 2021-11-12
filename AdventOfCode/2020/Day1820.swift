@@ -15,7 +15,7 @@ final class Day1820: Day {
     override func perform() {
         let input = String.input(forDay: 18, year: 2020)
         let equations = input.byLines()
-        
+
         func evaluate(_ string: [Character], startingAt startIndex: Int) -> (result: Int, lastIndex: Int) {
             var result = 0
             var op: (Int, Int) -> Int = (+)
@@ -43,30 +43,30 @@ final class Day1820: Day {
                 default:
                     fatalError()
                 }
-                
+
                 index += jump
             }
-            
+
             return (result: result, lastIndex: index)
         }
-        
+
         let results = equations.map { evaluate($0.map { $0 }, startingAt: 0) }
-        
+
         stageOneOutput = "\(results.map(\.result).sum())"
-        
+
         func evaluateWithPrecedence(_ string: [Character], startingAt startIndex: Int) -> (result: Int, lastIndex: Int) {
             enum Element: Equatable {
                 case number(Int)
                 case add
                 case multiply
-                
+
                 var value: Int? {
                     guard case let .number(value) = self else { return nil }
-                    
+
                     return value
                 }
             }
-            
+
             func evaluate(_ stack: [Element]) -> Int {
                 var added: [Element] = []
                 var index = 0
@@ -86,10 +86,10 @@ final class Day1820: Day {
                         index += 1
                     }
                 }
-                
+
                 return added.compactMap(\.value).product()
             }
-            
+
             var stack: [Element] = []
             var index = startIndex
             while index < string.endIndex {
@@ -115,15 +115,15 @@ final class Day1820: Day {
                 default:
                     fatalError()
                 }
-                
+
                 index += jump
             }
-            
+
             return (result: evaluate(stack), lastIndex: index)
         }
-        
+
         let stageTwo = equations.map { evaluateWithPrecedence($0.map { $0 }, startingAt: 0) }
-        
+
         stageTwoOutput = "\(stageTwo.map(\.result).sum())"
     }
 }

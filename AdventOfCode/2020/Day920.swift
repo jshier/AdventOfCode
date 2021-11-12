@@ -23,18 +23,18 @@ final class Day920: Day {
                 !window.prefix(25).combinations(ofCount: 2).contains { $0.sum() == window.last }
             }
         let invalidValue = invalidWindow!.last!
-        
+
         stageOneOutput = "\(invalidValue)"
-        
+
         let matchingWindow = (2..<numbers.count).lazy
             .compactMap { count in
                 numbers.lazy.windows(ofCount: count).filter { $0.last! < invalidValue }.first { $0.sum() == invalidValue }
             }
             .first
-        
+
         let (min, max) = (matchingWindow!.min()!, matchingWindow!.max()!)
-        
+
         stageTwoOutput = "\(min + max)"
-        //0.34263
+        // 0.34263
     }
 }
