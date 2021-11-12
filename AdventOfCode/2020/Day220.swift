@@ -49,10 +49,11 @@ final class Day220: Day {
             
             init(_ string: String) {
                 let parts = string.split(separator: " ")
-                let indices = parts[0]
+                let ints = parts[0]
                     .split(separator: "-")
                     .map(String.init)
                     .compactMap(Int.init)
+                let indices = ints
                     .map { $0 - 1 }
                     .map { $0..<($0 + 1) }
                 positions = RangeSet(indices)

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,7 +11,6 @@
 		310799962574607C00B54639 /* SE0270_RangeSet in Frameworks */ = {isa = PBXBuildFile; productRef = 310799952574607C00B54639 /* SE0270_RangeSet */; };
 		3109AA1221B4EE53006A24D0 /* Day318.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3109AA1121B4EE53006A24D0 /* Day318.swift */; };
 		310C94D423A061460010DCCD /* VectorMath in Frameworks */ = {isa = PBXBuildFile; productRef = 310C94D323A061460010DCCD /* VectorMath */; };
-		31186DB5261BE228009991A5 /* StringDecoder in Frameworks */ = {isa = PBXBuildFile; productRef = 31186DB4261BE228009991A5 /* StringDecoder */; };
 		31186DB9261BE262009991A5 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 31186DB8261BE262009991A5 /* OrderedCollections */; };
 		31186DBB261BE262009991A5 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 31186DBA261BE262009991A5 /* DequeModule */; };
 		31186DBD261BE262009991A5 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 31186DBC261BE262009991A5 /* Collections */; };
@@ -33,6 +32,7 @@
 		315B6A0C1FE765EC0026AF73 /* Day10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315B6A0B1FE765EC0026AF73 /* Day10.swift */; };
 		315B6A0F1FE77FA40026AF73 /* Day18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315B6A0E1FE77FA40026AF73 /* Day18.swift */; };
 		31635F8C1FE4F5FD004ADA7F /* Day16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31635F8B1FE4F5FD004ADA7F /* Day16.swift */; };
+		3165F514273EF691008F231F /* RegexOld in Frameworks */ = {isa = PBXBuildFile; productRef = 3165F513273EF691008F231F /* RegexOld */; };
 		3175D146238F3190007FAB8E /* Day1118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175D145238F3190007FAB8E /* Day1118.swift */; };
 		317C72C921BCD7B400C89EE1 /* Day918.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317C72C821BCD7B400C89EE1 /* Day918.swift */; };
 		318667C5238F29F5005DAACC /* Day619.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318667AC238F29F5005DAACC /* Day619.swift */; };
@@ -110,8 +110,10 @@
 		31D524AD200488260058241D /* Day515.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D524AC200488260058241D /* Day515.swift */; };
 		31DE12B91FE6281500C48F43 /* Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE12B81FE6281500C48F43 /* Day6.swift */; };
 		31DE12BC1FE631C600C48F43 /* Day17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE12BB1FE631C600C48F43 /* Day17.swift */; };
-		31DE7DBE257AA6D80017DA9B /* Regex in Frameworks */ = {isa = PBXBuildFile; productRef = 31DE7DBD257AA6D80017DA9B /* Regex */; };
 		31E0CB8721BB407D00998B50 /* Day718.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E0CB8621BB407D00998B50 /* Day718.swift */; };
+		31E7DE13273EECFE00690629 /* CollectionConcurrencyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 31E7DE12273EECFE00690629 /* CollectionConcurrencyKit */; };
+		31E7DE16273EF02300690629 /* MatchingEngine in Frameworks */ = {isa = PBXBuildFile; productRef = 31E7DE15273EF02300690629 /* MatchingEngine */; };
+		31E7DE1A273EF02300690629 /* Regex in Frameworks */ = {isa = PBXBuildFile; productRef = 31E7DE19273EF02300690629 /* Regex */; };
 		31E801E521B712710031C2B3 /* Day418.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E801E421B712710031C2B3 /* Day418.swift */; };
 		31F7E4F91FEDBD9C00B397E8 /* Day22.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F7E4F81FEDBD9C00B397E8 /* Day22.swift */; };
 /* End PBXBuildFile section */
@@ -335,10 +337,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31E7DE16273EF02300690629 /* MatchingEngine in Frameworks */,
 				31186DB9261BE262009991A5 /* OrderedCollections in Frameworks */,
-				31186DB5261BE228009991A5 /* StringDecoder in Frameworks */,
-				31DE7DBE257AA6D80017DA9B /* Regex in Frameworks */,
 				31186DBD261BE262009991A5 /* Collections in Frameworks */,
+				3165F514273EF691008F231F /* RegexOld in Frameworks */,
 				3191E1AA257327E100A8811A /* Algorithms in Frameworks */,
 				312A787A239A1B72002B9FC4 /* SwiftGraph in Frameworks */,
 				31186DBB261BE262009991A5 /* DequeModule in Frameworks */,
@@ -346,6 +348,8 @@
 				31D511A4257CA2480009B5AB /* CountedSet in Frameworks */,
 				310C94D423A061460010DCCD /* VectorMath in Frameworks */,
 				3191E1B12573284500A8811A /* RealModule in Frameworks */,
+				31E7DE13273EECFE00690629 /* CollectionConcurrencyKit in Frameworks */,
+				31E7DE1A273EF02300690629 /* Regex in Frameworks */,
 				3191E1B32573284500A8811A /* Numerics in Frameworks */,
 				3191E1AF2573284500A8811A /* ComplexModule in Frameworks */,
 			);
@@ -690,12 +694,14 @@
 				3191E1B02573284500A8811A /* RealModule */,
 				3191E1B22573284500A8811A /* Numerics */,
 				310799952574607C00B54639 /* SE0270_RangeSet */,
-				31DE7DBD257AA6D80017DA9B /* Regex */,
 				31D511A3257CA2480009B5AB /* CountedSet */,
-				31186DB4261BE228009991A5 /* StringDecoder */,
 				31186DB8261BE262009991A5 /* OrderedCollections */,
 				31186DBA261BE262009991A5 /* DequeModule */,
 				31186DBC261BE262009991A5 /* Collections */,
+				31E7DE12273EECFE00690629 /* CollectionConcurrencyKit */,
+				31E7DE15273EF02300690629 /* MatchingEngine */,
+				31E7DE19273EF02300690629 /* Regex */,
+				3165F513273EF691008F231F /* RegexOld */,
 			);
 			productName = AdventOfCode;
 			productReference = 318AC3261FE062A900A98B5E /* AdventOfCode */;
@@ -719,7 +725,7 @@
 				};
 			};
 			buildConfigurationList = 318AC3211FE062A900A98B5E /* Build configuration list for PBXProject "AdventOfCode" */;
-			compatibilityVersion = "Xcode 11.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -733,10 +739,11 @@
 				3191E1A8257327E100A8811A /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				3191E1AD2573284500A8811A /* XCRemoteSwiftPackageReference "swift-numerics" */,
 				310799942574607C00B54639 /* XCRemoteSwiftPackageReference "swift-se0270-range-set" */,
-				31DE7DBC257AA6D80017DA9B /* XCRemoteSwiftPackageReference "Regex" */,
 				31D511A2257CA2480009B5AB /* XCRemoteSwiftPackageReference "CountedSet" */,
-				31186DB3261BE228009991A5 /* XCRemoteSwiftPackageReference "StringDecoder" */,
 				31186DB7261BE262009991A5 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				31E7DE11273EECFE00690629 /* XCRemoteSwiftPackageReference "CollectionConcurrencyKit" */,
+				31E7DE14273EF02300690629 /* XCRemoteSwiftPackageReference "swift-experimental-string-processing" */,
+				3165F512273EF691008F231F /* XCRemoteSwiftPackageReference "Regex" */,
 			);
 			productRefGroup = 318AC3271FE062A900A98B5E /* Products */;
 			projectDirPath = "";
@@ -903,7 +910,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -958,7 +965,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1043,14 +1050,6 @@
 				minimumVersion = 0.4.1;
 			};
 		};
-		31186DB3261BE228009991A5 /* XCRemoteSwiftPackageReference "StringDecoder" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:SlaunchaMan/StringDecoder.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		31186DB7261BE262009991A5 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections";
@@ -1065,6 +1064,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 3.0.0;
+			};
+		};
+		3165F512273EF691008F231F /* XCRemoteSwiftPackageReference "Regex" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jshier/Regex";
+			requirement = {
+				branch = master;
+				kind = branch;
 			};
 		};
 		3191E1A8257327E100A8811A /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
@@ -1091,11 +1098,19 @@
 				kind = branch;
 			};
 		};
-		31DE7DBC257AA6D80017DA9B /* XCRemoteSwiftPackageReference "Regex" */ = {
+		31E7DE11273EECFE00690629 /* XCRemoteSwiftPackageReference "CollectionConcurrencyKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/jshier/Regex";
+			repositoryURL = "https://github.com/JohnSundell/CollectionConcurrencyKit.git";
 			requirement = {
-				branch = master;
+				branch = main;
+				kind = branch;
+			};
+		};
+		31E7DE14273EF02300690629 /* XCRemoteSwiftPackageReference "swift-experimental-string-processing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-experimental-string-processing.git";
+			requirement = {
+				branch = main;
 				kind = branch;
 			};
 		};
@@ -1111,11 +1126,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 310C94D223A061460010DCCD /* XCRemoteSwiftPackageReference "VectorMath" */;
 			productName = VectorMath;
-		};
-		31186DB4261BE228009991A5 /* StringDecoder */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 31186DB3261BE228009991A5 /* XCRemoteSwiftPackageReference "StringDecoder" */;
-			productName = StringDecoder;
 		};
 		31186DB8261BE262009991A5 /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1136,6 +1146,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 312A7878239A1B72002B9FC4 /* XCRemoteSwiftPackageReference "SwiftGraph" */;
 			productName = SwiftGraph;
+		};
+		3165F513273EF691008F231F /* RegexOld */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3165F512273EF691008F231F /* XCRemoteSwiftPackageReference "Regex" */;
+			productName = RegexOld;
 		};
 		3191E1A9257327E100A8811A /* Algorithms */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1162,9 +1177,19 @@
 			package = 31D511A2257CA2480009B5AB /* XCRemoteSwiftPackageReference "CountedSet" */;
 			productName = CountedSet;
 		};
-		31DE7DBD257AA6D80017DA9B /* Regex */ = {
+		31E7DE12273EECFE00690629 /* CollectionConcurrencyKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 31DE7DBC257AA6D80017DA9B /* XCRemoteSwiftPackageReference "Regex" */;
+			package = 31E7DE11273EECFE00690629 /* XCRemoteSwiftPackageReference "CollectionConcurrencyKit" */;
+			productName = CollectionConcurrencyKit;
+		};
+		31E7DE15273EF02300690629 /* MatchingEngine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31E7DE14273EF02300690629 /* XCRemoteSwiftPackageReference "swift-experimental-string-processing" */;
+			productName = MatchingEngine;
+		};
+		31E7DE19273EF02300690629 /* Regex */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31E7DE14273EF02300690629 /* XCRemoteSwiftPackageReference "swift-experimental-string-processing" */;
 			productName = Regex;
 		};
 /* End XCSwiftPackageProductDependency section */

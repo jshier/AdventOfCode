@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import StringDecoder
 
 final class Day820: Day {
     override var expectedStageOneOutput: String? { "1317" }
@@ -16,8 +15,8 @@ final class Day820: Day {
     override func perform() {
         let input = String.input(forDay: 8, year: 2020)
         
-        struct Instruction: Decodable, Equatable {
-            enum Operation: String, Decodable {
+        struct Instruction: Equatable {
+            enum Operation: String {
                 case acc, jmp, nop
             }
             

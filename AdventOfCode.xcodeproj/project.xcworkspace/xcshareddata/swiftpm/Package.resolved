@@ -2,38 +2,29 @@
   "object": {
     "pins": [
       {
+        "package": "CollectionConcurrencyKit",
+        "repositoryURL": "https://github.com/JohnSundell/CollectionConcurrencyKit.git",
+        "state": {
+          "branch": "main",
+          "revision": "a051efcb1e1352aadfd5c4f6b6afd8f7a9e38769",
+          "version": null
+        }
+      },
+      {
         "package": "CountedSet",
         "repositoryURL": "https://github.com/jshier/CountedSet",
         "state": {
           "branch": "master",
-          "revision": "9da0578bf96929dcca01ca1a8ff3dd9771905bd4",
+          "revision": "33653f1a9799c5f8478f564ac6fe1e2c9441dfdb",
           "version": null
         }
       },
       {
-        "package": "IsNotEmpty",
-        "repositoryURL": "https://github.com/SlaunchaMan/IsNotEmpty",
-        "state": {
-          "branch": null,
-          "revision": "57d6ca060e4a1e9bf8ce47738a1ed09f1f951a0e",
-          "version": "0.0.1"
-        }
-      },
-      {
-        "package": "Regex",
+        "package": "RegexOld",
         "repositoryURL": "https://github.com/jshier/Regex",
         "state": {
           "branch": "master",
-          "revision": "ee257e563894ad2c7b7046729f84c0bd72d61747",
-          "version": null
-        }
-      },
-      {
-        "package": "StringDecoder",
-        "repositoryURL": "git@github.com:SlaunchaMan/StringDecoder.git",
-        "state": {
-          "branch": "main",
-          "revision": "22f8e1568380a6b8b254e9dab35b89cd5c3ba473",
+          "revision": "74fb7345f4b1e94b2387227d1cbcf68f249e9c3b",
           "version": null
         }
       },
@@ -42,7 +33,7 @@
         "repositoryURL": "https://github.com/apple/swift-algorithms",
         "state": {
           "branch": "main",
-          "revision": "198eee004eaa34e9e0304ce7188527f1def08023",
+          "revision": "e2fa131d62604027889fcf87bb4d024e6576ac66",
           "version": null
         }
       },
@@ -51,8 +42,8 @@
         "repositoryURL": "https://github.com/apple/swift-argument-parser",
         "state": {
           "branch": null,
-          "revision": "831ed5e860a70e745bc1337830af4786b2576881",
-          "version": "0.4.1"
+          "revision": "e1465042f195f374b94f915ba8ca49de24300a0d",
+          "version": "1.0.2"
         }
       },
       {
@@ -60,17 +51,17 @@
         "repositoryURL": "https://github.com/apple/swift-collections",
         "state": {
           "branch": "main",
-          "revision": "bd924007a25488900d2e3f3437a0388a97636020",
+          "revision": "6eeae8088b389f8ade37efe26519cf6b8b867af2",
           "version": null
         }
       },
       {
-        "package": "swift-collections-benchmark",
-        "repositoryURL": "https://github.com/apple/swift-collections-benchmark",
+        "package": "swift-experimental-string-processing",
+        "repositoryURL": "https://github.com/apple/swift-experimental-string-processing.git",
         "state": {
-          "branch": null,
-          "revision": "49297647d1c0855eb33ec18cd6ee1181727c159b",
-          "version": "0.0.1"
+          "branch": "main",
+          "revision": "0e0abde0f643e962f8148d452bead322a0416119",
+          "version": null
         }
       },
       {
@@ -78,7 +69,7 @@
         "repositoryURL": "https://github.com/apple/swift-numerics",
         "state": {
           "branch": "main",
-          "revision": "f50a1acf2d44da619b95a0e2db97e26b545c6650",
+          "revision": "f5b33a6c076a721e216f266070d0fe21ae7a985c",
           "version": null
         }
       },
@@ -87,17 +78,8 @@
         "repositoryURL": "https://github.com/apple/swift-se0270-range-set",
         "state": {
           "branch": "main",
-          "revision": "120fc7efe17b11f7eedd94e7a5e1885fc69efb49",
+          "revision": "7d6d7531d40e95f4e1e26f6565265be6df228911",
           "version": null
-        }
-      },
-      {
-        "package": "swift-system",
-        "repositoryURL": "https://github.com/apple/swift-system",
-        "state": {
-          "branch": null,
-          "revision": "8ffa04c0a0592e6f4f9c30926dedd8fa1c5371f9",
-          "version": "0.0.1"
         }
       },
       {

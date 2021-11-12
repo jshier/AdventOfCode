@@ -14,7 +14,7 @@ final class Day419: Day {
 
     override func perform() {
         // let input = "108457-562041"
-        let passwords = (108_457...562_041).compactMap { ($0.containsDoublesAndIncreases) ? $0 : nil }
+        let passwords: [Int] = (108_457...562_041).compactMap { ($0.containsDoublesAndIncreases) ? $0 : nil }
 
         stageOneOutput = "\(passwords.count)"
 
