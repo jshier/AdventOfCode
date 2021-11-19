@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day7: Day {
-    override func perform() {
+    override func perform() async {
 //        let input =
 //            """
 //            pbga (66)

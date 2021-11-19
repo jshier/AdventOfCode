@@ -12,7 +12,7 @@ final class Day620: Day {
     override var expectedStageOneOutput: String? { "7120" }
     override var expectedStageTwoOutput: String? { "3570" }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 6, year: 2020)
         let groupAnswers = input.byParagraphs()
         let answers = groupAnswers.map {

@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day23: Day {
-    override func perform() {
+    override func perform() async {
         let fileInput = String.input(forDay: 23, year: 2017)
         let lines = fileInput.split(separator: "\n")
         let instructions = lines.map(Instruction.init)

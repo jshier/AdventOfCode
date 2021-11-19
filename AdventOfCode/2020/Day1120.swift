@@ -6,13 +6,11 @@
 //  Copyright © 2018 Jon Shier. All rights reserved.
 //
 
-import Foundation
-
 final class Day1120: Day {
     override var expectedStageOneOutput: String? { "2470" }
-    override var expectedStageTwoOutput: String? { nil }
+    override var expectedStageTwoOutput: String? { "2259" }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 11, year: 2020)
 //        let input = """
 //        L.LL.LL.LL
@@ -29,76 +27,143 @@ final class Day1120: Day {
 
         enum Seat: String, CustomStringConvertible {
             case empty = "L"
-            case taken = "X"
+            case taken = "#"
             case floor = "."
 
             var description: String { rawValue }
         }
-
         let initialSeats = input.byLines().map { $0.map(String.init).compactMap(Seat.init(rawValue:)) }
 
         let initialGrid = Grid(initialSeats)
-//        let points = initialGrid.containedPoints
-//        let seatPoints = points.filter { !(initialGrid[$0] == .floor) }
-
-        var grids: [Grid<Seat>] = [initialGrid]
-        var iterations = 0
-        while let grid = grids.last {
-            iterations += 1
-            let newValues: [[Seat]] = (0..<grid.height).map { y in
-                (0..<grid.width).map { x in
-                    let point = Point(x, y)
+        let (part1, part2) = await inParallel {
+            func iteratedGrid(from grid: Grid<Seat>) -> Grid<Seat> {
+                var nextGrid = grid
+                for point in grid.points {
                     let value = grid[point]
                     if value == .floor {
-                        return .floor
-
+                        continue
                     } else {
-                        let surrounding = grid.surroundingValues(for: point)
-                        let occupiedCount = surrounding.count { $0 == .taken }
+                        let surroundingPoints = point.surroundingPoints
+                        let occupiedCount = surroundingPoints.reduce(0) { result, value in
+                            guard value.x >= 0, value.x < grid.width, value.y >= 0, value.y < grid.height else { return result }
+                            
+                            return grid[value] == .taken ? result + 1 : result
+                        }
                         if value == .empty && occupiedCount == 0 {
-                            return .taken
+                            nextGrid[point] = .taken
                         } else if value == .taken && occupiedCount >= 4 {
-                            return .empty
-                        } else {
-                            return value
+                            nextGrid[point] = .empty
                         }
                     }
                 }
-            }
-            if newValues == grid.values {
-                break
-            } else {
-                grids.append(Grid(newValues))
-            }
-        }
 
-        let finalSeatsTaken = grids.last?.values.reduce(0) { $0 + $1.count(of: .taken) } ?? 0
-        print(iterations)
-        stageOneOutput = "\(finalSeatsTaken)"
+                return nextGrid
+            }
+
+            var grid = initialGrid
+            var nextGrid = iteratedGrid(from: grid)
+            while nextGrid != grid {
+                grid = nextGrid
+                nextGrid = iteratedGrid(from: grid)
+            }
+            let finalSeatsTaken = nextGrid.values.count(of: .taken)
+            
+            return "\(finalSeatsTaken)"
+        } part2: {
+            func rayIteratedGrid(from grid: Grid<Seat>) -> Grid<Seat> {
+                var nextGrid = grid
+                for point in grid.points {
+                    let value = grid[point]
+                    if value == .floor {
+                        continue
+                    } else {
+                        var occupiedRays = 0
+                        for ray in point.rays(maxX: (grid.width - 1), maxY: (grid.height - 1)) {
+                        ray: for rayPoint in ray {
+                            let rayValue = grid[rayPoint]
+                            switch rayValue {
+                            case .floor:
+                                continue
+                            case .taken:
+                                occupiedRays += 1
+                                break ray
+                            case .empty:
+                                break ray
+                            }
+                        }
+                        }
+                        if value == .empty && occupiedRays == 0 {
+                            nextGrid[point] = .taken
+                        } else if value == .taken && occupiedRays >= 5 {
+                            nextGrid[point] = .empty
+                        }
+                    }
+                }
+                
+                return nextGrid
+            }
+            
+            var rayGrid = initialGrid
+            var nextRayGrid = rayIteratedGrid(from: rayGrid)
+            while nextRayGrid != rayGrid {
+                rayGrid = nextRayGrid
+                nextRayGrid = rayIteratedGrid(from: rayGrid)
+            }
+            let finalRaySeatsTaken = nextRayGrid.values.count(of: .taken)
+            
+            return "\(finalRaySeatsTaken)"
+        }
+        
+        stageOneOutput = "\(part1)"
+        stageTwoOutput = "\(part2)"
     }
 }
 
 struct Grid<T> {
-    private(set) var values: [[T]]
+    private(set) var values: [T]
 
-    var height: Int { values.count }
-    var width: Int { values.first?.count ?? 0 }
-
-    var containedPoints: [Point] {
-        Array(PointSequence(start: .init(0, 0), end: .init(width - 1, height - 1)))
-    }
+    let height: Int
+    let width: Int
+    let points: PointSequence
 
     init(_ values: [[T]]) {
-        self.values = values
+        self.values = values.flatMap { $0 }
+        height = values.count
+        width = values[0].count
+        points = PointSequence(start: .origin, end: Point(width - 1, height - 1))
     }
 
     subscript(_ point: Point) -> T {
-        get { values[point.y][point.x] }
-        set { values[point.y][point.x] = newValue }
+        get { values[width * point.y + point.x] }
+        set { values[width * point.y + point.x] = newValue }
+    }
+    
+    subscript(_ x: Int, _ y: Int) -> T {
+        get { values[width * y + x] }
+        set { values[width * y + x] = newValue }
     }
 
     func surroundingValues(for point: Point) -> [T] {
-        let points: [Point] = point.surroundingPoints.filter { ($0.x >= 0 && $0.x < values[0].count) && ($0.y >= 0 && $0.y < values.count) }
+        let points = point.surroundingPoints.filter { ($0.x >= 0 && $0.x < width) && ($0.y >= 0 && $0.y < height) }
+        
         return points.map { self[$0] }
+    }
+}
+
+extension Grid: Sequence {
+    func makeIterator() -> some IteratorProtocol {
+        values.makeIterator()
+    }
+}
+
+extension Grid: Equatable where T: Equatable {
+    static func ==(_ lhs: Grid, _ rhs: Grid) -> Bool {
+        lhs.values == rhs.values
+    }
+}
+
+extension Grid: CustomStringConvertible {
+    var description: String {
+        values.map(String.init(describing:)).joined().chunked(into: width).joined(separator: "\n")
     }
 }

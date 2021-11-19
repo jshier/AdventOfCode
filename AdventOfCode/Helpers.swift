@@ -15,6 +15,12 @@ import Foundation
 extension String {
     static func input(forDay day: Int, year: Int) -> String {
         try! String(contentsOfFile: "/Users/jshier/Desktop/Code/AdventOfCode/Inputs/\(year)/day\(day).txt")
+            .trimmingWhitespace()
+    }
+    
+    static func input(forDay day: NewDay, year: Year) -> String {
+        try! String(contentsOfFile: "/Users/jshier/Desktop/Code/AdventOfCode/Inputs/\(year.rawValue)/day\(day.rawValue).txt")
+            .trimmingWhitespace()
     }
 
     func byLines() -> [String] {

@@ -15,7 +15,7 @@ final class Day420: Day {
     override var expectedStageOneOutput: String? { "233" }
     override var expectedStageTwoOutput: String? { "111" }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 4, year: 2020)
         let possiblePassports = input.byParagraphs()
 

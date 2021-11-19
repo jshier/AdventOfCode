@@ -23,7 +23,7 @@ final class Day819: Day {
         """
     }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 8, year: 2019)
 
         let width = 25

@@ -23,7 +23,7 @@ final class Day1119: Day {
         """
     }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 11, year: 2019)
         let program = input.byCommas().asInts()
 

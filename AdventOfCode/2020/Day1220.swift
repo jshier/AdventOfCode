@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import CollectionConcurrencyKit
 
 final class Day1220: Day {
-    override var expectedStageOneOutput: String? { nil }
-    override var expectedStageTwoOutput: String? { nil }
+    override var expectedStageOneOutput: String? { "364" }
+    override var expectedStageTwoOutput: String? { "39518" }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 12, year: 2020)
 //        let input = """
 //        F10
@@ -51,7 +52,7 @@ final class Day1220: Day {
         }
 
         struct Ship {
-            private(set) var position: Point = .init(0, 0)
+            private(set) var position: Point = .origin
             private(set) var facing: Direction = .right
 
             mutating func apply(_ action: Action) {
@@ -76,10 +77,10 @@ final class Day1220: Day {
         var ship = Ship()
         actions.forEach { ship.apply($0) }
 
-        stageOneOutput = "\(ship.position.manhattanDistance(to: .init(0, 0)))"
+        stageOneOutput = "\(ship.position.manhattanDistance(to: .origin))"
 
         struct WaypointShip {
-            private(set) var position: Point = .init(0, 0)
+            private(set) var position: Point = .origin
             private var waypoint = Point(10, 1)
 
             mutating func apply(_ action: Action) {
@@ -103,6 +104,6 @@ final class Day1220: Day {
         var waypointShip = WaypointShip()
         actions.forEach { waypointShip.apply($0) }
 
-        stageTwoOutput = "\(waypointShip.position.manhattanDistance(to: .init(0, 0)))"
+        stageTwoOutput = "\(waypointShip.position.manhattanDistance(to: .origin))"
     }
 }

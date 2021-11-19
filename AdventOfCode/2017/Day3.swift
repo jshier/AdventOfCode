@@ -9,7 +9,7 @@
 import Foundation
 
 class Day3: Day {
-    override func perform() {
+    override func perform() async {
         let input = 312_051
 
         let spiral = SquareSpiral()

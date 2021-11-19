@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day15: Day {
-    override func perform() {
+    override func perform() async {
         let aStart = 703
         let bStart = 516
         let aFactor = 16_807

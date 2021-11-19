@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day418: Day {
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 4, year: 2018)
         let guardSleepMap = input.byLines()
             .sorted()

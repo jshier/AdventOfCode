@@ -13,7 +13,7 @@ final class Day1519: Day {
     override var expectedStageOneOutput: String? { "232" }
     override var expectedStageTwoOutput: String? { "320" }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 15, year: 2019)
         let program = input.byCommas().asInts()
         let droid = RepairDroid(program: program)

@@ -9,7 +9,7 @@
 import Foundation
 
 class Day5: Day {
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 5, year: 2017)
         let instructions = input.split(separator: "\n").map(String.init).compactMap(Int.init)
 

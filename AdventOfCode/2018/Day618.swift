@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day618: Day {
-    override func perform() {
+    override func perform() async {
 //        let input = String.input(forDay: 6)
         let input = """
         1,1

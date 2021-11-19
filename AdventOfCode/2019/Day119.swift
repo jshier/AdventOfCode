@@ -12,7 +12,7 @@ final class Day119: Day {
     override var expectedStageOneOutput: String? { "3269199" }
     override var expectedStageTwoOutput: String? { "4900909" }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 1, year: 2019)
         let inputs = input.byLines().asInts()
         let values = inputs.map { ($0 / 3) - 2 }

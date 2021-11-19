@@ -12,7 +12,7 @@ final class Day319: Day {
     override var expectedStageOneOutput: String? { "280" }
     override var expectedStageTwoOutput: String? { "10554" }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 3, year: 2019)
         let wires = input.byLines()
 

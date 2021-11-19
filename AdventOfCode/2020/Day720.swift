@@ -13,7 +13,7 @@ final class Day720: Day {
     override var expectedStageOneOutput: String? { "235" }
     override var expectedStageTwoOutput: String? { "158493" }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 7, year: 2020)
 //        let input = """
 //        shiny gold bags contain 2 dark red bags.

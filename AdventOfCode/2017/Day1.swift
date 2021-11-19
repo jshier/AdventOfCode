@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day1: Day {
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 1, year: 2017)
         let calculator = CaptchaCalculator(input)
 

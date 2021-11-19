@@ -15,13 +15,13 @@ class Day {
     var expectedStageOneOutput: String? { nil }
     var expectedStageTwoOutput: String? { nil }
 
-    func perform() {
+    func perform() async {
         print("Must override perform in subclasses.")
     }
 
-    func output() -> String {
+    func output() async -> String {
         let startTime = CFAbsoluteTimeGetCurrent()
-        perform()
+        await perform()
         let endTime = CFAbsoluteTimeGetCurrent()
 
         let stageOneCorrect = (stageOneOutput == (expectedStageOneOutput ?? "Fallback")) ? "Correct!" : "Incorrect!"

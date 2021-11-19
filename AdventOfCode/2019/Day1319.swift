@@ -12,7 +12,7 @@ final class Day1319: Day {
     override var expectedStageOneOutput: String? { "273" }
     override var expectedStageTwoOutput: String? { "13140" }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 13, year: 2019)
         let program = input.byCommas().asInts()
         let computer = IntcodeComputer(program: program, input: [])

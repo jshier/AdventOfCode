@@ -8,27 +8,31 @@
 
 import Foundation
 
-class Day115: Day {
-    override func perform() {
-        let input = String.input(forDay: 1, year: 2015)
-        let opens = input.count { $0 == "(" }
-        let closeds = input.count { $0 == ")" }
+final class TwentyFifteen: Runner {
+    var year: Year { .fifteen }
+}
 
-        stageOneOutput = "\(opens - closeds)"
+extension TwentyFifteen {
+    func dayOne(_ output: inout YearRunner.DayOutput) async {
+        let input = String.input(forDay: .one, year: .fifteen)
 
+        let openDifference = input.reduce(0) { result, element in
+            result + (element == "(" ? 1 : -1)
+        }
+
+        output.stepOne = "\(openDifference)"
+        output.expectedStepOne = "74"
+        
         var value = 0
         var position = 0
 
         while value != -1 {
-            if input[position] == "(" {
-                value += 1
-            } else {
-                value -= 1
-            }
+            value += (input[position] == "(") ? 1 : -1
 
             position += 1
         }
-
-        stageTwoOutput = "\(position)"
+        
+        output.stepTwo = "\(position)"
+        output.expectedStepTwo = "1795"
     }
 }

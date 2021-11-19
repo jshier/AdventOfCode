@@ -10,9 +10,9 @@ import Foundation
 
 final class Day1820: Day {
     override var expectedStageOneOutput: String? { "16332191652452" }
-    override var expectedStageTwoOutput: String? { nil }
+    override var expectedStageTwoOutput: String? { "351175492232654" }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 18, year: 2020)
         let equations = input.byLines()
 

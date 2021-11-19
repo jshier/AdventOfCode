@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day8: Day {
-    override func perform() {
+    override func perform() async {
 //        let exampleInput = """
 //            b inc 5 if a > 1
 //            a inc 1 if b < 5

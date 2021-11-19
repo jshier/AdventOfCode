@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day25: Day {
-    override func perform() {
+    override func perform() async {
         let fileSteps = 12_317_297
 //        let testSteps = 6
         let steps = fileSteps

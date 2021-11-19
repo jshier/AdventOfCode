@@ -12,7 +12,7 @@ import Foundation
 //    override var expectedStageOneOutput: String? { nil }
 //    override var expectedStageTwoOutput: String? { nil }
 //
-//    override func perform() {
+//    override func perform() async {
 //        let input = String.input(forDay: 21, year: 2020)
 //    }
 // }

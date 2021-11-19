@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day4: Day {
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 7, year: 2017)
         let lines = input.split(separator: "\n")
         let uniquePassphrases: Int = lines.map { line -> (Int, Int) in

@@ -12,7 +12,7 @@ final class Day419: Day {
     override var expectedStageOneOutput: String? { "2779" }
     override var expectedStageTwoOutput: String? { "1972" }
 
-    override func perform() {
+    override func perform() async {
         // let input = "108457-562041"
         let passwords: [Int] = (108_457...562_041).compactMap { ($0.containsDoublesAndIncreases) ? $0 : nil }
 

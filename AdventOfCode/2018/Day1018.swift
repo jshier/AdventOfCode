@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day1018: Day {
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 10, year: 2018)
 //        let input = """
 //                    position=< 9,  1> velocity=< 0,  2>

@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day918: Day {
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 9, year: 2018).byLines()[0]
 //        let input = "13 players; last marble is worth 7999 points"
         let game = MarbleGame(input)

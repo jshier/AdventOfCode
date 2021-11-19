@@ -12,7 +12,7 @@ final class Day1118: Day {
     override var expectedStageOneOutput: String? { "(19, 41)" }
     override var expectedStageTwoOutput: String? { "(237, 284)x11" }
 
-    override func perform() {
+    override func perform() async {
         let input = 5535
 
         var sums: [[Int]] = Array(repeating: Array(repeating: 0, count: 301), count: 301)

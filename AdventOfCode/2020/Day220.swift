@@ -13,7 +13,7 @@ final class Day220: Day {
     override var expectedStageOneOutput: String? { "517" }
     override var expectedStageTwoOutput: String? { "284" }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 2, year: 2020)
         let separatedInput = input
             .byLines()

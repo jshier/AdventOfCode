@@ -12,7 +12,7 @@ final class Day118: Day {
     override var expectedStageOneOutput: String? { "425" }
     override var expectedStageTwoOutput: String? { "57538" }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 1, year: 2018)
         let lines = input.byLines()
         let frequencies = lines.compactMap(Int.init)

@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day718: Day {
-    override func perform() {
+    override func perform() async {
         //        let input = String.input(forDay: 7)
 //        let input = """
 //                    Step C must be finished before step A can begin.

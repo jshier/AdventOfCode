@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day9: Day {
-    override func perform() {
+    override func perform() async {
         let fileInput = String.input(forDay: 9, year: 2017)
 //        let testInput = "{{{!!},{<>!!!e},{{!!}}}}"
         var input = fileInput

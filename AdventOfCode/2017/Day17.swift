@@ -9,7 +9,7 @@
 import Foundation
 
 final class Day17: Day {
-    override func perform() {
+    override func perform() async {
         let fileInput = 367
 //        let testInput = 3
         let input = fileInput

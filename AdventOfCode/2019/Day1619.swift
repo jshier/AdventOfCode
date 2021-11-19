@@ -12,7 +12,7 @@ final class Day1619: Day {
     override var expectedStageOneOutput: String? { "70856418" }
     override var expectedStageTwoOutput: String? { "87766336" }
 
-    override func perform() {
+    override func perform() async {
         let input = String.input(forDay: 16, year: 2019)
 //        let input = "12345678"
 //        let input = "03036732577212944063491565474664"
