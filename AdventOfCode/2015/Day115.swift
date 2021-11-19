@@ -13,7 +13,7 @@ final class TwentyFifteen: Runner {
 }
 
 extension TwentyFifteen {
-    func dayOne(_ output: inout YearRunner.DayOutput) async {
+    func dayOne(_ output: inout DayOutput) async {
         let input = String.input(forDay: .one, year: .fifteen)
 
         let openDifference = input.reduce(0) { result, element in

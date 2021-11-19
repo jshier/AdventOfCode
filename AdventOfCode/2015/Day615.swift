@@ -7,7 +7,7 @@
 //
 
 extension TwentyFifteen {
-    func daySix(_ output: inout YearRunner.DayOutput) async {
+    func daySix(_ output: inout DayOutput) async {
         let fileInput = String.input(forDay: 6, year: 2015)
         //        let testInput = """
         //                        turn on 0,0 through 1,1

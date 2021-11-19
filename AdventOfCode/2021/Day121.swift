@@ -11,5 +11,5 @@ final class TwentyTwentyOne: Runner {
 }
 
 extension TwentyTwentyOne {
-    func dayOne(_ output: inout YearRunner.DayOutput) async {}
+    func dayOne(_ output: inout DayOutput) async {}
 }

@@ -28,88 +28,69 @@ extension NewDay: CustomStringConvertible {
     var description: String { "\(rawValue)" }
 }
 
-enum YearRunner {
-    typealias DayParts = (day: NewDay, parts: Parts)
-    typealias Parts = (partOne: String?, partTwo: String?)
+struct DayOutput {
+    var stepOne: String?
+    var stepTwo: String?
+    var expectedStepOne: String?
+    var expectedStepTwo: String?
+}
 
-    struct DayOutput {
-        var stepOne: String?
-        var stepTwo: String?
-        var expectedStepOne: String?
-        var expectedStepTwo: String?
-    }
+struct YearOutput: CustomStringConvertible {
+    let day: NewDay
+    let year: Year
+    let dayOutput: DayOutput
+    let duration: Double
 
-    struct YearOutput: CustomStringConvertible {
-        let day: NewDay
-        let year: Year
-        let dayOutput: DayOutput
-        let duration: Double
+    var description: String {
+        let stepOneCorrect = (dayOutput.stepOne != nil) && (dayOutput.stepOne == dayOutput.expectedStepOne)
+        let stepTwoCorrect = (dayOutput.stepTwo != nil) && (dayOutput.stepTwo == dayOutput.expectedStepTwo)
 
-        var description: String {
-            let stepOneCorrect = (dayOutput.stepOne != nil) && (dayOutput.stepOne == dayOutput.expectedStepOne)
-            let stepTwoCorrect = (dayOutput.stepTwo != nil) && (dayOutput.stepTwo == dayOutput.expectedStepTwo)
-
-            return """
-            ========== Dec. \(day.rawValue), \(year.rawValue) ==========
-            Step One: \(dayOutput.stepOne ?? "Incomplete.") \(stepOneCorrect ? "Correct!" : "Incorrect!")
-            Step Two: \(dayOutput.stepTwo ?? "Incomplete.") \(stepTwoCorrect ? "Correct!" : "Incorrect!")
-            Completed in: \(duration)s
-            """
-        }
+        return """
+        ========== Dec. \(day.rawValue), \(year.rawValue) ==========
+        Step One: \(dayOutput.stepOne ?? "Incomplete.") \(stepOneCorrect ? "Correct!" : "Incorrect!")
+        Step Two: \(dayOutput.stepTwo ?? "Incomplete.") \(stepTwoCorrect ? "Correct!" : "Incorrect!")
+        Completed in: \(duration)s
+        """
     }
 }
 
 protocol Runner: AnyObject {
     var year: Year { get }
-    func dayOne(_ output: inout YearRunner.DayOutput) async
-    func dayTwo(_ output: inout YearRunner.DayOutput) async
-    func dayThree(_ output: inout YearRunner.DayOutput) async
-    func dayFour(_ output: inout YearRunner.DayOutput) async
-    func dayFive(_ output: inout YearRunner.DayOutput) async
-    func daySix(_ output: inout YearRunner.DayOutput) async
-    func daySeven(_ output: inout YearRunner.DayOutput) async
-    func dayEight(_ output: inout YearRunner.DayOutput) async
-    func dayNine(_ output: inout YearRunner.DayOutput) async
-    func dayTen(_ output: inout YearRunner.DayOutput) async
-    func dayEleven(_ output: inout YearRunner.DayOutput) async
-    func dayTwelve(_ output: inout YearRunner.DayOutput) async
-    func dayThirteen(_ output: inout YearRunner.DayOutput) async
-    func dayFourteen(_ output: inout YearRunner.DayOutput) async
-    func dayFifteen(_ output: inout YearRunner.DayOutput) async
-    func daySixteen(_ output: inout YearRunner.DayOutput) async
-    func daySeventeen(_ output: inout YearRunner.DayOutput) async
-    func dayEighteen(_ output: inout YearRunner.DayOutput) async
-    func dayNineteen(_ output: inout YearRunner.DayOutput) async
-    func dayTwenty(_ output: inout YearRunner.DayOutput) async
-    func dayTwentyOne(_ output: inout YearRunner.DayOutput) async
-    func dayTwentyTwo(_ output: inout YearRunner.DayOutput) async
-    func dayTwentyThree(_ output: inout YearRunner.DayOutput) async
-    func dayTwentyFour(_ output: inout YearRunner.DayOutput) async
-    func dayTwentyFive(_ output: inout YearRunner.DayOutput) async
+    func dayOne(_ output: inout DayOutput) async
+    func dayTwo(_ output: inout DayOutput) async
+    func dayThree(_ output: inout DayOutput) async
+    func dayFour(_ output: inout DayOutput) async
+    func dayFive(_ output: inout DayOutput) async
+    func daySix(_ output: inout DayOutput) async
+    func daySeven(_ output: inout DayOutput) async
+    func dayEight(_ output: inout DayOutput) async
+    func dayNine(_ output: inout DayOutput) async
+    func dayTen(_ output: inout DayOutput) async
+    func dayEleven(_ output: inout DayOutput) async
+    func dayTwelve(_ output: inout DayOutput) async
+    func dayThirteen(_ output: inout DayOutput) async
+    func dayFourteen(_ output: inout DayOutput) async
+    func dayFifteen(_ output: inout DayOutput) async
+    func daySixteen(_ output: inout DayOutput) async
+    func daySeventeen(_ output: inout DayOutput) async
+    func dayEighteen(_ output: inout DayOutput) async
+    func dayNineteen(_ output: inout DayOutput) async
+    func dayTwenty(_ output: inout DayOutput) async
+    func dayTwentyOne(_ output: inout DayOutput) async
+    func dayTwentyTwo(_ output: inout DayOutput) async
+    func dayTwentyThree(_ output: inout DayOutput) async
+    func dayTwentyFour(_ output: inout DayOutput) async
+    func dayTwentyFive(_ output: inout DayOutput) async
 }
 
 extension Runner {
-    func runAllDays() -> AsyncStream<YearRunner.YearOutput> {
-        AsyncStream { continuation in
-            Task {
-                await withTaskGroup(of: YearRunner.YearOutput.self) { group in
-                    for day in NewDay.allCases {
-                        group.addTask { await self.run(day) }
-                    }
-
-                    for await output in group {
-                        continuation.yield(output)
-                    }
-
-                    continuation.finish()
-                }
-            }
-        }
+    func runAllDays() -> AsyncStream<YearOutput> {
+        NewDay.allCases.concurrentMapStream(performing: run)
     }
 
-    func run(_ day: NewDay) async -> YearRunner.YearOutput {
+    func run(_ day: NewDay) async -> YearOutput {
         let start = CFAbsoluteTimeGetCurrent()
-        var output = YearRunner.DayOutput()
+        var output = DayOutput()
         switch day {
         case .one:
             await dayOne(&output)
@@ -163,32 +144,33 @@ extension Runner {
             await dayTwentyFive(&output)
         }
         let end = CFAbsoluteTimeGetCurrent()
-        return YearRunner.YearOutput(day: day, year: year, dayOutput: output, duration: end - start)
+        print("\(day) complete!")
+        return YearOutput(day: day, year: year, dayOutput: output, duration: end - start)
     }
 
-    func dayOne(_ output: inout YearRunner.DayOutput) async {}
-    func dayTwo(_ output: inout YearRunner.DayOutput) async {}
-    func dayThree(_ output: inout YearRunner.DayOutput) async {}
-    func dayFour(_ output: inout YearRunner.DayOutput) async {}
-    func dayFive(_ output: inout YearRunner.DayOutput) async {}
-    func daySix(_ output: inout YearRunner.DayOutput) async {}
-    func daySeven(_ output: inout YearRunner.DayOutput) async {}
-    func dayEight(_ output: inout YearRunner.DayOutput) async {}
-    func dayNine(_ output: inout YearRunner.DayOutput) async {}
-    func dayTen(_ output: inout YearRunner.DayOutput) async {}
-    func dayEleven(_ output: inout YearRunner.DayOutput) async {}
-    func dayTwelve(_ output: inout YearRunner.DayOutput) async {}
-    func dayThirteen(_ output: inout YearRunner.DayOutput) async {}
-    func dayFourteen(_ output: inout YearRunner.DayOutput) async {}
-    func dayFifteen(_ output: inout YearRunner.DayOutput) async {}
-    func daySixteen(_ output: inout YearRunner.DayOutput) async {}
-    func daySeventeen(_ output: inout YearRunner.DayOutput) async {}
-    func dayEighteen(_ output: inout YearRunner.DayOutput) async {}
-    func dayNineteen(_ output: inout YearRunner.DayOutput) async {}
-    func dayTwenty(_ output: inout YearRunner.DayOutput) async {}
-    func dayTwentyOne(_ output: inout YearRunner.DayOutput) async {}
-    func dayTwentyTwo(_ output: inout YearRunner.DayOutput) async {}
-    func dayTwentyThree(_ output: inout YearRunner.DayOutput) async {}
-    func dayTwentyFour(_ output: inout YearRunner.DayOutput) async {}
-    func dayTwentyFive(_ output: inout YearRunner.DayOutput) async {}
+    func dayOne(_ output: inout DayOutput) async {}
+    func dayTwo(_ output: inout DayOutput) async {}
+    func dayThree(_ output: inout DayOutput) async {}
+    func dayFour(_ output: inout DayOutput) async {}
+    func dayFive(_ output: inout DayOutput) async {}
+    func daySix(_ output: inout DayOutput) async {}
+    func daySeven(_ output: inout DayOutput) async {}
+    func dayEight(_ output: inout DayOutput) async {}
+    func dayNine(_ output: inout DayOutput) async {}
+    func dayTen(_ output: inout DayOutput) async {}
+    func dayEleven(_ output: inout DayOutput) async {}
+    func dayTwelve(_ output: inout DayOutput) async {}
+    func dayThirteen(_ output: inout DayOutput) async {}
+    func dayFourteen(_ output: inout DayOutput) async {}
+    func dayFifteen(_ output: inout DayOutput) async {}
+    func daySixteen(_ output: inout DayOutput) async {}
+    func daySeventeen(_ output: inout DayOutput) async {}
+    func dayEighteen(_ output: inout DayOutput) async {}
+    func dayNineteen(_ output: inout DayOutput) async {}
+    func dayTwenty(_ output: inout DayOutput) async {}
+    func dayTwentyOne(_ output: inout DayOutput) async {}
+    func dayTwentyTwo(_ output: inout DayOutput) async {}
+    func dayTwentyThree(_ output: inout DayOutput) async {}
+    func dayTwentyFour(_ output: inout DayOutput) async {}
+    func dayTwentyFive(_ output: inout DayOutput) async {}
 }

@@ -35,7 +35,7 @@ final class Day1720: Day {
             }
         }
 
-        var cubes = SparseSpace(initialValues: Dictionary(uniqueKeysWithValues: pointCubes))
+        let cubes = SparseSpace(initialValues: Dictionary(uniqueKeysWithValues: pointCubes))
 
         debugPrint(cubes)
     }

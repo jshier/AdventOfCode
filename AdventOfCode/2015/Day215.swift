@@ -9,7 +9,7 @@
 import Foundation
 
 extension TwentyFifteen {
-    func dayTwo(_ output: inout YearRunner.DayOutput) async {
+    func dayTwo(_ output: inout DayOutput) async {
         let input = String.input(forDay: 2, year: 2015)
         let presents = input.split(separator: "\n").map(Present.init)
         let totalArea = presents.map(\.presentArea).reduce(0, +)

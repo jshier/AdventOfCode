@@ -9,7 +9,7 @@
 import Foundation
 
 extension TwentyFifteen {
-    func dayThree(_ output: inout YearRunner.DayOutput) async {
+    func dayThree(_ output: inout DayOutput) async {
         let fileInput = String.input(forDay: .three, year: .fifteen)
 //        let testInput = "^>v<"
         let input = fileInput

@@ -238,6 +238,23 @@ extension Sequence {
         guard let initialResult = iterator.next() else { return nil }
         return try IteratorSequence(iterator).reduce(into: initialResult, nextPartialResult)
     }
+
+    func concurrentMapStream<T>(performing closure: @escaping (Element) async -> T) -> AsyncStream<T> {
+        AsyncStream { continuation in
+            Task {
+                let maps = self.map { element in
+                    Task { await closure(element) }
+                }
+
+                for map in maps {
+                    let output = await map.value
+                    continuation.yield(output)
+                }
+
+                continuation.finish()
+            }
+        }
+    }
 }
 
 extension Sequence where Element: Equatable {

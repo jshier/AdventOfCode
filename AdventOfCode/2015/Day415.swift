@@ -38,7 +38,7 @@ final class Day415: Day {
 }
 
 extension TwentyFifteen {
-    func dayFour(_ output: inout YearRunner.DayOutput) async {
+    func dayFour(_ output: inout DayOutput) async {
         let input = "ckczppom"
 
         let (stepOne, stepTwo) = await inParallel {
