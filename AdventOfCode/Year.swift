@@ -28,27 +28,27 @@ extension NewDay: CustomStringConvertible {
     var description: String { "\(rawValue)" }
 }
 
-class YearRunner {
+enum YearRunner {
     typealias DayParts = (day: NewDay, parts: Parts)
     typealias Parts = (partOne: String?, partTwo: String?)
-    
+
     struct DayOutput {
         var stepOne: String?
         var stepTwo: String?
         var expectedStepOne: String?
         var expectedStepTwo: String?
     }
-    
+
     struct YearOutput: CustomStringConvertible {
         let day: NewDay
         let year: Year
         let dayOutput: DayOutput
         let duration: Double
-        
+
         var description: String {
             let stepOneCorrect = (dayOutput.stepOne != nil) && (dayOutput.stepOne == dayOutput.expectedStepOne)
             let stepTwoCorrect = (dayOutput.stepTwo != nil) && (dayOutput.stepTwo == dayOutput.expectedStepTwo)
-            
+
             return """
             ========== Dec. \(day.rawValue), \(year.rawValue) ==========
             Step One: \(dayOutput.stepOne ?? "Incomplete.") \(stepOneCorrect ? "Correct!" : "Incorrect!")
@@ -96,11 +96,11 @@ extension Runner {
                     for day in NewDay.allCases {
                         group.addTask { await self.run(day) }
                     }
-                    
+
                     for await output in group {
                         continuation.yield(output)
                     }
-                    
+
                     continuation.finish()
                 }
             }
@@ -163,9 +163,9 @@ extension Runner {
             await dayTwentyFive(&output)
         }
         let end = CFAbsoluteTimeGetCurrent()
-        return YearRunner.YearOutput(day: day, year: self.year, dayOutput: output, duration: (end - start))
+        return YearRunner.YearOutput(day: day, year: year, dayOutput: output, duration: end - start)
     }
-    
+
     func dayOne(_ output: inout YearRunner.DayOutput) async {}
     func dayTwo(_ output: inout YearRunner.DayOutput) async {}
     func dayThree(_ output: inout YearRunner.DayOutput) async {}

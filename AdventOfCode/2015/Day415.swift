@@ -48,7 +48,7 @@ extension TwentyFifteen {
                 hex = "\(input)\(count)".md5()
                 count += 1
             } while hex.prefix(5) != "00000"
-            
+
             return "\(count - 1)"
         } part2: {
             var count = 0
@@ -59,7 +59,7 @@ extension TwentyFifteen {
                 count += 1
                 if count % 1_000_000 == 0 { print(count) }
             } while dataHex.prefix(3) != threeZeroBytes
-            
+
             return "\(count - 1)"
         }
 

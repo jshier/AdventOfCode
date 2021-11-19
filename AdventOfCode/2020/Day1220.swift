@@ -6,8 +6,8 @@
 //  Copyright © 2018 Jon Shier. All rights reserved.
 //
 
-import Foundation
 import CollectionConcurrencyKit
+import Foundation
 
 final class Day1220: Day {
     override var expectedStageOneOutput: String? { "364" }

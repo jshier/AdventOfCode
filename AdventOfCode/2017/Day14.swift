@@ -15,7 +15,7 @@ final class Day14: Day {
         let input = fileInput
         let lines = (0..<128).map { "\(input)-\($0)" }
         let hashes = lines.map { $0.rawKnotHash() }
-        let binaryStrings = hashes.map { $0.map { $0.paddedBinaryRepresentation }.joined() }
+        let binaryStrings = hashes.map { $0.map(\.paddedBinaryRepresentation).joined() }
         let ones = binaryStrings.map { $0.count { $0 == "1" } }.reduce(0, +)
 
         stageOneOutput = "\(ones)"
@@ -31,7 +31,7 @@ final class Day14: Day {
         }
 
         func adjacentPoints(for localPoints: Set<Point>) -> Set<Point> {
-            let adjacents = Set(localPoints.flatMap { $0.adjacentPoints })
+            let adjacents = Set(localPoints.flatMap(\.adjacentPoints))
             let containedPoints = points.intersection(adjacents)
 
             let newPoints = containedPoints.subtracting(localPoints)

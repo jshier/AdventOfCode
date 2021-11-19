@@ -20,7 +20,7 @@ struct Point: Hashable, Codable {
 
 extension Point {
     private static var surroundingPointCache: [Point: [Point]] = [:]
-    
+
     static let surroundingOffsets = [(0, 1), (1, 0), (0, -1), (-1, 0), (-1, 1), (1, -1), (1, 1), (-1, -1)]
 
     var surroundingPoints: [Point] {
@@ -63,8 +63,8 @@ extension Point {
     }
 
     func distance(to point: Point) -> Double {
-        (Double(((point.x - x) * (point.x - x)) +
-                ((point.y - y) * (point.y - y)))).squareRoot()
+        Double(((point.x - x) * (point.x - x)) +
+            ((point.y - y) * (point.y - y))).squareRoot()
     }
 
     func rotated(_ direction: Direction) -> Point {
@@ -182,9 +182,9 @@ struct PointRayIterator: IteratorProtocol {
     let minY: Int
     let maxX: Int
     let maxY: Int
-    
+
     private var nextValue: Point
-    
+
     @inlinable
     @inline(__always)
     init(origin: Point, offset: (Int, Int), minX: Int, minY: Int, maxX: Int, maxY: Int) {
@@ -196,16 +196,16 @@ struct PointRayIterator: IteratorProtocol {
         self.maxY = maxY
         nextValue = origin + offset
     }
-    
+
     @inlinable
     @inline(__always)
     mutating func next() -> Point? {
         guard nextValue.x >= minX, nextValue.x <= maxX, nextValue.y >= minY, nextValue.y <= maxY else { return nil }
-        
+
         let current = nextValue
-        
+
         nextValue = nextValue + offset
-        
+
         return current
     }
 }
@@ -217,7 +217,7 @@ struct PointRaySequence: Sequence {
     let minY: Int
     let maxX: Int
     let maxY: Int
-    
+
     func makeIterator() -> PointRayIterator {
         PointRayIterator(origin: origin, offset: offset, minX: minX, minY: minY, maxX: maxX, maxY: maxY)
     }

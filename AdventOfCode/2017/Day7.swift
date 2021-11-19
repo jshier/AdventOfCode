@@ -75,11 +75,11 @@ final class Day7: Day {
         let heldPrograms: [Program]
 
         var heldNames: [String] {
-            heldPrograms.map { $0.name }
+            heldPrograms.map(\.name)
         }
 
         var heldWeight: Int {
-            heldPrograms.map { $0.totalWeight }.reduce(0, +)
+            heldPrograms.map(\.totalWeight).reduce(0, +)
         }
 
         var totalWeight: Int {
@@ -87,11 +87,11 @@ final class Day7: Day {
         }
 
         var heldWeights: [Int] {
-            heldPrograms.map { $0.heldWeight }
+            heldPrograms.map(\.heldWeight)
         }
 
         var heldTotalWeights: [Int] {
-            heldPrograms.map { $0.totalWeight }
+            heldPrograms.map(\.totalWeight)
         }
 
         var heldWeightMismatch: Bool {
@@ -100,9 +100,9 @@ final class Day7: Day {
 
         func findWeightMismatch() {
             if !heldTotalWeights.allElementsEqual() {
-                print(heldPrograms.map { $0.heldTotalWeights })
+                print(heldPrograms.map(\.heldTotalWeights))
                 print(heldTotalWeights)
-                print(heldPrograms.map { $0.weight })
+                print(heldPrograms.map(\.weight))
                 print(heldNames)
                 heldPrograms.forEach { $0.findWeightMismatch() }
             }

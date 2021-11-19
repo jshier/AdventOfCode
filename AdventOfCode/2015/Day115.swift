@@ -22,7 +22,7 @@ extension TwentyFifteen {
 
         output.stepOne = "\(openDifference)"
         output.expectedStepOne = "74"
-        
+
         var value = 0
         var position = 0
 
@@ -31,7 +31,7 @@ extension TwentyFifteen {
 
             position += 1
         }
-        
+
         output.stepTwo = "\(position)"
         output.expectedStepTwo = "1795"
     }

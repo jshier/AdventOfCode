@@ -9,7 +9,7 @@
 final class Day1720: Day {
     override var expectedStageOneOutput: String? { nil }
     override var expectedStageTwoOutput: String? { nil }
-    
+
     override func perform() async {
         // let input = String.input(forDay: 17, year: 2020)
         let input = """
@@ -17,26 +17,26 @@ final class Day1720: Day {
         ..#
         ###
         """
-        
+
         enum Cube: String, SparselyRepresentable, CustomStringConvertible {
             static let sparseValue: Cube = .inactive
-            
+
             case active = "#"
             case inactive = "."
-            
+
             var description: String {
                 rawValue
             }
         }
-        
+
         let pointCubes: [(Point3D, Cube)] = input.byLines().indexed().flatMap { y, line in
             line.map(String.init).indexed().map { x, character in
                 (Point3D(x: x, y: y, z: 0), Cube(rawValue: character)!)
             }
         }
-        
+
         var cubes = SparseSpace(initialValues: Dictionary(uniqueKeysWithValues: pointCubes))
-        
+
         debugPrint(cubes)
     }
 }
@@ -45,19 +45,19 @@ struct Point3D {
     var x: Int
     var y: Int
     var z: Int
-    
+
     var surroundingPoints: [Point3D] {
         var points: [Point3D] = []
         for newX in (x - 1)...(x + 1) {
             for newY in (y - 1)...(y + 1) {
                 for newZ in (z - 1)...(z + 1) {
                     if newX == x && newY == y && newZ == z { continue }
-                    
+
                     points.append(Point3D(x: newX, y: newY, z: newZ))
                 }
             }
         }
-        
+
         return points
     }
 }
@@ -68,18 +68,18 @@ extension Point3D: Comparable {
         if lhs.x != rhs.x {
             return lhs.x < rhs.x
         }
-        
+
         if lhs.y != rhs.y {
             return lhs.y < rhs.y
         }
-        
+
         return lhs.z < rhs.z
     }
 }
 
 struct SparseSpace<T: SparselyRepresentable> {
     private var space: [Point3D: T] = [:]
-    
+
     subscript(_ point: Point3D) -> T? {
         get { space[point, default: T.sparseValue] }
         set {
@@ -90,7 +90,7 @@ struct SparseSpace<T: SparselyRepresentable> {
             }
         }
     }
-    
+
     subscript(x: Int, y: Int, z: Int) -> T? {
         self[Point3D(x: x, y: y, z: z)]
     }
@@ -109,9 +109,9 @@ protocol SparselyRepresentable {
 extension SparseSpace: CustomDebugStringConvertible {
     var debugDescription: String {
         let keys = space.keys
-        
+
         guard !keys.isEmpty else { return "No values." }
-        
+
         return keys
             .sorted { $0.z > $1.z }
             .chunked { $0.z == $1.z }
@@ -121,8 +121,9 @@ extension SparseSpace: CustomDebugStringConvertible {
                 \(zChunk.sorted { $0.y < $1.y }
                     .chunked { $0.y == $1.y }
                     .map { $0.sorted()
-                             .map { String(describing: self[$0] ?? T.sparseValue) }
-                             .joined() }
+                        .map { String(describing: self[$0] ?? T.sparseValue) }
+                        .joined()
+                    }
                     .joined(separator: "\n"))
                 """
             }

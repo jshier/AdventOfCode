@@ -12,12 +12,12 @@ extension TwentyFifteen {
     func dayTwo(_ output: inout YearRunner.DayOutput) async {
         let input = String.input(forDay: 2, year: 2015)
         let presents = input.split(separator: "\n").map(Present.init)
-        let totalArea = presents.map { $0.presentArea }.reduce(0, +)
+        let totalArea = presents.map(\.presentArea).reduce(0, +)
 
         output.stepOne = "\(totalArea)"
         output.expectedStepOne = "1588178"
 
-        let totalRibbon = presents.map { $0.ribbonLength }.reduce(0, +)
+        let totalRibbon = presents.map(\.ribbonLength).reduce(0, +)
 
         output.stepTwo = "\(totalRibbon)"
         output.expectedStepTwo = "3783758"

@@ -90,7 +90,7 @@ final class Day1420: Day {
                         }
                     }
 
-                    let floatingLocations = currentBitmask[twosStart...].map { $0.index }
+                    let floatingLocations = currentBitmask[twosStart...].map(\.index)
                     let locations: [Int] = floatingLocations.reduce(into: [processedLocation]) { locations, floatingIndex in
                         locations = locations.map { [$0 | (1 << floatingIndex), $0 & ~(1 << floatingIndex)] }.flatMap { $0 }
                     }

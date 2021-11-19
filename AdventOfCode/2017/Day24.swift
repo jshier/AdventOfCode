@@ -22,7 +22,7 @@ final class Day24: Day {
         let input = fileInput
         let components = input.split(separator: "\n").map(Component.init)
         let bridges = Bridge(components: []).build(using: components)
-        let strengths = bridges.map { $0.strength }
+        let strengths = bridges.map(\.strength)
 
         stageOneOutput = "\(strengths.max()!)"
 
@@ -55,7 +55,7 @@ struct Bridge {
     }
 
     var strength: Int {
-        components.map { $0.strength }.reduce(0, +)
+        components.map(\.strength).reduce(0, +)
     }
 
     var length: Int {
@@ -87,7 +87,7 @@ struct Bridge {
 
 extension Bridge: CustomStringConvertible {
     var description: String {
-        components.map { $0.description }.joined(separator: "--")
+        components.map(\.description).joined(separator: "--")
     }
 }
 

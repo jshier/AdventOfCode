@@ -8,14 +8,14 @@
 
 @_exported import Algorithms
 @_exported import Collections
+import CoreFoundation
 @_exported import CountedSet
 @_exported import Numerics
 @_exported import SE0270_RangeSet
 @_exported import SwiftGraph
-import CoreFoundation
 
 @main
-struct AdventOfCode {
+enum AdventOfCode {
     static func main() async {
         let fifteen = TwentyFifteen()
 //        let start = CFAbsoluteTimeGetCurrent()
@@ -24,6 +24,6 @@ struct AdventOfCode {
 //        }
 //        let end = CFAbsoluteTimeGetCurrent()
 //        print("Overall Execution Time: \(end - start)s")
-        print(await fifteen.run(.four))
+        print(await fifteen.run(.six))
     }
 }

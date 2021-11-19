@@ -90,10 +90,10 @@ final class Day1519: Day {
 }
 
 func print(_ map: [Point: Day1519.RepairDroid.Space], currentLocation: Point) {
-    let minX = map.keys.map { $0.x }.min()!
-    let maxX = map.keys.map { $0.x }.max()!
-    let minY = map.keys.map { $0.y }.min()!
-    let maxY = map.keys.map { $0.y }.max()!
+    let minX = map.keys.map(\.x).min()!
+    let maxX = map.keys.map(\.x).max()!
+    let minY = map.keys.map(\.y).min()!
+    let maxY = map.keys.map(\.y).max()!
 
     var output = ""
     for y in (minY...maxY).reversed() {

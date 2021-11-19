@@ -8,7 +8,7 @@
 
 import Foundation
 
- final class Day1620: Day {
+final class Day1620: Day {
     override var expectedStageOneOutput: String? { nil }
     override var expectedStageTwoOutput: String? { nil }
 
@@ -28,6 +28,5 @@ import Foundation
 //        55,2,20
 //        38,6,12
 //        """
-        
     }
- }
+}

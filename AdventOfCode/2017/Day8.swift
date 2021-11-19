@@ -20,7 +20,7 @@ final class Day8: Day {
         let input = fileInput
         let lines = input.split(separator: "\n")
         let instructions = lines.map(Instruction.init)
-        let allRegisters = Set(instructions.map { $0.register })
+        let allRegisters = Set(instructions.map(\.register))
         var state = Dictionary(uniqueKeysWithValues: zip(allRegisters, Array(repeating: 0, count: allRegisters.count)))
         var largestValueEverSeen = 0
         for instruction in instructions {

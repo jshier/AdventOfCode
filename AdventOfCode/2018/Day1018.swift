@@ -79,12 +79,12 @@ final class Day1018: Day {
 
 extension Day1018.Stars: CustomStringConvertible {
     var description: String {
-        let positions = stars.map { $0.position }.sorted()
-        let largestY = positions.map { $0.y }.max()!
+        let positions = stars.map(\.position).sorted()
+        let largestY = positions.map(\.y).max()!
         let furthestPoint = Point(positions.last!.x, largestY)
         let allPoints = PointSequence(start: positions.first!, end: furthestPoint).map { $0 }
-        let xs = Array(Set(allPoints.map { $0.x })).sorted()
-        let ys = Array(Set(allPoints.map { $0.y })).sorted()
+        let xs = Array(Set(allPoints.map(\.x))).sorted()
+        let ys = Array(Set(allPoints.map(\.y))).sorted()
         var output = ""
 
         for y in ys {

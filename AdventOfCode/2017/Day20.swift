@@ -26,7 +26,7 @@ final class Day20: Day {
                 particles[i] = particles[i].move()
             }
         }
-        let distances = particles.map { $0.position.distanceToOrigin }
+        let distances = particles.map(\.position.distanceToOrigin)
         let minIndex = distances.firstIndex(of: distances.min()!)!
         stageOneOutput = "\(minIndex)"
 

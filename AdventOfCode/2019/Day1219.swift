@@ -36,7 +36,7 @@ final class Day1219: Day {
             duplicateDetected = simulateStep(for: &moons, seenX: &seenX, seenY: &seenY, seenZ: &seenZ)
         }
 
-        let totalEnergy = moons.map { $0.totalEnergy }.reduce(0, +)
+        let totalEnergy = moons.map(\.totalEnergy).reduce(0, +)
 
         stageOneOutput = "\(totalEnergy)"
 

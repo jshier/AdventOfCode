@@ -78,7 +78,7 @@ final class Day1020: Day {
         let fours = rangeLengths.count(of: 4)
         let threes = rangeLengths.count(of: 3)
         let twos = rangeLengths.count(of: 2)
-        
+
         stageTwoOutput = "\(pow(7, fours) * pow(4, threes) * pow(2, twos))"
     }
 }

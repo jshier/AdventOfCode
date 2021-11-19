@@ -17,7 +17,7 @@ extension String {
         try! String(contentsOfFile: "/Users/jshier/Desktop/Code/AdventOfCode/Inputs/\(year)/day\(day).txt")
             .trimmingWhitespace()
     }
-    
+
     static func input(forDay day: NewDay, year: Year) -> String {
         try! String(contentsOfFile: "/Users/jshier/Desktop/Code/AdventOfCode/Inputs/\(year.rawValue)/day\(day.rawValue).txt")
             .trimmingWhitespace()
@@ -74,7 +74,7 @@ extension String {
     }
 
     var unicodeValues: [Int] {
-        map { $0.unicodeValue }
+        map(\.unicodeValue)
     }
 
     /// Extremely inefficient!
@@ -308,10 +308,10 @@ extension Sequence where Element == String {
 
 extension Dictionary where Key == Point {
     func print(perElement: (_ element: Value) -> String) -> String {
-        let minX = keys.map { $0.x }.min()!
-        let maxX = keys.map { $0.x }.max()!
-        let minY = keys.map { $0.y }.min()!
-        let maxY = keys.map { $0.y }.max()!
+        let minX = keys.map(\.x).min()!
+        let maxX = keys.map(\.x).max()!
+        let minY = keys.map(\.y).min()!
+        let maxY = keys.map(\.y).max()!
 
         var output = ""
         for y in (minY...maxY).reversed() {
@@ -327,10 +327,10 @@ extension Dictionary where Key == Point {
 extension Sequence where Element == Point {
     func print(lowestToHighest: Bool = true, perElement: (_ contained: Bool) -> String) -> String {
         let values = sorted()
-        let minX = values.map { $0.x }.min()!
-        let maxX = values.map { $0.x }.max()!
-        let minY = values.map { $0.y }.min()!
-        let maxY = values.map { $0.y }.max()!
+        let minX = values.map(\.x).min()!
+        let maxX = values.map(\.x).max()!
+        let minY = values.map(\.y).min()!
+        let maxY = values.map(\.y).max()!
 
         var output = ""
         for y in minY...maxY {

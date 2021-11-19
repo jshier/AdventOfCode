@@ -19,7 +19,7 @@ final class Day1319: Day {
         computer.execute()
         let outputs = computer.outputs.asOutput()
 
-        let blocks = outputs.compactMap { $0.id }.count { $0 == .block }
+        let blocks = outputs.compactMap(\.id).count { $0 == .block }
 
         stageOneOutput = "\(blocks)"
 
@@ -45,14 +45,14 @@ final class Day1319: Day {
                 switch computer.execute() {
                 case .exited:
                     let outputs = computer.outputs.asOutput()
-                    score = outputs.compactMap { $0.score }.last ?? score
+                    score = outputs.compactMap(\.score).last ?? score
                     break loop
                 case .needInput:
                     let outputs = computer.outputs.asOutput()
                     let ball = outputs.last { $0.id == .ball }!.tile!
                     let paddle = outputs.last { $0.id == .paddle }!.tile!
-                    score = outputs.compactMap { $0.score }.last ?? score
-                    outputs.compactMap { $0.tile }.forEach { screen[$0.point] = $0.id }
+                    score = outputs.compactMap(\.score).last ?? score
+                    outputs.compactMap(\.tile).forEach { screen[$0.point] = $0.id }
 
                     if ball.x < paddle.x {
                         computer.input.append(-1)

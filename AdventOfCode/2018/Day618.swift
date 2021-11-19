@@ -22,7 +22,7 @@ final class Day618: Day {
         let points = input.byLines().map(Point.init)
         let sorted = points.sorted()
         var closestPointMap: [Point: Point] = [:]
-        let largestY = sorted.map { $0.y }.max()!
+        let largestY = sorted.map(\.y).max()!
         let furthestPoint = Point(sorted.last!.x, largestY)
         outer: for point in PointSequence(start: sorted.first!, end: furthestPoint) {
             var shortestDistance = Int.max
