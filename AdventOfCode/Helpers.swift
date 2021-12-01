@@ -6,6 +6,7 @@
 //  Copyright © 2017 Jon Shier. All rights reserved.
 //
 
+import Algorithms
 import CommonCrypto
 import CryptoKit
 import Foundation
@@ -231,6 +232,10 @@ extension Sequence {
         var iterator = makeIterator()
         guard let initialResult = iterator.next() else { return nil }
         return try IteratorSequence(iterator).reduce(into: initialResult, nextPartialResult)
+    }
+
+    func chaining<Other>(_ other: Other) -> Chain2Sequence<Self, Other> where Other: Sequence {
+        chain(self, other)
     }
 }
 

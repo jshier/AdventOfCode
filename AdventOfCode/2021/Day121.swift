@@ -14,20 +14,20 @@ extension TwentyTwentyOne {
     func dayOne(_ output: inout DayOutput) async {
         let input = String.input(forDay: .one, year: .twentyOne)
         let depths = input.byLines().asInts()
-        let (stepOne, stepTwo) = await inParallel {
-            let increases = depths.adjacentPairs().count(where: <)
 
-            return "\(increases)"
+        await into(&output) {
+            depths.adjacentPairs().count(where: <)
         } part2: {
-            let increases = depths.windows(ofCount: 3).map(\.sum).adjacentPairs().count(where: <)
-
-            return "\(increases)"
+            depths.windows(ofCount: 3).map(\.sum).adjacentPairs().count(where: <)
         }
 
-        output.stepOne = stepOne
         output.expectedStepOne = "1624"
-
-        output.stepTwo = stepTwo
         output.expectedStepTwo = "1653"
+    }
+}
+
+extension Int {
+    func into(_ output: inout String?) {
+        output = "\(self)"
     }
 }
