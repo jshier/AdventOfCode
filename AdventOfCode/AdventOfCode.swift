@@ -10,20 +10,27 @@
 @_exported import Collections
 import CoreFoundation
 @_exported import CountedSet
+@_exported import IntegerUtilities
 @_exported import Numerics
 @_exported import SE0270_RangeSet
 @_exported import SwiftGraph
 
 @main
 enum AdventOfCode {
-    static func main() async {
-        let fifteen = TwentyFifteen()
-        let start = CFAbsoluteTimeGetCurrent()
-        for await day in fifteen.runAllDays() {
-            print(day)
+    // Make async if they ever fix the compiler crash, or the 5.6 toolchain starts working.
+    static func main() {
+        Task {
+            let year = TwentyTwentyOne()
+//            let start = CFAbsoluteTimeGetCurrent()
+//            for await day in year.runAllDays() {
+//                print(day)
+//            }
+//            let end = CFAbsoluteTimeGetCurrent()
+//            print("Overall Execution Time: \(end - start)s")
+            print(await year.run(.one))
+            exit(0)
         }
-        let end = CFAbsoluteTimeGetCurrent()
-        print("Overall Execution Time: \(end - start)s")
-//        print(await fifteen.run(.six))
+
+        dispatchMain()
     }
 }

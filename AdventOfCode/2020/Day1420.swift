@@ -35,7 +35,7 @@ final class Day1420: Day {
                 let parts = string.components(separatedBy: " = ")
                 if parts[0] == "mask" {
                     self = .updateBitmask(parts[1].map { $0 }.reversed().indexed().map { tuple in
-                        (index: tuple.index, element: Int(String(tuple.element)) ?? 2)
+                        (index: tuple.index, value: Int(String(tuple.element)) ?? 2)
                     }
                     )
                 } else {
@@ -53,7 +53,7 @@ final class Day1420: Day {
             var currentBitmask: [(index: Int, value: Int)] = []
 
             var memorySum: Int {
-                memory.values.sum()
+                memory.values.sum
             }
 
             mutating func applyStage1(_ action: Action) {

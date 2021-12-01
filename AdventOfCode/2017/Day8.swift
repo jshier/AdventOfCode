@@ -8,17 +8,17 @@
 
 import Foundation
 
-final class Day8: Day {
-    override func perform() async {
-//        let exampleInput = """
-//            b inc 5 if a > 1
-//            a inc 1 if b < 5
-//            c dec -10 if a >= 1
-//            c inc -20 if c == 10
-//            """
-        let fileInput = String.input(forDay: 8, year: 2017)
+extension TwentySeventeen {
+    func dayEight(_ output: inout DayOutput) async {
+        let fileInput = String.input(forDay: .eight, year: .seventeen)
+        //        let exampleInput = """
+        //            b inc 5 if a > 1
+        //            a inc 1 if b < 5
+        //            c dec -10 if a >= 1
+        //            c inc -20 if c == 10
+        //            """
         let input = fileInput
-        let lines = input.split(separator: "\n")
+        let lines = input.byLines()
         let instructions = lines.map(Instruction.init)
         let allRegisters = Set(instructions.map(\.register))
         var state = Dictionary(uniqueKeysWithValues: zip(allRegisters, Array(repeating: 0, count: allRegisters.count)))
@@ -36,17 +36,19 @@ final class Day8: Day {
         }
 
         let largestValueInRegister = state.values.max()!
-        stageOneOutput = "\(largestValueInRegister)"
-        stageTwoOutput = "\(largestValueEverSeen)"
+        output.stepOne = "\(largestValueInRegister)"
+        output.expectedStepOne = "6343"
+        output.stepTwo = "\(largestValueEverSeen)"
+        output.expectedStepTwo = "7184"
     }
 
-    struct Instruction {
+    private struct Instruction {
         let register: String
         let action: Action
         let amount: Int
         let condition: Condition
 
-        init(line: Substring) {
+        init<S>(line: S) where S: StringProtocol {
             let split = line.components(separatedBy: " if ")
             let registerActionAmount = split[0].split(separator: " ")
             register = String(registerActionAmount[0])

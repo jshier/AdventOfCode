@@ -24,8 +24,8 @@ final class Day120: Day {
         let tripleProduct = ints
             .lazy
             .combinations(ofCount: 2)
-            .first { ints.contains(2020 - $0.sum()) }
-            .map { $0.product() * (2020 - $0.sum()) }!
+            .first { ints.contains(2020 - $0.sum) }
+            .map { $0.product() * (2020 - $0.sum) }!
 
         stageTwoOutput = "\(tripleProduct)"
     }

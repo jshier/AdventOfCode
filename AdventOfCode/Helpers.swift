@@ -9,6 +9,7 @@
 import CommonCrypto
 import CryptoKit
 import Foundation
+import IntegerUtilities
 
 // MARK: - String
 
@@ -160,19 +161,8 @@ extension Sequence where Element == Int {
 }
 
 extension Collection where Element: Comparable {
-    func maxValueIndex() -> (value: Element, index: Index)? {
-        guard !isEmpty else { return nil }
-
-        var maxValue = first!
-        var maxIndex = startIndex
-        for (index, element) in zip(indices, self) {
-            if element > maxValue {
-                maxValue = element
-                maxIndex = index
-            }
-        }
-
-        return (value: maxValue, index: maxIndex)
+    func maxValueIndex() -> (index: Index, element: Element)? {
+        indexed().max { $0.element < $1.element }
     }
 }
 
@@ -200,6 +190,10 @@ public extension Collection {
         }
 
         return chunks
+    }
+
+    func allPairs() -> LazyMapSequence<CombinationsSequence<Self>, (Self.Element, Self.Element)> {
+        combinations(ofCount: 2).lazy.map { ($0[0], $0[1]) }
     }
 }
 
@@ -238,8 +232,10 @@ extension Sequence {
         guard let initialResult = iterator.next() else { return nil }
         return try IteratorSequence(iterator).reduce(into: initialResult, nextPartialResult)
     }
+}
 
-    func concurrentMapStream<T>(performing closure: @escaping (Element) async -> T) -> AsyncStream<T> {
+extension Sequence where Self: Sendable, Element: Sendable {
+    func concurrentMapStream<T: Sendable>(performing closure: @escaping @Sendable (Element) async -> T) -> AsyncStream<T> {
         AsyncStream { continuation in
             Task {
                 let maps = self.map { element in
@@ -247,8 +243,7 @@ extension Sequence {
                 }
 
                 for map in maps {
-                    let output = await map.value
-                    continuation.yield(output)
+                    continuation.yield(await map.value)
                 }
 
                 continuation.finish()
@@ -263,8 +258,20 @@ extension Sequence where Element: Equatable {
     }
 }
 
+extension Sequence where Element: Comparable {
+    func onMinAndMax<T>(_ perform: (_ min: Element, _ max: Element) -> T) -> T {
+        let (min, max) = minAndMax()!
+        return perform(min, max)
+    }
+
+    func onMaxAndMin<T>(_ perform: (_ max: Element, _ min: Element) -> T) -> T {
+        let (min, max) = minAndMax()!
+        return perform(max, min)
+    }
+}
+
 extension Sequence where Element: AdditiveArithmetic {
-    func sum() -> Element {
+    var sum: Element {
         reduce(Element.zero, +)
     }
 }
@@ -298,9 +305,7 @@ extension Int {
 }
 
 func greatestCommonDivisor(_ lhs: Int, _ rhs: Int) -> Int {
-    if rhs == 0 { return lhs }
-
-    return greatestCommonDivisor(rhs, lhs % rhs)
+    gcd(lhs, rhs)
 }
 
 func leastCommonMultiple(_ lhs: Int, _ rhs: Int) -> Int {
@@ -320,6 +325,12 @@ extension Sequence where Element == String {
 
     func asDoubles() -> [Double] {
         compactMap(Double.init)
+    }
+}
+
+extension String {
+    func asInts() -> [Int] {
+        map(String.init).asInts()
     }
 }
 

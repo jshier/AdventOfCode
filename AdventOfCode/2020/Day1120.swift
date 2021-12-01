@@ -119,28 +119,28 @@ final class Day1120: Day {
     }
 }
 
-struct Grid<T> {
-    private(set) var values: [T]
+struct Grid<Element> {
+    private(set) var values: [Element]
 
     let height: Int
     let width: Int
     let points: PointSequence
 
-    init(_ values: [[T]]) {
+    init(_ values: [[Element]]) {
         self.values = values.flatMap { $0 }
         height = values.count
         width = values[0].count
         points = PointSequence(start: .origin, end: Point(width - 1, height - 1))
     }
 
-    init(_ values: [T], height: Int, width: Int) {
+    init(_ values: [Element], height: Int, width: Int) {
         self.values = values
         self.height = height
         self.width = width
         points = PointSequence(start: .origin, end: Point(width, height))
     }
 
-    init(repeating value: T, size: Int) {
+    init(repeating value: Element, size: Int) {
         values = Array(repeating: value, count: size * size + 1)
         width = size
         height = size
@@ -149,24 +149,26 @@ struct Grid<T> {
 
     @inline(__always)
     @inlinable
-    subscript(_ point: Point) -> T {
+    subscript(_ point: Point) -> Element {
         get { values[width * point.y + point.x] }
         set { values[width * point.y + point.x] = newValue }
     }
 
     @inline(__always)
     @inlinable
-    subscript(_ x: Int, _ y: Int) -> T {
+    subscript(_ x: Int, _ y: Int) -> Element {
         get { values[width * y + x] }
         set { values[width * y + x] = newValue }
     }
 
-    func surroundingValues(for point: Point) -> [T] {
+    func surroundingValues(for point: Point) -> [Element] {
         let points = point.surroundingPoints.filter { ($0.x >= 0 && $0.x < width) && ($0.y >= 0 && $0.y < height) }
 
         return points.map { self[$0] }
     }
 }
+
+extension Grid: Sendable where Element: Sendable {}
 
 extension Grid: Sequence {
     func makeIterator() -> some IteratorProtocol {
@@ -174,7 +176,7 @@ extension Grid: Sequence {
     }
 }
 
-extension Grid: Equatable where T: Equatable {
+extension Grid: Equatable where Element: Equatable {
     static func == (_ lhs: Grid, _ rhs: Grid) -> Bool {
         lhs.values == rhs.values
     }

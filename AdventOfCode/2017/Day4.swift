@@ -8,52 +8,30 @@
 
 import Foundation
 
-final class Day4: Day {
-    override func perform() async {
-        let input = String.input(forDay: 7, year: 2017)
-        let lines = input.split(separator: "\n")
-        let uniquePassphrases: Int = lines.map { line -> (Int, Int) in
-            let words = line.split(separator: " ")
-            let totalCount = words.count
-            let uniqueCount = Set(words).count
-            return (totalCount, uniqueCount)
-        }
-        .reduce(0) { result, element -> Int in
-            (element.0 == element.1) ? result + 1 : result
+extension TwentySeventeen {
+    func dayFour(_ output: inout DayOutput) async {
+        let input = String.input(forDay: .four, year: .seventeen)
+        let lines = input.byLines()
+        let unique = lines.filter { line in
+            let words = line.bySpaces()
+            return Set(words).count == words.count
         }
 
-        let uniqueAnagramlessPhrases = lines.map { line -> Bool in
-            let words = line.split(separator: " ")
-            let totalCount = words.count
-            let uniqueCount = Set(words).count
+        output.stepOne = "\(unique.count)"
+        output.expectedStepOne = "383"
 
-            guard totalCount == uniqueCount else { return false }
-
-            var anagrams: [String: [String]] = [:]
-            for word in words {
-                let string = String(word)
-                if var strings = anagrams[string.anagramKey] {
-                    strings.append(string)
-                    anagrams[string.anagramKey] = strings
-                } else {
-                    anagrams[string.anagramKey] = [string]
-                }
-                if anagrams[string.anagramKey]!.count > 1 { return false }
-            }
-
-            return true
-        }
-        .reduce(0) { result, element -> Int in
-            element ? result + 1 : result
+        let anagramless = unique.filter { line in
+            let words = line.bySpaces()
+            return Set(words.map(\.anagramKey)).count == words.count
         }
 
-        stageOneOutput = "\(uniquePassphrases)"
-        stageTwoOutput = "\(uniqueAnagramlessPhrases)"
+        output.stepTwo = "\(anagramless.count)"
+        output.expectedStepTwo = "265"
     }
 }
 
 extension String {
     var anagramKey: String {
-        String(map { $0 }.sorted())
+        String(sorted())
     }
 }

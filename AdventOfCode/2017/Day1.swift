@@ -8,54 +8,60 @@
 
 import Foundation
 
-final class Day1: Day {
-    override func perform() async {
-        let input = String.input(forDay: 1, year: 2017)
+final class TwentySeventeen: Runner {
+    var year: Year { .seventeen }
+}
+
+extension TwentySeventeen {
+    func dayOne(_ output: inout DayOutput) async {
+        let input = String.input(forDay: .one, year: .seventeen)
         let calculator = CaptchaCalculator(input)
 
-        stageOneOutput = "\(calculator.calculateCircularSum())"
-        stageTwoOutput = "\(calculator.calculateHalfwaySum())"
+        output.stepOne = "\(calculator.calculateCircularSum())"
+        output.expectedStepOne = "1102"
+        output.stepTwo = "\(calculator.calculateHalfwaySum())"
+        output.expectedStepTwo = "1076"
+    }
+}
+
+private struct CaptchaCalculator {
+    let storage: [Int]
+
+    init(_ input: String) {
+        storage = input.asInts()
     }
 
-    struct CaptchaCalculator {
-        let storage: [Int]
+    func calculateCircularSum() -> Int {
+        var sum = 0
+        var index = storage.startIndex
+        while index < storage.endIndex {
+            let potentialNextIndex = storage.index(after: index)
+            let nextIndex = (potentialNextIndex == storage.endIndex) ? storage.startIndex : potentialNextIndex
 
-        init(_ input: String) {
-            storage = input.map(String.init).compactMap(Int.init)
-        }
-
-        func calculateCircularSum() -> Int {
-            var sum = 0
-            var index = storage.startIndex
-            while index < storage.endIndex {
-                let potentialNextIndex = storage.index(after: index)
-                let nextIndex = (potentialNextIndex == storage.endIndex) ? storage.startIndex : potentialNextIndex
-
-                if storage[index] == storage[nextIndex] && index != nextIndex {
-                    sum += storage[index]
-                }
-
-                index = potentialNextIndex
+            if storage[index] == storage[nextIndex] && index != nextIndex {
+                sum += storage[index]
             }
 
-            return sum
+            index = potentialNextIndex
         }
 
-        func calculateHalfwaySum() -> Int {
-            var sum = 0
-            var index = storage.startIndex
-            var middleIndex = storage.index(index, offsetBy: storage.count / 2)
-            while index < storage.endIndex {
-                if storage[index] == storage[middleIndex] {
-                    sum += storage[index]
-                }
+        return sum
+    }
 
-                let potentialNextMiddleIndex = storage.index(after: middleIndex)
-                middleIndex = (potentialNextMiddleIndex == storage.endIndex) ? storage.startIndex : potentialNextMiddleIndex
-                index = storage.index(after: index)
+    func calculateHalfwaySum() -> Int {
+        var sum = 0
+        var index = storage.startIndex
+        var middleIndex = storage.index(index, offsetBy: storage.count / 2)
+        while index < storage.endIndex {
+            if storage[index] == storage[middleIndex] {
+                sum += storage[index]
             }
 
-            return sum
+            let potentialNextMiddleIndex = storage.index(after: middleIndex)
+            middleIndex = (potentialNextMiddleIndex == storage.endIndex) ? storage.startIndex : potentialNextMiddleIndex
+            index = storage.index(after: index)
         }
+
+        return sum
     }
 }

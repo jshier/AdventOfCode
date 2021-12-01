@@ -8,8 +8,9 @@
 
 import Foundation
 
-final class Day7: Day {
-    override func perform() async {
+extension TwentySeventeen {
+    func daySeven(_ output: inout DayOutput) async {
+        let input = String.input(forDay: .seven, year: .seventeen)
 //        let input =
 //            """
 //            pbga (66)
@@ -26,8 +27,8 @@ final class Day7: Day {
 //            gyxo (61)
 //            cntj (57)
 //            """
-        let input = String.input(forDay: 7, year: 2017)
-        let lines = input.split(separator: "\n").map(String.init)
+
+        let lines = input.byLines()
         let allNames: [String] = lines.map { line in
             let endNameIndex = line.firstIndex { $0 == " " }!
             return String(line.prefix(upTo: endNameIndex))
@@ -53,7 +54,8 @@ final class Day7: Day {
         let baseName = uniqueNames.subtracting(uniqueHostedNames)
         let baseProgramName = baseName.first!
 
-        stageOneOutput = baseProgramName
+        output.stepOne = baseProgramName
+        output.expectedStepOne = "mkxke"
 
         func createProgram(_ name: String) -> Program {
             Program(name: name, weight: namesAndWeights[name]!, heldPrograms: namesAndLinks[name]?.map(createProgram) ?? [])
@@ -61,56 +63,57 @@ final class Day7: Day {
 
         let baseProgram = createProgram(baseProgramName)
 
-        stageTwoOutput = "\(baseProgram.heldWeightMismatch)"
+        output.stepTwo = "\(baseProgram.heldWeightMismatch)"
+        output.expectedStepTwo = "268"
         baseProgram.findWeightMismatch()
 
 //        let baseProgram = programs.first { $0.name == baseProgramName }!
 //        let programMap = Dictionary(uniqueKeysWithValues: zip(programs.map { $0.name }, programs))
 //        let weights = Dictionary(uniqueKeysWithValues: zip(programs.map { $0.name }, programs.map { $0.weight }))
     }
+}
 
-    struct Program {
-        let name: String
-        let weight: Int
-        let heldPrograms: [Program]
+private struct Program {
+    let name: String
+    let weight: Int
+    let heldPrograms: [Program]
 
-        var heldNames: [String] {
-            heldPrograms.map(\.name)
-        }
+    var heldNames: [String] {
+        heldPrograms.map(\.name)
+    }
 
-        var heldWeight: Int {
-            heldPrograms.map(\.totalWeight).reduce(0, +)
-        }
+    var heldWeight: Int {
+        heldPrograms.map(\.totalWeight).reduce(0, +)
+    }
 
-        var totalWeight: Int {
-            heldWeight + weight
-        }
+    var totalWeight: Int {
+        heldWeight + weight
+    }
 
-        var heldWeights: [Int] {
-            heldPrograms.map(\.heldWeight)
-        }
+    var heldWeights: [Int] {
+        heldPrograms.map(\.heldWeight)
+    }
 
-        var heldTotalWeights: [Int] {
-            heldPrograms.map(\.totalWeight)
-        }
+    var heldTotalWeights: [Int] {
+        heldPrograms.map(\.totalWeight)
+    }
 
-        var heldWeightMismatch: Bool {
-            !heldTotalWeights.allElementsEqual()
-        }
+    var heldWeightMismatch: Bool {
+        !heldTotalWeights.allElementsEqual()
+    }
 
-        func findWeightMismatch() {
-            if !heldTotalWeights.allElementsEqual() {
-                print(heldPrograms.map(\.heldTotalWeights))
-                print(heldTotalWeights)
-                print(heldPrograms.map(\.weight))
-                print(heldNames)
-                heldPrograms.forEach { $0.findWeightMismatch() }
-            }
+    func findWeightMismatch() {
+        if !heldTotalWeights.allElementsEqual() {
+//            print(heldPrograms.map(\.heldTotalWeights))
+//            print(heldTotalWeights)
+//            print(heldPrograms.map(\.weight))
+//            print(heldNames)
+            heldPrograms.forEach { $0.findWeightMismatch() }
         }
     }
 }
 
-struct SimpleCountedSet<Element: Hashable> {
+private struct SimpleCountedSet<Element: Hashable> {
     let counts: [Element: Int]
 
     init(_ array: [Element]) {

@@ -52,7 +52,7 @@ final class Day1820: Day {
 
         let results = equations.map { evaluate($0.map { $0 }, startingAt: 0) }
 
-        stageOneOutput = "\(results.map(\.result).sum())"
+        stageOneOutput = "\(results.map(\.result).sum)"
 
         func evaluateWithPrecedence(_ string: [Character], startingAt startIndex: Int) -> (result: Int, lastIndex: Int) {
             enum Element: Equatable {
@@ -124,6 +124,6 @@ final class Day1820: Day {
 
         let stageTwo = equations.map { evaluateWithPrecedence($0.map { $0 }, startingAt: 0) }
 
-        stageTwoOutput = "\(stageTwo.map(\.result).sum())"
+        stageTwoOutput = "\(stageTwo.map(\.result).sum)"
     }
 }

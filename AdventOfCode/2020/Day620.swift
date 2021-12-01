@@ -21,7 +21,7 @@ final class Day620: Day {
             }
         }
 
-        stageOneOutput = "\(answers.map(\.count).sum())"
+        stageOneOutput = "\(answers.map(\.count).sum)"
 
         let everyoneAnswers = groupAnswers.map {
             $0.byLines().map { line in
@@ -35,6 +35,6 @@ final class Day620: Day {
             $0.reduce { $0 = $0.intersection($1) }
         }
 
-        stageTwoOutput = "\(union.map(\.count).sum())"
+        stageTwoOutput = "\(union.map(\.count).sum)"
     }
 }

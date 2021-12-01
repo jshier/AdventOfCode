@@ -61,7 +61,7 @@ final class Day720: Day {
         func bags(from origin: String) -> Int {
             guard let contained = bagMap[origin] else { return 0 }
 
-            return contained.map { $0.quantity + bags(from: $0.color) * $0.quantity }.sum()
+            return contained.map { $0.quantity + bags(from: $0.color) * $0.quantity }.sum
         }
 
         stageTwoOutput = "\(bags(from: "shiny gold"))"

@@ -6,42 +6,42 @@
 //  Copyright © 2017 Jon Shier. All rights reserved.
 //
 
-import Foundation
+import CoreFoundation
 
-class Day5: Day {
-    override func perform() async {
-        let input = String.input(forDay: 5, year: 2017)
-        let instructions = input.split(separator: "\n").map(String.init).compactMap(Int.init)
+extension TwentySeventeen {
+    func dayFive(_ output: inout DayOutput) async {
+        let input = String.input(forDay: .five, year: .seventeen)
+        let program = input.byLines().asInts()
 
-        stageOneOutput = "\(performStageOneProgram(with: instructions))"
-        stageTwoOutput = "\(performStageTwoProgram(with: instructions))"
-    }
+        let (partOne, partTwo) = await inParallel {
+            var instructions = program
+            var index = instructions.startIndex
+            var steps = 0
+            while index < instructions.endIndex {
+                let jump = instructions[index]
+                instructions[index] += 1
+                index = index + jump
+                steps += 1
+            }
 
-    func performStageOneProgram(with program: [Int]) -> Int {
-        var instructions = program
-        var index = instructions.startIndex
-        var steps = 0
-        while index < instructions.endIndex {
-            let jump = instructions[index]
-            instructions[index] += 1
-            index = index + jump
-            steps += 1
+            return "\(steps)"
+        } part2: {
+            var instructions = program
+            var index = instructions.startIndex
+            var steps = 0
+            while index < instructions.endIndex {
+                let jump = instructions[index]
+                instructions[index] += (jump >= 3) ? -1 : 1
+                index = index + jump
+                steps += 1
+            }
+
+            return "\(steps)"
         }
 
-        return steps
-    }
-
-    func performStageTwoProgram(with program: [Int]) -> Int {
-        var instructions = program
-        var index = instructions.startIndex
-        var steps = 0
-        while index < instructions.endIndex {
-            let jump = instructions[index]
-            instructions[index] += (jump >= 3) ? -1 : 1
-            index = index + jump
-            steps += 1
-        }
-
-        return steps
+        output.stepOne = partOne
+        output.expectedStepOne = "391540"
+        output.stepTwo = partTwo
+        output.expectedStepTwo = "30513679"
     }
 }

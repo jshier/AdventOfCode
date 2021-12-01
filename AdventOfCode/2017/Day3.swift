@@ -8,22 +8,23 @@
 
 import Foundation
 
-class Day3: Day {
-    override func perform() async {
+extension TwentySeventeen {
+    func dayThree(_ output: inout DayOutput) async {
         let input = 312_051
 
         let spiral = SquareSpiral()
         spiral.generate(outTo: input)
 
-        stageOneOutput = "\(spiral.distanceToOrigin)"
-
-        stageTwoOutput = "\(spiral.firstLargerValue)"
+        output.stepOne = "\(spiral.distanceToOrigin)"
+        output.expectedStepOne = "430"
+        output.stepTwo = "\(spiral.firstLargerValue)"
+        output.expectedStepTwo = "312453"
     }
 }
 
-final class SquareSpiral {
-    private var spiral: [Point] = [Point(0, 0)]
-    private var spiralValues: [Point: Int] = [Point(0, 0): 1]
+private final class SquareSpiral {
+    private var spiral: [Point] = [.origin]
+    private var spiralValues: [Point: Int] = [.origin: 1]
     private var direction = Direction.right
     var firstLargerValue = 0
 
@@ -39,7 +40,7 @@ final class SquareSpiral {
                     previousPoint = point
 
                     if firstLargerValue == 0 {
-                        let newValue = point.surroundingPoints.map { spiralValues[$0] ?? 0 }.reduce(0, +)
+                        let newValue = point.surroundingPoints.map { spiralValues[$0] ?? 0 }.sum
                         if newValue > value {
                             firstLargerValue = newValue
                         } else {

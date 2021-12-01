@@ -54,7 +54,7 @@ struct YearOutput: CustomStringConvertible {
     }
 }
 
-protocol Runner: AnyObject {
+protocol Runner: AnyObject, Sendable {
     var year: Year { get }
     func dayOne(_ output: inout DayOutput) async
     func dayTwo(_ output: inout DayOutput) async
@@ -88,6 +88,7 @@ extension Runner {
         NewDay.allCases.concurrentMapStream(performing: run)
     }
 
+    @Sendable
     func run(_ day: NewDay) async -> YearOutput {
         let start = CFAbsoluteTimeGetCurrent()
         var output = DayOutput()
@@ -144,7 +145,6 @@ extension Runner {
             await dayTwentyFive(&output)
         }
         let end = CFAbsoluteTimeGetCurrent()
-        print("\(day) complete!")
         return YearOutput(day: day, year: year, dayOutput: output, duration: end - start)
     }
 
@@ -174,3 +174,45 @@ extension Runner {
     func dayTwentyFour(_ output: inout DayOutput) async {}
     func dayTwentyFive(_ output: inout DayOutput) async {}
 }
+
+protocol ParallelCollectionProtocol: Collection where Element: Sendable {
+    var parallel: ParallelCollection<Self> { get }
+}
+
+struct ParallelCollection<Base> where Base: Collection, Base.Element: Sendable {
+    private(set) var base: Base
+
+    init(_ base: Base) {
+        self.base = base
+    }
+}
+
+extension ParallelCollection {
+    func map<T: Sendable>(priority: TaskPriority? = nil, transform: @Sendable @escaping (Base.Element) async -> T) async -> [T] {
+        let tasks = base.map { element in
+            Task { await transform(element) }
+        }
+        var results: [T] = []
+        for task in tasks {
+            await results.append(task.value)
+        }
+
+        return results
+    }
+}
+
+// extension Collection where Self: ParallelCollectionProtocol {
+//    var parallel: ParallelCollection<Self> {
+//        ParallelCollection(self)
+//    }
+// }
+
+// extension Array: ParallelCollectionProtocol where Element: Sendable {
+//    var parallel: ParallelCollection<Array<Element>> {
+//        ParallelCollection(self)
+//    }
+// }
+
+// extension Array: ParallelCollectionProtocol where Element: Sendable {}
+
+// extension ParallelCollection: ParallelCollectionProtocol {}

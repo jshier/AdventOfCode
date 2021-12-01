@@ -6,20 +6,17 @@
 //  Copyright © 2017 Jon Shier. All rights reserved.
 //
 
-import Foundation
-
-final class Day6: Day {
-    override func perform() async {
-        let fileInput = String.input(forDay: 6, year: 2017)
-        let fileBanks = fileInput.split(separator: "\t")
-            .compactMap { Int($0) }
+extension TwentySeventeen {
+    func daySix(_ output: inout DayOutput) async {
+        let fileInput = String.input(forDay: .six, year: .seventeen)
+        let fileBanks = fileInput.byTabs().asInts()
         // let testBanks = [0, 2, 7, 0]
         var banks = fileBanks
         var seen: Set<String> = [banks.asString]
         var redistributions = 0
 
         func redistribute() {
-            var (value, index) = banks.maxValueIndex()!
+            var (index, value) = banks.maxValueIndex()!
             banks[index] = 0
             while value > 0 {
                 index = banks.circularIndex(after: index)
@@ -44,13 +41,15 @@ final class Day6: Day {
 
         redistributeUntilDuplicate()
 
-        stageOneOutput = "\(redistributions)"
+        output.stepOne = "\(redistributions)"
+        output.expectedStepOne = "11137"
 
         seen.removeAll()
         seen.insert(banks.asString)
 
         redistributions = 0
         redistributeUntilDuplicate()
-        stageTwoOutput = "\(redistributions)"
+        output.stepTwo = "\(redistributions)"
+        output.expectedStepTwo = "1037"
     }
 }

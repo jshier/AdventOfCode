@@ -6,7 +6,6 @@
 //  Copyright © 2018 Jon Shier. All rights reserved.
 //
 
-import CollectionConcurrencyKit
 import Foundation
 
 final class Day1220: Day {

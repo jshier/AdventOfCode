@@ -38,29 +38,11 @@
         }
       },
       {
-        "package": "swift-argument-parser",
-        "repositoryURL": "https://github.com/apple/swift-argument-parser",
-        "state": {
-          "branch": null,
-          "revision": "e1465042f195f374b94f915ba8ca49de24300a0d",
-          "version": "1.0.2"
-        }
-      },
-      {
         "package": "swift-collections",
         "repositoryURL": "https://github.com/apple/swift-collections",
         "state": {
           "branch": "main",
-          "revision": "6eeae8088b389f8ade37efe26519cf6b8b867af2",
-          "version": null
-        }
-      },
-      {
-        "package": "swift-experimental-string-processing",
-        "repositoryURL": "https://github.com/apple/swift-experimental-string-processing.git",
-        "state": {
-          "branch": "main",
-          "revision": "0e0abde0f643e962f8148d452bead322a0416119",
+          "revision": "22dc81b89fc1dee9d52c6a3fcfa1fcd08f184ae8",
           "version": null
         }
       },
@@ -69,7 +51,7 @@
         "repositoryURL": "https://github.com/apple/swift-numerics",
         "state": {
           "branch": "main",
-          "revision": "f5b33a6c076a721e216f266070d0fe21ae7a985c",
+          "revision": "1939f34fde2903b5943884a2eb0ba91679b5ebc8",
           "version": null
         }
       },
@@ -89,15 +71,6 @@
           "branch": null,
           "revision": "76b5180a5cc32eda7f5236a756f4c1e0936311c6",
           "version": "3.1.0"
-        }
-      },
-      {
-        "package": "VectorMath",
-        "repositoryURL": "https://github.com/nicklockwood/VectorMath.git",
-        "state": {
-          "branch": null,
-          "revision": "2de2585f455dc8e15d642ca51b29b1917e68fd1e",
-          "version": "0.4.1"
         }
       }
     ]
