@@ -39,6 +39,8 @@ extension Point {
         Point.adjacentOffsets.map { self + $0 }
     }
 
+    var product: Int { x * y }
+
     var squareDistance: Int {
         abs(x) + abs(y)
     }
