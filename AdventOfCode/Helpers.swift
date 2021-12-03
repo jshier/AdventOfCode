@@ -11,6 +11,7 @@ import CommonCrypto
 import CryptoKit
 import Foundation
 import IntegerUtilities
+import SE0270_RangeSet
 
 // MARK: - String
 
@@ -293,8 +294,12 @@ extension Int {
     }
 
     var paddedBinaryRepresentation: String {
+        binaryRepresentation(paddedToLength: 8)
+    }
+
+    func binaryRepresentation(paddedToLength length: Int) -> String {
         let string = String(self, radix: 2)
-        let padding = String(repeating: "0", count: 8 - string.count)
+        let padding = String(repeating: "0", count: length - string.count)
         return padding + string
     }
 
@@ -315,6 +320,10 @@ func greatestCommonDivisor(_ lhs: Int, _ rhs: Int) -> Int {
 
 func leastCommonMultiple(_ lhs: Int, _ rhs: Int) -> Int {
     abs(lhs * rhs) / greatestCommonDivisor(lhs, rhs)
+}
+
+func pow(_ lhs: Int, _ rhs: Int) -> Int {
+    Int(pow(Double(lhs), Double(rhs)))
 }
 
 extension Data {
