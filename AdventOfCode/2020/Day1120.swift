@@ -166,6 +166,12 @@ struct Grid<Element> {
 
         return points.map { self[$0] }
     }
+
+    func point(forValue value: Element) -> Point? where Element: Equatable {
+        guard let index = values.firstIndex(of: value) else { return nil }
+
+        return Point(index % width, index / width)
+    }
 }
 
 extension Grid: Sendable where Element: Sendable {}
@@ -182,8 +188,8 @@ extension Grid: Equatable where Element: Equatable {
     }
 }
 
-extension Grid: CustomStringConvertible {
-    var description: String {
-        values.map(String.init(describing:)).joined().chunked(into: width).joined(separator: "\n")
-    }
-}
+// extension Grid: CustomStringConvertible {
+//    var description: String {
+//        values.map(String.init(describing:)).joined().chunked(into: width).joined(separator: "\n")
+//    }
+// }
