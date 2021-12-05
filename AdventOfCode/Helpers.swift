@@ -238,6 +238,10 @@ extension Sequence {
     func chaining<Other>(_ other: Other) -> Chain2Sequence<Self, Other> where Other: Sequence {
         chain(self, other)
     }
+
+    func asArray() -> [Element] {
+        Array(self)
+    }
 }
 
 extension Sequence where Self: Sendable, Element: Sendable {
@@ -311,6 +315,15 @@ extension Int {
 
     func lowestCommonMultiple(with other: Int) -> Int {
         abs(self * other) / greatestCommonDivisor(with: other)
+    }
+
+    var vectorOffset: Int {
+        switch self {
+        case ..<0: return -1
+        case 0: return 0
+        case 1...: return 1
+        default: fatalError("Impossible!")
+        }
     }
 }
 

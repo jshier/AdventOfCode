@@ -232,3 +232,49 @@ extension Point {
         }
     }
 }
+
+struct PointVectorIterator: IteratorProtocol {
+    let start: Point
+    let end: Point
+
+    private let offset: (Int, Int)
+    private let pastTheEndPoint: Point
+    private var nextValue: Point
+
+    init(start: Point, end: Point) {
+        self.start = start
+        self.end = end
+        let dx = end.x - start.x
+        let dy = end.y - start.y
+        offset = (dx.vectorOffset, dy.vectorOffset)
+        nextValue = start
+        pastTheEndPoint = end + offset
+    }
+
+    @inlinable
+    @inline(__always)
+    mutating func next() -> Point? {
+        guard nextValue != pastTheEndPoint else { return nil }
+
+        let current = nextValue
+
+        nextValue = current + offset
+
+        return current
+    }
+}
+
+struct PointVectorSequence: Sequence {
+    let start: Point
+    let end: Point
+
+    func makeIterator() -> PointVectorIterator {
+        PointVectorIterator(start: start, end: end)
+    }
+}
+
+extension Point {
+    func vector(to point: Point) -> PointVectorSequence {
+        PointVectorSequence(start: self, end: point)
+    }
+}
