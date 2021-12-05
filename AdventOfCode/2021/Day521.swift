@@ -6,6 +6,7 @@
 //  Copyright © 2018 Jon Shier. All rights reserved.
 //
 
+import CountedSet
 import Foundation
 import SE0270_RangeSet
 
