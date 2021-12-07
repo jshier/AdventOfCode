@@ -328,12 +328,7 @@ extension Int {
     }
 
     var vectorOffset: Int {
-        switch self {
-        case ..<0: return -1
-        case 0: return 0
-        case 1...: return 1
-        default: fatalError("Impossible!")
-        }
+        signum()
     }
 
     var sum: Int {
