@@ -12,33 +12,35 @@ extension TwentyTwentyOne {
 //        let input = "3,4,3,1,2"
         let numbers = input.byCommas().asInts()
 
-        var lanternFish: [Int: Int] = numbers.reduce(into: [:]) { partialResult, value in
-            partialResult[value, default: 0] += 1
+        var lanternFish: [Int] = numbers.reduce(into: Array(repeating: 0, count: 9)) { partialResult, value in
+            partialResult[value] += 1
         }
-        var nextFish: [Int: Int] = [:]
+        var nextFish: [Int] = Array(repeating: 0, count: 9)
         for day in 0..<256 {
             for age in 0...8 {
                 if age == 0 {
-                    guard let count = lanternFish[age], count > 0 else { continue }
+                    let count = lanternFish[age]
+                    guard count > 0 else { continue }
 
-                    nextFish[6, default: 0] += count
-                    nextFish[8, default: 0] = count
+                    nextFish[6] += count
+                    nextFish[8] = count
                 } else {
-                    guard let count = lanternFish[age], count > 0 else { continue }
+                    let count = lanternFish[age]
+                    guard count > 0 else { continue }
 
-                    nextFish[age - 1, default: 0] += count
+                    nextFish[age - 1] += count
                 }
             }
 
             lanternFish = nextFish
-            nextFish.removeAll(keepingCapacity: true)
+            nextFish = Array(repeating: 0, count: 9)
 
             if day == 79 {
-                output.stepOne = "\(lanternFish.values.sum)"
+                output.stepOne = "\(lanternFish.sum)"
             }
         }
 
-        output.stepTwo = "\(lanternFish.values.sum)"
+        output.stepTwo = "\(lanternFish.sum)"
 
         output.expectedStepOne = "352872"
         output.expectedStepTwo = "1604361182149"
