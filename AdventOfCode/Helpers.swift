@@ -325,6 +325,10 @@ extension Int {
         default: fatalError("Impossible!")
         }
     }
+
+    var sum: Int {
+        (0...self).reduce(0, +)
+    }
 }
 
 func greatestCommonDivisor(_ lhs: Int, _ rhs: Int) -> Int {

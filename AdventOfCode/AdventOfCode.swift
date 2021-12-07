@@ -27,7 +27,7 @@ enum AdventOfCode {
 //            }
 //            let end = CFAbsoluteTimeGetCurrent()
 //            print("Overall Execution Time: \(end - start)s")
-            print(await year.run(.six))
+            print(await year.run(.seven))
             exit(0)
         }
 
