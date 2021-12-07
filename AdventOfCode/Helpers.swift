@@ -176,7 +176,17 @@ extension Collection where Element: Equatable {
     }
 }
 
-public extension Collection {
+extension Collection where Element: BinaryInteger, Index == Int {
+    var median: Element {
+        self[count / 2]
+    }
+
+    var average: Int {
+        Int(sum) / count
+    }
+}
+
+extension Collection {
     func chunked(into size: Int) -> [SubSequence] {
         var chunks: [SubSequence] = []
         var i = startIndex
@@ -327,7 +337,7 @@ extension Int {
     }
 
     var sum: Int {
-        (0...self).reduce(0, +)
+        (self * (self + 1)) / 2
     }
 }
 

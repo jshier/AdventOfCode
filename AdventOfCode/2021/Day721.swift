@@ -13,16 +13,16 @@ extension TwentyTwentyOne {
         let crabs = input.byCommas().asInts().sorted()
 
         await into(&output) { () -> Int in
-            let median = crabs[crabs.count / 2]
+            let median = crabs.median
 
             return crabs.reduce(0) { result, crab in
-                result + (max(crab, median) - min(crab, median))
+                result + abs(crab - median)
             }
         } part2: { () -> Int in
-            let average = crabs.sum / crabs.count
+            let average = crabs.average
 
             return crabs.reduce(0) { result, crab in
-                result + (max(crab, average) - min(crab, average)).sum
+                result + abs(crab - average).sum
             }
         }
 
