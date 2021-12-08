@@ -9,32 +9,18 @@
 func inParallel(part1: @Sendable @escaping () async -> String,
                 part2: @Sendable @escaping () async -> String) async
     -> (stepOne: String, stepTwo: String) {
-    await withTaskGroup(of: String.self, returning: (String, String).self) { group in
-        group.addTask {
-            await "\(part1())"
-        }
-        group.addTask {
-            await "\(part2())"
-        }
+    let steps = [Task { await part1() },
+                 Task { await part2() }]
 
-        return await (group.next()!, group.next()!)
-    }
+    return await (steps[0].value, steps[1].value)
 }
 
 func into<StepOne, StepTwo>(_ output: inout DayOutput,
                             part1: @Sendable @escaping () async -> StepOne,
                             part2: @Sendable @escaping () async -> StepTwo) async {
-    let steps = await withTaskGroup(of: String.self, returning: (String, String).self) { group in
-        group.addTask {
-            await "\(part1())"
-        }
-        group.addTask {
-            await "\(part2())"
-        }
+    let steps = [Task { await "\(part1())" },
+                 Task { await "\(part2())" }]
 
-        return await (group.next()!, group.next()!)
-    }
-
-    output.stepOne = steps.0
-    output.stepTwo = steps.1
+    output.stepOne = await steps[0].value
+    output.stepTwo = await steps[1].value
 }
