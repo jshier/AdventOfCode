@@ -36,9 +36,7 @@ extension TwentyTwentyOne {
             while let point = pointsToCheck.popLast() {
                 guard seen.insert(point).inserted else { continue }
 
-                pointsToCheck.append(contentsOf: caveMap.adjacentPointValues(for: point)
-                    .filter { $0.value != 9 }
-                    .map(\.point))
+                pointsToCheck.append(contentsOf: caveMap.adjacentPoints(for: point).filter { caveMap[$0] != 9 })
             }
 
             return seen.count

@@ -37,6 +37,7 @@ extension Point {
     static let adjacentOffsets = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
     var adjacentPoints: [Point] {
+//        Point.adjacentOffsets.map { self + $0 }
         if let points = Point.adjacentPointCache[self] {
             return points
         } else {
