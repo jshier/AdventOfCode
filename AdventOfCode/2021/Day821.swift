@@ -10,17 +10,17 @@ extension TwentyTwentyOne {
     func dayEight(_ output: inout DayOutput) async {
         let input = String.input(forDay: .eight, year: .twentyOne)
 
-        let rightSide = input.byLines().flatMap { $0.components(separatedBy: " | ")[1].bySpaces() }
+        let sides = input.byLines().map { $0.components(separatedBy: " | ") }
+        let rightSide = sides.flatMap { $0[1].bySpaces() }
         let uniqueCounts = rightSide.reduce(0) { result, value in
             result + (([2, 3, 4, 7].contains(value.count)) ? 1 : 0)
         }
         output.stepOne = "\(uniqueCounts)"
         output.expectedStepOne = "512"
 
-        let values = input.byLines().map { line -> Int in
-            let sides = line.components(separatedBy: " | ")
-            let analyzer = Inputs(sides[0].bySpaces().map(Set.init))
-            return Int(sides[1].bySpaces().map { "\(analyzer.value(forSegments: $0))" }.joined())!
+        let values = sides.map { side -> Int in
+            let analyzer = Inputs(side[0].bySpaces().map(Set.init))
+            return Int(side[1].bySpaces().map { "\(analyzer.value(forSegments: $0))" }.joined())!
         }
 
         output.stepTwo = "\(values.sum)"

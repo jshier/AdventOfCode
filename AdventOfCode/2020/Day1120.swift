@@ -162,9 +162,24 @@ struct Grid<Element> {
     }
 
     func surroundingValues(for point: Point) -> [Element] {
-        let points = point.surroundingPoints.filter { ($0.x >= 0 && $0.x < width) && ($0.y >= 0 && $0.y < height) }
+        point.surroundingPoints
+            .filter { ($0.x >= 0 && $0.x < width) && ($0.y >= 0 && $0.y < height) }
+            .map { self[$0] }
+    }
 
-        return points.map { self[$0] }
+    func adjacentPoints(for point: Point) -> [Point] {
+        point.adjacentPoints
+            .filter { ($0.x >= 0 && $0.x < width) && ($0.y >= 0 && $0.y < height) }
+    }
+
+    func adjacentPointValues(for point: Point) -> [PointValue<Element>] {
+        adjacentPoints(for: point)
+            .map { PointValue(point: $0, value: self[$0]) }
+    }
+
+    func adjacentValues(for point: Point) -> [Element] {
+        adjacentPoints(for: point)
+            .map { self[$0] }
     }
 
     func point(forValue value: Element) -> Point? where Element: Equatable {
@@ -187,6 +202,26 @@ extension Grid: Equatable where Element: Equatable {
         lhs.values == rhs.values
     }
 }
+
+extension Grid: Hashable where Element: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(values)
+    }
+}
+
+struct PointValue<Element> {
+    let point: Point
+    let value: Element
+}
+
+extension PointValue: CustomStringConvertible {
+    var description: String {
+        "(\(point), \(value))"
+    }
+}
+
+extension PointValue: Equatable where Element: Equatable {}
+extension PointValue: Hashable where Element: Hashable {}
 
 // extension Grid: CustomStringConvertible {
 //    var description: String {

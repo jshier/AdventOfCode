@@ -9,18 +9,18 @@
 func inParallel(part1: @Sendable @escaping () async -> String,
                 part2: @Sendable @escaping () async -> String) async
     -> (stepOne: String, stepTwo: String) {
-    let steps = [Task { await part1() },
-                 Task { await part2() }]
+    async let p1 = part1()
+    async let p2 = part2()
 
-    return await (steps[0].value, steps[1].value)
+    return await (p1, p2)
 }
 
 func into<StepOne, StepTwo>(_ output: inout DayOutput,
                             part1: @Sendable @escaping () async -> StepOne,
                             part2: @Sendable @escaping () async -> StepTwo) async {
-    let steps = [Task { await "\(part1())" },
-                 Task { await "\(part2())" }]
+    async let p1 = part1()
+    async let p2 = part2()
 
-    output.stepOne = await steps[0].value
-    output.stepTwo = await steps[1].value
+    output.stepOne = await "\(p1)"
+    output.stepTwo = await "\(p2)"
 }
