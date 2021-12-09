@@ -43,5 +43,6 @@ extension TwentyTwentyOne {
         }
 
         output.stepTwo = "\(counts.max(count: 3).product())"
+        output.expectedStepTwo = "827904"
     }
 }

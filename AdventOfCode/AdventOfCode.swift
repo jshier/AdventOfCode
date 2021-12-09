@@ -18,7 +18,6 @@ import CoreFoundation
 
 @main
 enum AdventOfCode {
-    // Make async if they ever fix the compiler crash, or the 5.6 toolchain starts working.
     static func main() async {
         let year = TwentyTwentyOne()
         // let start = CFAbsoluteTimeGetCurrent()

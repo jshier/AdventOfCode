@@ -10,30 +10,25 @@ import Foundation
 
 extension TwentyTwentyOne {
     func dayThree(_ output: inout DayOutput) async {
-//        let input = String.input(forDay: .three, year: .twentyOne)
-        let input = """
-        00100
-        11110
-        10110
-        10111
-        10101
-        01111
-        00111
-        11100
-        10000
-        11001
-        00010
-        01010
-        """
+        let input = String.input(forDay: .three, year: .twentyOne)
+//        let input = """
+//        00100
+//        11110
+//        10110
+//        10111
+//        10101
+//        01111
+//        00111
+//        11100
+//        10000
+//        11001
+//        00010
+//        01010
+//        """
         let lines = input.byLines()
         let numbers = lines.compactMap { Int($0, radix: 2) }
         let length = lines[0].count
         let halfCount = Int(numbers.count / 2)
-
-        let transposed = lines.transposed()
-        let averages = transposed.map { Double($0.compactMap { Int(String($0)) }.sum) / Double($0.count) }
-        let dominantBits = averages.map { $0 >= 0.5 ? 1 : 0 }
-        print(dominantBits)
 
         let onesCounts = numbers.onesCounts(upToLength: length)
 
