@@ -141,6 +141,13 @@ extension Point {
         x = elements[0]
         y = elements[1]
     }
+
+    init(_ ints: [Int]) {
+        guard ints.count == 2 else { fatalError() }
+
+        x = ints[0]
+        y = ints[1]
+    }
 }
 
 struct PointIterator: IteratorProtocol {

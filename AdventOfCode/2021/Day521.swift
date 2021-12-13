@@ -36,6 +36,7 @@ extension TwentyTwentyOne {
                 let x2 = arrays[1][0]
                 let y1 = arrays[0][1]
                 let y2 = arrays[1][1]
+
                 if x1 == x2 || y1 == y2 {
                     return Point(x1, y1).vector(to: .init(x2, y2)).asArray()
                 } else {

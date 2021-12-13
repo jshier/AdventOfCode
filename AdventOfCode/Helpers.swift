@@ -388,6 +388,26 @@ extension Dictionary where Key == Point {
     }
 }
 
+extension Set where Element == Point {
+    func asStringGrid() -> String {
+        let (minX, maxX, minY, maxY) = reduce((0, 0, 0, 0)) { partialResult, point in
+            (minX: Swift.min(partialResult.minX, point.x),
+             maxX: Swift.max(partialResult.maxX, point.x),
+             minY: Swift.min(partialResult.minY, point.y),
+             maxY: Swift.max(partialResult.maxY, point.y))
+        }
+
+        var output = ""
+        for y in minY...maxY {
+            for x in minX...maxX {
+                output += contains(.init(x, y)) ? "#" : " "
+            }
+            output += "\n"
+        }
+        return output
+    }
+}
+
 extension Sequence where Element == Point {
     func print(lowestToHighest: Bool = true, perElement: (_ contained: Bool) -> String) -> String {
         let values = sorted()

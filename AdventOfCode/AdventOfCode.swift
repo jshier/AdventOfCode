@@ -20,12 +20,7 @@ import CoreFoundation
 enum AdventOfCode {
     static func main() async {
         let year = TwentyTwentyOne()
-        // let start = CFAbsoluteTimeGetCurrent()
-        // for await day in year.runAllDays() {
-        //     print(day)
-        // }
-        // let end = CFAbsoluteTimeGetCurrent()
-        // print("Overall Execution Time: \(end - start)s")
-        print(await year.run(.ten))
+//        await year.runAllDays()
+        print(await year.run(.thirteen))
     }
 }

@@ -39,7 +39,8 @@ struct YearOutput: CustomStringConvertible {
     let day: NewDay
     let year: Year
     let dayOutput: DayOutput
-    let duration: Double
+    let dayDuration: Double
+    let absoluteDuration: Double
 
     var description: String {
         let stepOneCorrect = (dayOutput.stepOne != nil) && (dayOutput.stepOne == dayOutput.expectedStepOne)
@@ -49,7 +50,7 @@ struct YearOutput: CustomStringConvertible {
         ========== Dec. \(day.rawValue), \(year.rawValue) ==========
         Step One: \(dayOutput.stepOne ?? "Incomplete.") \(stepOneCorrect ? "Correct!" : "Incorrect!")
         Step Two: \(dayOutput.stepTwo ?? "Incomplete.") \(stepTwoCorrect ? "Correct!" : "Incorrect!")
-        Completed in: \(duration)s
+        Completed in: \(dayDuration)s, \(absoluteDuration) overall.
         """
     }
 }
@@ -68,7 +69,7 @@ protocol Runner: AnyObject, Sendable {
     func dayTen(_ output: inout DayOutput) async
     func dayEleven(_ output: inout DayOutput) async
     func dayTwelve(_ output: inout DayOutput) async
-    func dayThirteen(_ output: inout DayOutput) async
+    func dayThirteen(input: String, output: inout DayOutput) async
     func dayFourteen(_ output: inout DayOutput) async
     func dayFifteen(_ output: inout DayOutput) async
     func daySixteen(_ output: inout DayOutput) async
@@ -84,14 +85,30 @@ protocol Runner: AnyObject, Sendable {
 }
 
 extension Runner {
-    func runAllDays() -> AsyncStream<YearOutput> {
-        NewDay.allCases.concurrentMapStream(performing: run)
+    func runAllDays() async {
+        let start = CFAbsoluteTimeGetCurrent()
+        var days: [YearOutput] = []
+        for await day in NewDay.allCases.concurrentMapStream(performing: run) {
+            print(day)
+            days.append(day)
+        }
+        let end = CFAbsoluteTimeGetCurrent()
+
+        let problemTime = days.map(\.dayDuration).sum
+        let absoluteTime = days.map(\.absoluteDuration).sum
+        let totalTime = end - start
+
+        print("""
+        Completed \(year) in \(totalTime)s total, \(absoluteTime)s absolute, and \(problemTime)s on problems.
+        """)
     }
 
     @Sendable
     func run(_ day: NewDay) async -> YearOutput {
-        let start = CFAbsoluteTimeGetCurrent()
+        let absoluteStart = CFAbsoluteTimeGetCurrent()
+        let input = String.input(forDay: day, year: year)
         var output = DayOutput()
+        let start = CFAbsoluteTimeGetCurrent()
         switch day {
         case .one:
             await dayOne(&output)
@@ -118,7 +135,7 @@ extension Runner {
         case .twelve:
             await dayTwelve(&output)
         case .thirteen:
-            await dayThirteen(&output)
+            await dayThirteen(input: input, output: &output)
         case .fourteen:
             await dayFourteen(&output)
         case .fifteen:
@@ -145,7 +162,11 @@ extension Runner {
             await dayTwentyFive(&output)
         }
         let end = CFAbsoluteTimeGetCurrent()
-        return YearOutput(day: day, year: year, dayOutput: output, duration: end - start)
+        return YearOutput(day: day,
+                          year: year,
+                          dayOutput: output,
+                          dayDuration: end - start,
+                          absoluteDuration: end - absoluteStart)
     }
 
     func dayOne(_ output: inout DayOutput) async {}
@@ -160,7 +181,7 @@ extension Runner {
     func dayTen(_ output: inout DayOutput) async {}
     func dayEleven(_ output: inout DayOutput) async {}
     func dayTwelve(_ output: inout DayOutput) async {}
-    func dayThirteen(_ output: inout DayOutput) async {}
+    func dayThirteen(input: String, output: inout DayOutput) async {}
     func dayFourteen(_ output: inout DayOutput) async {}
     func dayFifteen(_ output: inout DayOutput) async {}
     func daySixteen(_ output: inout DayOutput) async {}
@@ -174,45 +195,3 @@ extension Runner {
     func dayTwentyFour(_ output: inout DayOutput) async {}
     func dayTwentyFive(_ output: inout DayOutput) async {}
 }
-
-protocol ParallelCollectionProtocol: Collection where Element: Sendable {
-    var parallel: ParallelCollection<Self> { get }
-}
-
-struct ParallelCollection<Base> where Base: Collection, Base.Element: Sendable {
-    private(set) var base: Base
-
-    init(_ base: Base) {
-        self.base = base
-    }
-}
-
-extension ParallelCollection {
-    func map<T: Sendable>(priority: TaskPriority? = nil, transform: @Sendable @escaping (Base.Element) async -> T) async -> [T] {
-        let tasks = base.map { element in
-            Task { await transform(element) }
-        }
-        var results: [T] = []
-        for task in tasks {
-            await results.append(task.value)
-        }
-
-        return results
-    }
-}
-
-// extension Collection where Self: ParallelCollectionProtocol {
-//    var parallel: ParallelCollection<Self> {
-//        ParallelCollection(self)
-//    }
-// }
-
-// extension Array: ParallelCollectionProtocol where Element: Sendable {
-//    var parallel: ParallelCollection<Array<Element>> {
-//        ParallelCollection(self)
-//    }
-// }
-
-// extension Array: ParallelCollectionProtocol where Element: Sendable {}
-
-// extension ParallelCollection: ParallelCollectionProtocol {}

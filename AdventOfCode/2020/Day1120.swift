@@ -162,9 +162,13 @@ struct Grid<Element> {
     }
 
     func surroundingValues(for point: Point) -> [Element] {
+        surroundingPoints(for: point)
+            .map { self[$0] }
+    }
+
+    func surroundingPoints(for point: Point) -> [Point] {
         point.surroundingPoints
             .filter { ($0.x >= 0 && $0.x < width) && ($0.y >= 0 && $0.y < height) }
-            .map { self[$0] }
     }
 
     func adjacentPoints(for point: Point) -> [Point] {
@@ -223,8 +227,8 @@ extension PointValue: CustomStringConvertible {
 extension PointValue: Equatable where Element: Equatable {}
 extension PointValue: Hashable where Element: Hashable {}
 
-// extension Grid: CustomStringConvertible {
-//    var description: String {
-//        values.map(String.init(describing:)).joined().chunked(into: width).joined(separator: "\n")
-//    }
-// }
+extension Grid: CustomStringConvertible {
+    var description: String {
+        values.map(String.init(describing:)).joined().chunked(into: width).joined(separator: "\n")
+    }
+}
