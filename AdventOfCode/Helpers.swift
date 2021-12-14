@@ -426,3 +426,11 @@ extension Sequence where Element == Point {
         return (lowestToHighest ? output : output.split(separator: "\n").reversed().joined(separator: "\n"))
     }
 }
+
+extension Sequence where Element: Hashable {
+    func counted() -> [Element: Int] {
+        reduce(into: [:]) { partialResult, element in
+            partialResult[element, default: 0] += 1
+        }
+    }
+}

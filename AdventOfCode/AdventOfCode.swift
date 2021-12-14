@@ -21,6 +21,6 @@ enum AdventOfCode {
     static func main() async {
         let year = TwentyTwentyOne()
 //        await year.runAllDays()
-        print(await year.run(.thirteen))
+        print(await year.run(.fourteen))
     }
 }
