@@ -71,8 +71,8 @@ protocol Runner: AnyObject, Sendable {
     func dayTwelve(_ output: inout DayOutput) async
     func dayThirteen(input: String, output: inout DayOutput) async
     func dayFourteen(input: String, output: inout DayOutput) async
-    func dayFifteen(_ output: inout DayOutput) async
-    func daySixteen(_ output: inout DayOutput) async
+    func dayFifteen(input: String, output: inout DayOutput) async
+    func daySixteen(input: String, output: inout DayOutput) async
     func daySeventeen(_ output: inout DayOutput) async
     func dayEighteen(_ output: inout DayOutput) async
     func dayNineteen(_ output: inout DayOutput) async
@@ -139,9 +139,9 @@ extension Runner {
         case .fourteen:
             await dayFourteen(input: input, output: &output)
         case .fifteen:
-            await dayFifteen(&output)
+            await dayFifteen(input: input, output: &output)
         case .sixteen:
-            await daySixteen(&output)
+            await daySixteen(input: input, output: &output)
         case .seventeen:
             await daySeventeen(&output)
         case .eighteen:
@@ -183,8 +183,8 @@ extension Runner {
     func dayTwelve(_ output: inout DayOutput) async {}
     func dayThirteen(input: String, output: inout DayOutput) async {}
     func dayFourteen(input: String, output: inout DayOutput) async {}
-    func dayFifteen(_ output: inout DayOutput) async {}
-    func daySixteen(_ output: inout DayOutput) async {}
+    func dayFifteen(input: String, output: inout DayOutput) async {}
+    func daySixteen(input: String, output: inout DayOutput) async {}
     func daySeventeen(_ output: inout DayOutput) async {}
     func dayEighteen(_ output: inout DayOutput) async {}
     func dayNineteen(_ output: inout DayOutput) async {}

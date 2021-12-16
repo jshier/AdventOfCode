@@ -119,6 +119,7 @@
 		319347291FE0897B00D4EC4F /* Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319347281FE0897B00D4EC4F /* Day1.swift */; };
 		3193472B1FE0899B00D4EC4F /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3193472A1FE0899B00D4EC4F /* Day.swift */; };
 		3193472D1FE0AA2000D4EC4F /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3193472C1FE0AA2000D4EC4F /* Day2.swift */; };
+		31992DB82769B68A00CACF7D /* AStar in Frameworks */ = {isa = PBXBuildFile; productRef = 31992DB72769B68A00CACF7D /* AStar */; };
 		31A87E1C1FE4879600FF85D3 /* Day15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E1B1FE4879600FF85D3 /* Day15.swift */; };
 		31A87E201FE4964700FF85D3 /* Day4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E1F1FE4964700FF85D3 /* Day4.swift */; };
 		31A87E281FE49F9500FF85D3 /* Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A87E271FE49F9500FF85D3 /* Day7.swift */; };
@@ -423,6 +424,7 @@
 				31186DBB261BE262009991A5 /* DequeModule in Frameworks */,
 				310799962574607C00B54639 /* SE0270_RangeSet in Frameworks */,
 				31D511A4257CA2480009B5AB /* CountedSet in Frameworks */,
+				31992DB82769B68A00CACF7D /* AStar in Frameworks */,
 				3191E1B12573284500A8811A /* RealModule in Frameworks */,
 				31B521B22749CAA80058FDA3 /* CollectionConcurrencyKit in Frameworks */,
 				3191E1B32573284500A8811A /* Numerics in Frameworks */,
@@ -843,6 +845,7 @@
 				31186DBC261BE262009991A5 /* Collections */,
 				3165F513273EF691008F231F /* RegexOld */,
 				31B521B12749CAA80058FDA3 /* CollectionConcurrencyKit */,
+				31992DB72769B68A00CACF7D /* AStar */,
 			);
 			productName = AdventOfCode;
 			productReference = 318AC3261FE062A900A98B5E /* AdventOfCode */;
@@ -883,6 +886,7 @@
 				31186DB7261BE262009991A5 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				3165F512273EF691008F231F /* XCRemoteSwiftPackageReference "Regex" */,
 				31B521B02749CAA80058FDA3 /* XCRemoteSwiftPackageReference "CollectionConcurrencyKit" */,
+				31992DB62769B68A00CACF7D /* XCRemoteSwiftPackageReference "A-Star" */,
 			);
 			productRefGroup = 318AC3271FE062A900A98B5E /* Products */;
 			projectDirPath = "";
@@ -1251,6 +1255,14 @@
 				kind = branch;
 			};
 		};
+		31992DB62769B68A00CACF7D /* XCRemoteSwiftPackageReference "A-Star" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Dev1an/A-Star";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		31B521B02749CAA80058FDA3 /* XCRemoteSwiftPackageReference "CollectionConcurrencyKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JohnSundell/CollectionConcurrencyKit.git";
@@ -1319,6 +1331,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3191E1AD2573284500A8811A /* XCRemoteSwiftPackageReference "swift-numerics" */;
 			productName = Numerics;
+		};
+		31992DB72769B68A00CACF7D /* AStar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31992DB62769B68A00CACF7D /* XCRemoteSwiftPackageReference "A-Star" */;
+			productName = AStar;
 		};
 		31B521B12749CAA80058FDA3 /* CollectionConcurrencyKit */ = {
 			isa = XCSwiftPackageProductDependency;

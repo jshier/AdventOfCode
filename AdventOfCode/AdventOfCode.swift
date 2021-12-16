@@ -7,6 +7,7 @@
 //
 
 @_exported import Algorithms
+@_exported import AStar
 @_exported import CollectionConcurrencyKit
 @_exported import Collections
 import CoreFoundation
@@ -21,6 +22,6 @@ enum AdventOfCode {
     static func main() async {
         let year = TwentyTwentyOne()
 //        await year.runAllDays()
-        print(await year.run(.fourteen))
+        print(await year.run(.sixteen))
     }
 }

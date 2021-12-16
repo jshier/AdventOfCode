@@ -232,3 +232,20 @@ extension Grid: CustomStringConvertible {
         values.map(String.init(describing:)).joined().chunked(into: width).joined(separator: "\n")
     }
 }
+
+extension Grid: AStar.Graph where Element == Int {
+    typealias Node = Point
+    typealias Cost = Double
+
+    func nodesAdjacent(to node: Point) -> Set<Point> {
+        Set(adjacentPoints(for: node))
+    }
+
+    func estimatedCost(from start: Point, to end: Point) -> Double {
+        cost(from: start, to: end)
+    }
+
+    func cost(from start: Point, to end: Point) -> Double {
+        Double(self[end])
+    }
+}
