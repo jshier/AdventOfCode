@@ -21,7 +21,8 @@ import CoreFoundation
 enum AdventOfCode {
     static func main() async {
         let year = TwentyTwentyOne()
+//        let year = TwentyFifteen()
 //        await year.runAllDays()
-        print(await year.run(.sixteen))
+        print(await year.run(.twentyOne))
     }
 }

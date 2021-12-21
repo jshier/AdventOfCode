@@ -348,9 +348,48 @@ func pow(_ lhs: Int, _ rhs: Int) -> Int {
     Int(pow(Double(lhs), Double(rhs)))
 }
 
-extension Data {
+extension UInt8 {
+    @usableFromInline
+    var char: CChar {
+        switch self {
+        case 0..<10:
+            return CChar(UInt8(ascii: "0") + self)
+        default:
+            precondition(self < 16)
+            return CChar(UInt8(ascii: "a") + self - 10)
+        }
+    }
+}
+
+extension Collection where Element == UInt8, Index == Int {
+    @inlinable
+    var hexChars: [CChar] {
+        var output = [CChar](repeating: 0, count: count * 2)
+        for (i, byte) in enumerated() {
+            output[i * 2 + 0] = ((byte >> 4) & 0xF).char
+            output[i * 2 + 1] = ((byte >> 0) & 0xF).char
+        }
+        return output
+    }
+
+    @inlinable
     var hexString: String {
-        map { String(format: "%02x", $0) }.joined()
+        String(fromUTF8: hexChars.map { UInt8($0) })
+    }
+}
+
+public extension String {
+    @inlinable
+    init(fromUTF8 bytes: [UInt8]) {
+        if let string = bytes.withContiguousStorageIfAvailable({ bptr in
+            String(decoding: bptr, as: UTF8.self)
+        }) {
+            self = string
+        } else {
+            self = bytes.withUnsafeBufferPointer { ubp in
+                String(decoding: ubp, as: UTF8.self)
+            }
+        }
     }
 }
 
@@ -372,13 +411,15 @@ extension String {
 
 extension Dictionary where Key == Point {
     func print(perElement: (_ element: Value) -> String) -> String {
-        let minX = keys.map(\.x).min()!
-        let maxX = keys.map(\.x).max()!
-        let minY = keys.map(\.y).min()!
-        let maxY = keys.map(\.y).max()!
+        let (minX, maxX, minY, maxY) = keys.reduce((Int.max, Int.min, Int.max, Int.min)) { partialResult, point in
+            (minX: Swift.min(partialResult.minX, point.x),
+             maxX: Swift.max(partialResult.maxX, point.x),
+             minY: Swift.min(partialResult.minY, point.y),
+             maxY: Swift.max(partialResult.maxY, point.y))
+        }
 
         var output = ""
-        for y in (minY...maxY).reversed() {
+        for y in minY...maxY {
             for x in minX...maxX {
                 output += perElement(self[Point(x, y)]!)
             }
@@ -390,7 +431,7 @@ extension Dictionary where Key == Point {
 
 extension Set where Element == Point {
     func asStringGrid() -> String {
-        let (minX, maxX, minY, maxY) = reduce((0, 0, 0, 0)) { partialResult, point in
+        let (minX, maxX, minY, maxY) = reduce((Int.max, Int.min, Int.max, Int.min)) { partialResult, point in
             (minX: Swift.min(partialResult.minX, point.x),
              maxX: Swift.max(partialResult.maxX, point.x),
              minY: Swift.min(partialResult.minY, point.y),

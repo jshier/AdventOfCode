@@ -20,9 +20,11 @@ struct Point: Hashable, Codable {
 
 extension Point {
     private static var surroundingPointCache: [Point: [Point]] = [:]
+    private static var inclusiveSurroundingPointCache: [Point: [Point]] = [:]
     private static var adjacentPointCache: [Point: [Point]] = [:]
 
-    static let surroundingOffsets = [(0, 1), (1, 0), (0, -1), (-1, 0), (-1, 1), (1, -1), (1, 1), (-1, -1)]
+    static let surroundingOffsets = [(-1, -1), (0, -1), (1, -1), (-1, 0), (1, 0), (-1, 1), (0, 1), (1, 1)]
+    static let inclusiveSurroundingOffsets = [(-1, -1), (0, -1), (1, -1), (-1, 0), (0, 0), (1, 0), (-1, 1), (0, 1), (1, 1)]
 
     var surroundingPoints: [Point] {
         if let points = Point.surroundingPointCache[self] {
@@ -30,6 +32,16 @@ extension Point {
         } else {
             let points = Point.surroundingOffsets.map { self + $0 }
             Point.surroundingPointCache[self] = points
+            return points
+        }
+    }
+
+    var inclusiveSurroundingPoints: [Point] {
+        if let points = Point.inclusiveSurroundingPointCache[self] {
+            return points
+        } else {
+            let points = Point.inclusiveSurroundingOffsets.map { self + $0 }
+            Point.inclusiveSurroundingPointCache[self] = points
             return points
         }
     }

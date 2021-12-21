@@ -73,15 +73,15 @@ protocol Runner: AnyObject, Sendable {
     func dayFourteen(input: String, output: inout DayOutput) async
     func dayFifteen(input: String, output: inout DayOutput) async
     func daySixteen(input: String, output: inout DayOutput) async
-    func daySeventeen(_ output: inout DayOutput) async
-    func dayEighteen(_ output: inout DayOutput) async
-    func dayNineteen(_ output: inout DayOutput) async
-    func dayTwenty(_ output: inout DayOutput) async
-    func dayTwentyOne(_ output: inout DayOutput) async
-    func dayTwentyTwo(_ output: inout DayOutput) async
-    func dayTwentyThree(_ output: inout DayOutput) async
-    func dayTwentyFour(_ output: inout DayOutput) async
-    func dayTwentyFive(_ output: inout DayOutput) async
+    func daySeventeen(input: String, output: inout DayOutput) async
+    func dayEighteen(input: String, output: inout DayOutput) async
+    func dayNineteen(input: String, output: inout DayOutput) async
+    func dayTwenty(input: String, output: inout DayOutput) async
+    func dayTwentyOne(input: String, output: inout DayOutput) async
+    func dayTwentyTwo(input: String, output: inout DayOutput) async
+    func dayTwentyThree(input: String, output: inout DayOutput) async
+    func dayTwentyFour(input: String, output: inout DayOutput) async
+    func dayTwentyFive(input: String, output: inout DayOutput) async
 }
 
 extension Runner {
@@ -143,23 +143,23 @@ extension Runner {
         case .sixteen:
             await daySixteen(input: input, output: &output)
         case .seventeen:
-            await daySeventeen(&output)
+            await daySeventeen(input: input, output: &output)
         case .eighteen:
-            await dayEighteen(&output)
+            await dayEighteen(input: input, output: &output)
         case .nineteen:
-            await dayNineteen(&output)
+            await dayNineteen(input: input, output: &output)
         case .twenty:
-            await dayTwenty(&output)
+            await dayTwenty(input: input, output: &output)
         case .twentyOne:
-            await dayTwentyOne(&output)
+            await dayTwentyOne(input: input, output: &output)
         case .twentyTwo:
-            await dayTwentyTwo(&output)
+            await dayTwentyTwo(input: input, output: &output)
         case .twentyThree:
-            await dayTwentyThree(&output)
+            await dayTwentyThree(input: input, output: &output)
         case .twentyFour:
-            await dayTwentyFour(&output)
+            await dayTwentyFour(input: input, output: &output)
         case .twentyFive:
-            await dayTwentyFive(&output)
+            await dayTwentyFive(input: input, output: &output)
         }
         let end = CFAbsoluteTimeGetCurrent()
         return YearOutput(day: day,
@@ -185,13 +185,13 @@ extension Runner {
     func dayFourteen(input: String, output: inout DayOutput) async {}
     func dayFifteen(input: String, output: inout DayOutput) async {}
     func daySixteen(input: String, output: inout DayOutput) async {}
-    func daySeventeen(_ output: inout DayOutput) async {}
-    func dayEighteen(_ output: inout DayOutput) async {}
-    func dayNineteen(_ output: inout DayOutput) async {}
-    func dayTwenty(_ output: inout DayOutput) async {}
-    func dayTwentyOne(_ output: inout DayOutput) async {}
-    func dayTwentyTwo(_ output: inout DayOutput) async {}
-    func dayTwentyThree(_ output: inout DayOutput) async {}
-    func dayTwentyFour(_ output: inout DayOutput) async {}
-    func dayTwentyFive(_ output: inout DayOutput) async {}
+    func daySeventeen(input: String, output: inout DayOutput) async {}
+    func dayEighteen(input: String, output: inout DayOutput) async {}
+    func dayNineteen(input: String, output: inout DayOutput) async {}
+    func dayTwenty(input: String, output: inout DayOutput) async {}
+    func dayTwentyOne(input: String, output: inout DayOutput) async {}
+    func dayTwentyTwo(input: String, output: inout DayOutput) async {}
+    func dayTwentyThree(input: String, output: inout DayOutput) async {}
+    func dayTwentyFour(input: String, output: inout DayOutput) async {}
+    func dayTwentyFive(input: String, output: inout DayOutput) async {}
 }
