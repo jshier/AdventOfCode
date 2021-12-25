@@ -42,39 +42,39 @@ extension TwentyTwentyOne {
 
         output.stepOne = "\(rolls * min(p1Score, p2Score))"
         output.expectedStepOne = "518418"
-        
+
         struct State: Hashable {
             let p1: Int
             let p2: Int
             let s1: Int
             let s2: Int
         }
-        
+
 //        let sumMultiples = [(3, 1), (4, 3), (5, 6), (6, 7), (7, 6), (8, 3), (9, 1)]
         let sumMultiples = [3: 1, 4: 3, 5: 6, 6: 7, 7: 6, 8: 3, 9: 1]
         var cache: [State: (Int, Int)] = [:]
-        
+
         func countWins(fromPosition1 p1: Int, position2 p2: Int, score1: Int, score2: Int) -> (Int, Int) {
             if score1 >= 21 { return (1, 0) }
             if score2 >= 21 { return (0, 1) }
-            
+
             let state = State(p1: p1, p2: p2, s1: score1, s2: score2)
             if let result = cache[state] {
                 return result
             }
-            
+
             var result = (0, 0)
             for (sum, multiple) in sumMultiples {
                 let newP1 = (p1 + sum) % 10
                 let newScore1 = score1 + newP1 + 1
-                
+
                 let (x1, y1) = countWins(fromPosition1: p2, position2: newP1, score1: score2, score2: newScore1)
                 result = (result.0 + (y1 * multiple), result.1 + (x1 * multiple))
             }
             cache[state] = result
             return result
         }
-        
+
         let result = countWins(fromPosition1: p1Start, position2: p2Start, score1: 0, score2: 0)
         output.stepTwo = "\(max(result.0, result.1))"
         output.expectedStepTwo = "116741133558209"

@@ -23,6 +23,6 @@ enum AdventOfCode {
         let year = TwentyTwentyOne()
 //        let year = TwentyFifteen()
 //        await year.runAllDays()
-        print(await year.run(.twentyOne))
+        print(await year.run(.twentyFive))
     }
 }

@@ -6,13 +6,56 @@
 //  Copyright © 2018 Jon Shier. All rights reserved.
 //
 
-import Foundation
+extension TwentyTwentyOne {
+    func dayTwentyFive(input: String, output: inout DayOutput) async {
+//        let input = """
+//        v...>>.vv>
+//        .vv>>.vv..
+//        >>.>v>...v
+//        >>v>>.>.v.
+//        v>v.vv.v..
+//        >.>>..v...
+//        .vv..>.>v.
+//        v.v..>>v.v
+//        ....v..v.>
+//        """
 
-// final class Day2520: Day {
-//    override var expectedStageOneOutput: String? { nil }
-//    override var expectedStageTwoOutput: String? { nil }
-//
-//    override func perform() async {
-//        let input = String.input(forDay: 25, year: 2020)
-//    }
-// }
+        let floor = Grid(input.byLines().map { $0.map { $0 } })
+
+        let points = floor.points
+        var first = floor
+        var second = first
+        var third = first
+        var steps = 0
+        repeat {
+            steps += 1
+            second = first
+            third = first
+
+            for point in points {
+                guard second[point] == ">" else { continue }
+
+                let checkPoint = floor.wrappingPoint(from: point, in: .right)
+                if second[checkPoint] == "." {
+                    first[checkPoint] = ">"
+                    first[point] = "."
+                }
+            }
+
+            second = first
+
+            for point in points {
+                guard second[point] == "v" else { continue }
+
+                let checkPoint = floor.wrappingPoint(from: point, in: .up)
+                if second[checkPoint] == "." {
+                    first[checkPoint] = "v"
+                    first[point] = "."
+                }
+            }
+        } while first != third
+
+        output.stepOne = "\(steps)"
+        output.expectedStepOne = "560"
+    }
+}

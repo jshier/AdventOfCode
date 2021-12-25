@@ -124,27 +124,27 @@ struct Grid<Element> {
 
     let height: Int
     let width: Int
-    let points: PointSequence
+    let points: [Point]
 
     init(_ values: [[Element]]) {
         self.values = values.flatMap { $0 }
         height = values.count
         width = values[0].count
-        points = PointSequence(start: .origin, end: Point(width - 1, height - 1))
+        points = Array(PointSequence(start: .origin, end: Point(width - 1, height - 1)))
     }
 
     init(_ values: [Element], height: Int, width: Int) {
         self.values = values
         self.height = height
         self.width = width
-        points = PointSequence(start: .origin, end: Point(width, height))
+        points = Array(PointSequence(start: .origin, end: Point(width, height)))
     }
 
     init(repeating value: Element, size: Int) {
         values = Array(repeating: value, count: size * size + 1)
         width = size
         height = size
-        points = PointSequence(start: .origin, end: Point(width, height))
+        points = Array(PointSequence(start: .origin, end: Point(width, height)))
     }
 
     @inline(__always)
@@ -184,6 +184,25 @@ struct Grid<Element> {
     func adjacentValues(for point: Point) -> [Element] {
         adjacentPoints(for: point)
             .map { self[$0] }
+    }
+
+    func wrappingPoint(from point: Point, in direction: Direction) -> Point {
+        var offsetPoint = direction.offset(point)
+
+        if offsetPoint.x < 0 || offsetPoint.x > (width - 1) || offsetPoint.y < 0 || offsetPoint.y > (height - 1) {
+            switch direction {
+            case .up:
+                offsetPoint = Point(offsetPoint.x, 0)
+            case .down:
+                offsetPoint = Point(offsetPoint.x, height - 1)
+            case .left:
+                offsetPoint = Point(width - 1, offsetPoint.y)
+            case .right:
+                offsetPoint = Point(0, offsetPoint.y)
+            }
+        }
+
+        return offsetPoint
     }
 
     func point(forValue value: Element) -> Point? where Element: Equatable {
